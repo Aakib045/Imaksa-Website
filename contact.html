@@ -283,15 +283,15 @@ async function submitForm() {
   btn.style.opacity = '0.7';
 
   try {
-    const res    = await fetch(`${API}/enquiries`, {
+    const res = await fetch(`${API}/enquiries`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       mode:    'cors',
       body:    JSON.stringify(data),
     });
-    const result = await res.json();
 
-    if (result.success) {
+    // Treat any 2xx status as success
+    if (res.ok || res.status === 201 || res.status === 200) {
       btn.textContent      = '✅ Enquiry Sent!';
       btn.style.background = '#0D9B6E';
       btn.style.opacity    = '1';
@@ -317,8 +317,13 @@ async function submitForm() {
         successEl.style.display = 'none';
       }, 5000);
 
+    } else if (res.status === 429) {
+      btn.textContent  = 'Send Enquiry →';
+      btn.disabled     = false;
+      btn.style.opacity = '1';
+      showAlert('⏳ Too many submissions. Please wait a few minutes.', 'warning');
     } else {
-      throw new Error(result.message || 'Failed');
+      throw new Error('Server returned ' + res.status);
     }
 
   } catch (err) {
