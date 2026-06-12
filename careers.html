@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Careers — IMAKSA Dubai Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;scroll-behavior:smooth;overflow-x:hidden;}
+body{background:#FAFAF8;color:#0A0A0A;font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;}
+img{max-width:100%;height:auto;display:block;}a{text-decoration:none;color:inherit;}
+::-webkit-scrollbar{width:2px;}::-webkit-scrollbar-thumb{background:#0D4F4A;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2.5vw,26px) clamp(16px,4vw,60px);transition:all .4s;width:100%;}
+nav.sc{background:rgba(250,250,248,.97);backdrop-filter:blur(20px);padding:clamp(10px,1.8vw,16px) clamp(16px,4vw,60px);border-bottom:1px solid rgba(13,79,74,.12);box-shadow:0 2px 24px rgba(0,0,0,.07);}
+.n-logo{font-family:'Fraunces',serif;font-size:clamp(16px,2.5vw,22px);font-weight:400;color:#0D4F4A;letter-spacing:clamp(2px,1vw,4px);}
+.n-links{display:flex;gap:clamp(20px,3vw,40px);list-style:none;}
+.n-links a{color:#6B6B60;font-size:clamp(9px,1.1vw,11px);letter-spacing:1.5px;text-transform:uppercase;transition:color .3s;}
+.n-links a:hover{color:#0D4F4A;}
+.n-cta{background:#0D4F4A;color:#F5EFE4;padding:clamp(9px,1.4vw,12px) clamp(18px,2.5vw,28px);font-size:clamp(9px,1.1vw,10px);letter-spacing:2px;text-transform:uppercase;transition:all .3s;font-family:'Inter',sans-serif;}
+.n-cta:hover{background:#1A6B65;}
+.n-hbtn{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:8px;cursor:pointer;}
+.n-hbtn span{display:block;width:22px;height:1.5px;background:#0D4F4A;transition:all .35s;}
+.n-hbtn.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px);}
+.n-hbtn.open span:nth-child(2){opacity:0;}
+.n-hbtn.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px);}
+@media(max-width:900px){.n-links,.n-cta{display:none!important;}.n-hbtn{display:flex!important;}}
+.mob-menu{display:none;position:fixed;inset:0;background:rgba(13,79,74,.99);z-index:998;flex-direction:column;align-items:center;justify-content:center;gap:clamp(24px,5vw,40px);}
+.mob-menu.open{display:flex;}
+.mob-menu a{font-family:'Fraunces',serif;font-size:clamp(28px,8vw,52px);font-weight:300;color:#F5EFE4;letter-spacing:3px;}
+.mob-cta-link{border:1px solid rgba(245,239,228,.4);padding:clamp(12px,3vw,18px) clamp(32px,6vw,56px)!important;font-size:clamp(14px,3.5vw,20px)!important;}
+.page-hero{background:#0D4F4A;padding:clamp(120px,15vw,180px) clamp(16px,5vw,72px) clamp(60px,8vw,100px);text-align:center;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80') center/cover no-repeat;opacity:.1;}
+.page-hero-tag{font-size:clamp(8px,1.3vw,10px);letter-spacing:5px;text-transform:uppercase;color:rgba(245,239,228,.6);margin-bottom:16px;position:relative;}
+.page-hero-title{font-family:'Fraunces',serif;font-size:clamp(36px,7vw,88px);font-weight:300;color:#F5EFE4;position:relative;}
+.page-hero-title em{font-style:italic;}
+.sec{padding:clamp(60px,8vw,100px) clamp(16px,5vw,72px);}
+.sec-tag{font-size:clamp(8px,1.3vw,10px);letter-spacing:5px;text-transform:uppercase;color:#2E8B84;margin-bottom:14px;}
+.sec-h{font-family:'Fraunces',serif;font-size:clamp(26px,4.5vw,56px);font-weight:300;color:#0D4F4A;line-height:1.1;}
+.sec-h em{font-style:italic;}
+
+/* WHY JOIN */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,28px);margin-top:clamp(36px,5vw,60px);}
+@media(max-width:768px){.why-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.why-grid{grid-template-columns:1fr;}}
+.why-card{background:#F5EFE4;padding:clamp(28px,4vw,48px) clamp(20px,3vw,36px);border-bottom:3px solid transparent;transition:all .4s;}
+.why-card:hover{border-bottom-color:#0D4F4A;transform:translateY(-4px);}
+.why-icon{font-size:clamp(28px,4vw,40px);margin-bottom:clamp(14px,2vw,22px);}
+.why-title{font-family:'Fraunces',serif;font-size:clamp(17px,2vw,22px);color:#0D4F4A;margin-bottom:10px;}
+.why-desc{font-size:clamp(11px,1.3vw,13px);color:#6B6B60;line-height:1.9;}
+
+/* JOBS */
+#jobs{background:#F5EFE4;}
+.jobs-list{display:flex;flex-direction:column;gap:clamp(12px,1.8vw,20px);margin-top:clamp(36px,5vw,60px);}
+.job{background:#fff;padding:clamp(24px,3.5vw,40px);display:flex;align-items:center;justify-content:space-between;gap:clamp(16px,2.5vw,32px);flex-wrap:wrap;transition:box-shadow .4s;box-shadow:0 2px 16px rgba(0,0,0,.05);}
+.job:hover{box-shadow:0 8px 36px rgba(0,0,0,.1);}
+.job-left{flex:1;min-width:200px;}
+.job-dept{font-size:clamp(8px,1vw,9px);letter-spacing:3px;text-transform:uppercase;color:#2E8B84;margin-bottom:8px;}
+.job-title{font-family:'Fraunces',serif;font-size:clamp(18px,2.2vw,26px);color:#0D4F4A;margin-bottom:8px;}
+.job-meta{display:flex;gap:clamp(12px,2vw,24px);flex-wrap:wrap;}
+.job-tag{font-size:clamp(9px,1.1vw,10px);letter-spacing:1px;color:#6B6B60;display:flex;align-items:center;gap:6px;}
+.job-apply{display:inline-block;background:#0D4F4A;color:#F5EFE4;padding:clamp(11px,1.5vw,14px) clamp(20px,3vw,32px);font-size:clamp(9px,1.2vw,10px);letter-spacing:2px;text-transform:uppercase;transition:background .3s;white-space:nowrap;font-family:'Inter',sans-serif;}
+.job-apply:hover{background:#1A6B65;}
+
+/* APPLY FORM */
+#apply{background:#0D4F4A;padding:clamp(60px,8vw,100px) clamp(16px,5vw,72px);}
+.apply-inner{display:grid;grid-template-columns:1fr 1.5fr;gap:clamp(36px,6vw,80px);align-items:start;}
+@media(max-width:768px){.apply-inner{grid-template-columns:1fr;}}
+.apply-text h2{font-family:'Fraunces',serif;font-size:clamp(26px,4vw,48px);font-weight:300;color:#F5EFE4;line-height:1.1;margin-bottom:20px;}
+.apply-text h2 em{font-style:italic;}
+.apply-text p{font-size:clamp(12px,1.4vw,14px);color:rgba(245,239,228,.6);line-height:1.9;}
+.apply-form{}
+.fi{width:100%;background:rgba(245,239,228,.08);border:1px solid rgba(245,239,228,.18);color:#F5EFE4;padding:clamp(13px,1.8vw,16px) clamp(14px,2vw,18px);font-family:'Inter',sans-serif;font-size:clamp(11px,1.3vw,13px);margin-bottom:clamp(12px,1.6vw,16px);outline:none;transition:border-color .3s;appearance:none;}
+.fi::placeholder{color:rgba(245,239,228,.35);}
+.fi:focus{border-color:rgba(245,239,228,.5);}
+textarea.fi{height:clamp(90px,11vw,120px);resize:none;}
+select.fi option{background:#0D4F4A;color:#F5EFE4;}
+.fi-btn{width:100%;background:#F5EFE4;color:#0D4F4A;border:none;padding:clamp(14px,2vw,18px);font-family:'Inter',sans-serif;font-size:clamp(10px,1.3vw,12px);letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background .35s;font-weight:500;}
+.fi-btn:hover{background:#DDD3C0;}
+
+footer{background:#080808;padding:clamp(44px,6vw,80px) clamp(16px,5vw,72px) 0;border-top:1px solid rgba(13,79,74,.3);}
+.ft-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:clamp(20px,4vw,52px);padding-bottom:clamp(36px,5vw,52px);border-bottom:1px solid rgba(255,255,255,.06);}
+.ft-logo{font-family:'Fraunces',serif;font-size:clamp(20px,3vw,28px);font-weight:300;color:#F5EFE4;letter-spacing:3px;display:block;margin-bottom:14px;}
+.ft-about{font-size:clamp(10px,1.2vw,11px);color:rgba(255,255,255,.28);line-height:2;max-width:240px;}
+.ft-head{font-size:clamp(7px,1vw,9px);letter-spacing:4px;text-transform:uppercase;color:#2E8B84;margin-bottom:18px;}
+.ft-links{list-style:none;}
+.ft-links li{margin-bottom:10px;}
+.ft-links a{font-size:clamp(10px,1.2vw,12px);color:rgba(255,255,255,.32);transition:color .3s;}
+.ft-links a:hover{color:rgba(255,255,255,.8);}
+@media(max-width:720px){.ft-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:400px){.ft-top{grid-template-columns:1fr;}}
+.ft-bottom{display:flex;flex-direction:column;align-items:center;gap:14px;padding:clamp(18px,3vw,28px) 0 clamp(20px,3vw,28px);text-align:center;}
+.ft-socs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.ft-soc{width:clamp(34px,4.5vw,40px);height:clamp(34px,4.5vw,40px);border:1px solid rgba(13,79,74,.5);display:flex;align-items:center;justify-content:center;color:#2E8B84;font-size:11px;font-weight:600;transition:all .3s;}
+.ft-soc:hover{background:#0D4F4A;border-color:#0D4F4A;color:#F5EFE4;}
+.ft-copy{font-size:clamp(9px,1.2vw,10px);color:rgba(255,255,255,.2);}
+.wa{position:fixed;bottom:clamp(16px,3vw,28px);right:clamp(16px,3vw,28px);z-index:9000;width:clamp(48px,6.5vw,58px);height:clamp(48px,6.5vw,58px);background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .3s;}
+.wa:hover{transform:scale(1.12);}
+.wa svg{width:clamp(22px,3.5vw,28px);height:clamp(22px,3.5vw,28px);}
+.rv{opacity:0;transform:translateY(32px);}
+.rv.in{opacity:1;transform:translateY(0);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
+.rv.d1.in{transition-delay:.1s;}.rv.d2.in{transition-delay:.2s;}.rv.d3.in{transition-delay:.3s;}
+</style>
+</head>
+<body>
+<a href="https://wa.me/971XXXXXXXXX" target="_blank" class="wa"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<div class="mob-menu" id="mm">
+  <a href="index.html" onclick="closeMM()">Home</a>
+  <a href="properties.html" onclick="closeMM()">Properties</a>
+  <a href="about.html" onclick="closeMM()">About</a>
+  <a href="contact.html" onclick="closeMM()">Contact</a>
+  <a href="contact.html" onclick="closeMM()" class="mob-cta-link">Enquire Now</a>
+</div>
+<nav id="nav">
+  <a href="index.html" class="n-logo">IMAKSA</a>
+  <ul class="n-links"><li><a href="properties.html">Properties</a></li><li><a href="about.html">About</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <a href="contact.html" class="n-cta">Enquire</a>
+  <button class="n-hbtn" id="hbtn"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-tag">Join Our Team</div>
+  <h1 class="page-hero-title">Build Your <em>Career</em></h1>
+</div>
+
+<!-- WHY JOIN -->
+<section class="sec">
+  <div class="rv"><div class="sec-tag">Why IMAKSA</div><h2 class="sec-h">Why Join <em>Our Team?</em></h2></div>
+  <div class="why-grid">
+    <div class="why-card rv"><div class="why-icon">💰</div><div class="why-title">Top Commissions</div><div class="why-desc">Industry-leading commission structure with uncapped earning potential. Our top agents earn AED 1M+ annually.</div></div>
+    <div class="why-card rv d1"><div class="why-icon">📚</div><div class="why-title">Training & Growth</div><div class="why-desc">Comprehensive onboarding, RERA certification support, and ongoing mentorship from senior agents.</div></div>
+    <div class="why-card rv d2"><div class="why-icon">🌍</div><div class="why-title">Global Network</div><div class="why-desc">Access to our international client database and developer relationships built over 12+ years.</div></div>
+    <div class="why-card rv"><div class="why-icon">🏆</div><div class="why-title">Award-Winning Brand</div><div class="why-desc">Join a recognized, trusted brand that clients already know and trust — making your job easier from day one.</div></div>
+    <div class="why-card rv d1"><div class="why-icon">📍</div><div class="why-title">Prime Location</div><div class="why-desc">Work from our Business Bay office in the heart of Dubai's commercial and property hub.</div></div>
+    <div class="why-card rv d2"><div class="why-icon">🤝</div><div class="why-title">Supportive Culture</div><div class="why-desc">A collaborative, diverse team where everyone supports each other's success — no politics, just results.</div></div>
+  </div>
+</section>
+
+<!-- OPEN ROLES -->
+<section class="sec" id="jobs">
+  <div class="rv"><div class="sec-tag">Open Positions</div><h2 class="sec-h">Current <em>Openings</em></h2></div>
+  <div class="jobs-list">
+    <div class="job rv">
+      <div class="job-left">
+        <div class="job-dept">Sales</div>
+        <div class="job-title">Senior Property Consultant</div>
+        <div class="job-meta"><span class="job-tag">📍 Dubai</span><span class="job-tag">💼 Full-time</span><span class="job-tag">💰 Commission + Base</span></div>
+      </div>
+      <a href="#apply" class="job-apply">Apply Now</a>
+    </div>
+    <div class="job rv">
+      <div class="job-left">
+        <div class="job-dept">Sales</div>
+        <div class="job-title">Junior Real Estate Agent</div>
+        <div class="job-meta"><span class="job-tag">📍 Dubai</span><span class="job-tag">💼 Full-time</span><span class="job-tag">💰 Commission + Training</span></div>
+      </div>
+      <a href="#apply" class="job-apply">Apply Now</a>
+    </div>
+    <div class="job rv">
+      <div class="job-left">
+        <div class="job-dept">Investment</div>
+        <div class="job-title">Investment Advisory Specialist</div>
+        <div class="job-meta"><span class="job-tag">📍 Dubai</span><span class="job-tag">💼 Full-time</span><span class="job-tag">💰 Competitive Package</span></div>
+      </div>
+      <a href="#apply" class="job-apply">Apply Now</a>
+    </div>
+    <div class="job rv">
+      <div class="job-left">
+        <div class="job-dept">Marketing</div>
+        <div class="job-title">Digital Marketing Manager</div>
+        <div class="job-meta"><span class="job-tag">📍 Dubai</span><span class="job-tag">💼 Full-time</span><span class="job-tag">💰 Fixed Salary</span></div>
+      </div>
+      <a href="#apply" class="job-apply">Apply Now</a>
+    </div>
+    <div class="job rv">
+      <div class="job-left">
+        <div class="job-dept">Operations</div>
+        <div class="job-title">Property Manager</div>
+        <div class="job-meta"><span class="job-tag">📍 Dubai</span><span class="job-tag">💼 Full-time</span><span class="job-tag">💰 Fixed + Bonus</span></div>
+      </div>
+      <a href="#apply" class="job-apply">Apply Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY FORM -->
+<section id="apply">
+  <div class="apply-inner">
+    <div class="apply-text rv">
+      <h2>Apply <em>Today</em></h2>
+      <p>Send us your CV and we'll be in touch within 48 hours. We welcome applicants from all backgrounds — real estate experience is a bonus, but passion and drive are what we really look for.</p>
+      <p style="margin-top:16px;">📧 careers@imaksa.ae</p>
+    </div>
+    <div class="apply-form rv">
+      <input type="text" class="fi" placeholder="Full Name">
+      <input type="email" class="fi" placeholder="Email Address">
+      <input type="tel" class="fi" placeholder="Phone Number">
+      <select class="fi"><option value="" disabled selected>Position Applying For</option><option>Senior Property Consultant</option><option>Junior Real Estate Agent</option><option>Investment Advisory Specialist</option><option>Digital Marketing Manager</option><option>Property Manager</option></select>
+      <input type="text" class="fi" placeholder="Years of Experience">
+      <textarea class="fi" placeholder="Tell us about yourself and why you want to join IMAKSA..."></textarea>
+      <button class="fi-btn" onclick="this.textContent='Application Sent! ✅';this.style.background='#DDD3C0';">Submit Application</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-top">
+    <div><span class="ft-logo">IMAKSA</span><p class="ft-about">Dubai's trusted property partner. Connecting clients with extraordinary homes since 2012. RERA Licensed.</p></div>
+    <div><div class="ft-head">Properties</div><ul class="ft-links"><li><a href="properties.html">Villas & Mansions</a></li><li><a href="properties.html">Penthouses</a></li><li><a href="properties.html">Apartments</a></li><li><a href="properties.html">Off-Plan</a></li><li><a href="properties.html">Commercial</a></li></ul></div>
+    <div><div class="ft-head">Company</div><ul class="ft-links"><li><a href="about.html">About IMAKSA</a></li><li><a href="about.html#team">Our Team</a></li><li><a href="careers.html">Careers</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><div class="ft-head">Contact</div><ul class="ft-links"><li><a href="contact.html">Business Bay, Dubai</a></li><li><a href="tel:+971XXXXXXXX">+971 4 XXX XXXX</a></li><li><a href="mailto:info@imaksa.ae">info@imaksa.ae</a></li><li>Mon–Sat 9am–7pm</li></ul></div>
+  </div>
+  <div class="ft-bottom"><div class="ft-socs"><a href="#" class="ft-soc">in</a><a href="#" class="ft-soc">ig</a><a href="#" class="ft-soc">wa</a><a href="#" class="ft-soc">fb</a></div><p class="ft-copy">© 2025 IMAKSA Properties LLC. RERA Licensed. All Rights Reserved.</p></div>
+</footer>
+<script>
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>50));
+const hbtn=document.getElementById('hbtn'),mm=document.getElementById('mm');
+hbtn.addEventListener('click',()=>{hbtn.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+function closeMM(){hbtn.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}
+const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.07});
+document.querySelectorAll('.rv').forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>
