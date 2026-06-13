@@ -635,7 +635,7 @@ async function renderProps() {
   let props = res.data || [];
 
   if (pSearch) props = props.filter(p => (p.name + p.location).toLowerCase().includes(pSearch));
-  if (pType !== 'all') props = props.filter(p => p.type === pType);
+  if (pType !== 'all') props = props.filter(p => (p.type || '').toLowerCase() === pType.toLowerCase());
 
   if (!props.length) {
     tb.innerHTML = `<tr><td colspan="7"><div class="empty"><div class="empty-icon">🏡</div><div class="empty-title">No properties found</div><div class="empty-desc">Click "Add Property" to add your first listing</div></div></td></tr>`;
