@@ -68,27 +68,29 @@ nav.sc .n-links>li>a{color:#6B6B60;}
 .n-links>li>a:hover{color:#fff;}
 nav.sc .n-links>li>a:hover{color:#0D4F4A;}
 
-/* DEVELOPER DROPDOWN */
+/* DEVELOPER DROPDOWN — fixed with padding bridge */
 .dev-dd{
-  position:absolute;top:calc(100% + 22px);left:50%;
-  transform:translateX(-50%);
+  position:absolute;top:calc(100% + 8px);left:50%;
+  transform:translateX(-50%) translateY(8px);
   background:#fff;border:1px solid rgba(13,79,74,.1);
   box-shadow:0 24px 64px rgba(0,0,0,.18);
   padding:24px 28px;min-width:380px;
   opacity:0;visibility:hidden;pointer-events:none;
-  transition:all .3s cubic-bezier(.16,1,.3,1);z-index:2000;
+  transition:all .35s cubic-bezier(.16,1,.3,1);z-index:2000;
 }
-.n-links>li:hover .dev-dd{opacity:1;visibility:visible;pointer-events:all;top:calc(100% + 14px);}
+/* Bridge gap between nav link and dropdown so it doesn't disappear */
+.dev-dd::after{content:'';position:absolute;top:-20px;left:0;right:0;height:20px;}
+.n-links>li:hover .dev-dd{opacity:1;visibility:visible;pointer-events:all;transform:translateX(-50%) translateY(0);}
 .dev-dd::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%) rotate(45deg);width:11px;height:11px;background:#fff;border-left:1px solid rgba(13,79,74,.1);border-top:1px solid rgba(13,79,74,.1);}
 .dd-head{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#0D4F4A;font-weight:600;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid rgba(13,79,74,.08);}
 .dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:14px;}
-.dd-link{display:flex;align-items:center;gap:8px;padding:9px 10px;color:#3A3A32;font-size:11px;transition:all .2s;}
-.dd-link:hover{background:#F5EFE4;color:#0D4F4A;padding-left:14px;}
-.dd-link::before{content:'';width:4px;height:4px;background:#D4B896;border-radius:50%;flex-shrink:0;transition:background .2s;}
-.dd-link:hover::before{background:#0D4F4A;}
+.dd-link{display:flex;align-items:center;gap:8px;padding:9px 10px;color:#3A3A32;font-size:11px;transition:all .25s cubic-bezier(.16,1,.3,1);}
+.dd-link:hover{background:#F5EFE4;color:#0D4F4A;padding-left:16px;letter-spacing:.5px;}
+.dd-link::before{content:'';width:4px;height:4px;background:#D4B896;border-radius:50%;flex-shrink:0;transition:all .25s;}
+.dd-link:hover::before{background:#0D4F4A;width:6px;height:6px;}
 .dd-foot{padding-top:12px;border-top:1px solid rgba(13,79,74,.08);}
-.dd-all{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#0D4F4A;display:flex;align-items:center;gap:8px;transition:gap .2s;}
-.dd-all:hover{gap:14px;}
+.dd-all{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#0D4F4A;display:flex;align-items:center;gap:8px;transition:all .25s;}
+.dd-all:hover{gap:14px;letter-spacing:3px;}
 
 .n-cta{
   background:rgba(255,255,255,.15);
@@ -120,13 +122,32 @@ nav.sc .n-hbtn span{background:#0D4F4A;}
 .mob-menu a:hover{color:#D4B896;}
 .mob-cta-link{border:1px solid rgba(245,239,228,.3)!important;padding:clamp(10px,2.5vw,16px) clamp(28px,5vw,48px)!important;font-size:clamp(11px,3vw,16px)!important;letter-spacing:4px!important;}
 
-/* ── HERO ── */
+/* HERO — with floating animated elements */
 #hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;}
 .h-photo{position:relative;overflow:hidden;}
-.h-photo img{width:100%;height:100vh;object-fit:cover;transform:scale(1.05);animation:hiz 8s ease forwards;}
+.h-photo img{width:100%;height:100vh;object-fit:cover;transform:scale(1.08);animation:hiz 10s ease forwards;}
 @keyframes hiz{to{transform:scale(1);}}
-.h-grad{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,79,74,.2) 0%,transparent 60%);}
-.h-content{background:#F5EFE4;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,10vw,140px) clamp(32px,5vw,72px) clamp(40px,5vw,80px);}
+.h-grad{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,79,74,.15) 0%,transparent 60%);}
+
+/* Floating badges on hero image */
+.h-float{position:absolute;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);padding:14px 18px;border-left:3px solid #0D4F4A;}
+.h-float-1{bottom:25%;left:6%;animation:float1 4s ease-in-out infinite;}
+.h-float-2{top:25%;right:5%;animation:float2 5s ease-in-out infinite;}
+@keyframes float1{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes float2{0%,100%{transform:translateY(0);}50%{transform:translateY(10px);}}
+.h-float-label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#9B9B8A;margin-bottom:4px;}
+.h-float-val{font-family:'Fraunces',serif;font-size:16px;font-weight:400;color:#0D4F4A;}
+.h-float-sub{font-size:10px;color:#6B6B60;margin-top:2px;}
+
+.h-content{background:#F5EFE4;display:flex;flex-direction:column;justify-content:center;padding:clamp(80px,10vw,140px) clamp(32px,5vw,72px) clamp(40px,5vw,80px);position:relative;}
+
+/* Animated scroll indicator */
+.h-scroll-ind{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fi 1s 1.5s forwards;}
+.h-scroll-line{width:1px;height:40px;background:rgba(13,79,74,.2);position:relative;overflow:hidden;}
+.h-scroll-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:#0D4F4A;animation:scrolldown 2s ease-in-out infinite;}
+@keyframes scrolldown{to{top:200%;}}
+.h-scroll-text{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:#9B9B8A;}
+
 .h-tag{font-size:clamp(8px,1vw,10px);letter-spacing:3px;text-transform:uppercase;color:#9B9B8A;margin-bottom:clamp(14px,2.5vw,24px);opacity:0;animation:fi 1s .3s forwards;}
 .h-title{font-family:'Fraunces',serif;font-size:clamp(32px,5vw,64px);font-weight:300;line-height:1.08;color:#0D4F4A;margin-bottom:clamp(16px,2.5vw,28px);opacity:0;animation:fi 1s .5s forwards;}
 .h-title em{font-style:italic;color:#8B6E47;}
@@ -137,22 +158,41 @@ nav.sc .n-hbtn span{background:#0D4F4A;}
 .s-tabs{display:flex;gap:0;border-bottom:1px solid rgba(13,79,74,.15);}
 .s-tab{background:none;border:none;padding:9px 16px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#9B9B8A;cursor:pointer;transition:all .3s;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:'Inter',sans-serif;}
 .s-tab.active{color:#0D4F4A;border-bottom-color:#0D4F4A;}
-.s-input-row{display:flex;gap:0;margin-top:14px;border:1px solid rgba(13,79,74,.2);}
+.s-input-row{display:flex;gap:0;margin-top:14px;border:1px solid rgba(13,79,74,.2);transition:border .3s;}
+.s-input-row:focus-within{border-color:#0D4F4A;box-shadow:0 0 0 3px rgba(13,79,74,.08);}
 .s-input{flex:1;border:none;padding:13px 16px;font-size:12px;font-family:'Inter',sans-serif;background:#fff;color:#0A0A0A;outline:none;min-width:0;}
 .s-input::placeholder{color:#B0B0A0;}
-.s-btn{background:#0D4F4A;color:#F5EFE4;border:none;padding:13px 20px;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .3s;font-family:'Inter',sans-serif;white-space:nowrap;flex-shrink:0;}
-.s-btn:hover{background:#1A6B65;}
+.s-btn{background:#0D4F4A;color:#F5EFE4;border:none;padding:13px 20px;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;white-space:nowrap;flex-shrink:0;}
+.s-btn:hover{background:#1A6B65;letter-spacing:3px;}
 
+/* Hero buttons with animation */
 .h-btns{display:flex;gap:14px;margin-top:24px;opacity:0;animation:fi 1s 1.1s forwards;flex-wrap:wrap;}
-.h-btn1{background:#0D4F4A;color:#F5EFE4;padding:13px 28px;font-size:10px;letter-spacing:2px;text-transform:uppercase;transition:all .3s;}
-.h-btn1:hover{background:#1A6B65;}
-.h-btn2{border:1px solid rgba(13,79,74,.3);color:#0D4F4A;padding:13px 28px;font-size:10px;letter-spacing:2px;text-transform:uppercase;transition:all .3s;}
-.h-btn2:hover{border-color:#0D4F4A;background:rgba(13,79,74,.05);}
+.h-btn1{
+  background:#0D4F4A;color:#F5EFE4;
+  padding:13px 28px;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+  position:relative;overflow:hidden;
+}
+.h-btn1::after{content:'→';position:absolute;right:-20px;top:50%;transform:translateY(-50%);transition:all .4s cubic-bezier(.16,1,.3,1);opacity:0;}
+.h-btn1:hover{background:#1A6B65;padding-right:44px;padding-left:20px;}
+.h-btn1:hover::after{right:16px;opacity:1;}
+.h-btn2{
+  border:1px solid rgba(13,79,74,.3);color:#0D4F4A;
+  padding:13px 28px;font-size:10px;letter-spacing:2px;text-transform:uppercase;
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+  position:relative;overflow:hidden;
+}
+.h-btn2::before{content:'';position:absolute;inset:0;background:#0D4F4A;transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.16,1,.3,1);z-index:0;}
+.h-btn2 span{position:relative;z-index:1;transition:color .4s;}
+.h-btn2:hover::before{transform:scaleX(1);}
+.h-btn2:hover span{color:#F5EFE4;}
+.h-btn2:hover{border-color:#0D4F4A;}
 
 @media(max-width:900px){
   #hero{grid-template-columns:1fr;min-height:auto;}
   .h-photo{height:55vw;min-height:300px;}
   .h-photo img{height:55vw;min-height:300px;}
+  .h-float{display:none;}
   .h-content{padding:clamp(32px,6vw,56px) clamp(20px,5vw,40px);}
 }
 @media(max-width:480px){
@@ -244,13 +284,27 @@ nav.sc .n-hbtn span{background:#0D4F4A;}
 
 /* SERVICES */
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
-.srv{background:#F5EFE4;padding:clamp(24px,3vw,40px);transition:all .4s;}
-.srv:hover{background:#0D4F4A;}
-.srv-icon{font-size:26px;margin-bottom:18px;display:block;}
-.srv-title{font-family:'Fraunces',serif;font-size:clamp(16px,1.8vw,22px);font-weight:300;color:#0A0A0A;margin-bottom:10px;transition:color .4s;}
+.srv{
+  background:#F5EFE4;padding:clamp(24px,3vw,40px);
+  transition:all .5s cubic-bezier(.16,1,.3,1);
+  cursor:default;position:relative;overflow:hidden;
+}
+.srv::before{
+  content:'';position:absolute;inset:0;
+  background:#0D4F4A;transform:translateY(100%);
+  transition:transform .5s cubic-bezier(.16,1,.3,1);
+  z-index:0;
+}
+.srv:hover::before{transform:translateY(0);}
+.srv:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(13,79,74,.25);}
+.srv-icon{font-size:26px;margin-bottom:18px;display:block;position:relative;z-index:1;transition:transform .4s cubic-bezier(.16,1,.3,1);}
+.srv:hover .srv-icon{transform:scale(1.15) rotate(-5deg);}
+.srv-title{font-family:'Fraunces',serif;font-size:clamp(16px,1.8vw,22px);font-weight:300;color:#0A0A0A;margin-bottom:10px;transition:color .4s;position:relative;z-index:1;}
 .srv:hover .srv-title{color:#F5EFE4;}
-.srv-desc{font-size:clamp(11px,1.1vw,13px);color:#6B6B60;line-height:1.7;transition:color .4s;}
+.srv-desc{font-size:clamp(11px,1.1vw,13px);color:#6B6B60;line-height:1.7;transition:color .4s;position:relative;z-index:1;}
 .srv:hover .srv-desc{color:rgba(245,239,228,.75);}
+.srv-arrow{position:absolute;bottom:24px;right:24px;width:32px;height:32px;border:1px solid rgba(13,79,74,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;color:#0D4F4A;transition:all .4s cubic-bezier(.16,1,.3,1);z-index:1;opacity:0;transform:scale(.7);}
+.srv:hover .srv-arrow{opacity:1;transform:scale(1);border-color:rgba(245,239,228,.3);color:#F5EFE4;}
 @media(max-width:768px){.services-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:480px){.services-grid{grid-template-columns:1fr;}}
 
@@ -269,10 +323,10 @@ nav.sc .n-hbtn span{background:#0D4F4A;}
 .cta-left{
   padding:clamp(40px,6vw,80px);
   display:flex;flex-direction:column;justify-content:center;
-  background:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&q=80') center/cover no-repeat;
+  background:url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=900&q=80') center/cover no-repeat;
   position:relative;
 }
-.cta-left::before{content:'';position:absolute;inset:0;background:rgba(13,79,74,.78);}
+.cta-left::before{content:'';position:absolute;inset:0;background:rgba(8,38,35,.82);}
 .cta-left-inner{position:relative;}
 .cta-right{padding:clamp(36px,5vw,68px);background:#F5EFE4;display:flex;flex-direction:column;justify-content:center;}
 .cta-h{font-family:'Fraunces',serif;font-size:clamp(26px,3.5vw,44px);font-weight:300;color:#F5EFE4;line-height:1.15;margin-bottom:16px;}
@@ -335,7 +389,7 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
 <div class="cur-ring" id="cring"></div>
 
 <!-- WHATSAPP -->
-<a href="https://wa.me/971506957009?text=Hi%2C%20I'm%20interested%20in%20a%20property%20via%20IMAKSA" target="_blank" class="wa" aria-label="WhatsApp">
+<a href="https://wa.me/971506957009?text=Hello%20IMAKSA%20%F0%9F%8F%A1%0A%0AI%20am%20interested%20in%20purchasing%20a%20property%20in%20Dubai.%20Could%20you%20please%20help%20me%20find%20the%20right%20property%3F%0A%0AThank%20you!" target="_blank" class="wa" aria-label="WhatsApp">
   <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
@@ -391,6 +445,17 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
   <div class="h-photo">
     <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1400&q=90" alt="Dubai Skyline" loading="eager">
     <div class="h-grad"></div>
+    <!-- Floating animated badges -->
+    <div class="h-float h-float-1">
+      <div class="h-float-label">Properties Available</div>
+      <div class="h-float-val">500+</div>
+      <div class="h-float-sub">Across Dubai</div>
+    </div>
+    <div class="h-float h-float-2">
+      <div class="h-float-label">Client Satisfaction</div>
+      <div class="h-float-val">98%</div>
+      <div class="h-float-sub">5-Star Reviews</div>
+    </div>
   </div>
   <div class="h-content">
     <p class="h-tag">Dubai's Trusted Property Partner</p>
@@ -410,7 +475,11 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
     </div>
     <div class="h-btns">
       <a href="properties.html" class="h-btn1">Explore Properties</a>
-      <a href="contact.html" class="h-btn2">Get in Touch</a>
+      <a href="contact.html" class="h-btn2"><span>Get in Touch</span></a>
+    </div>
+    <div class="h-scroll-ind">
+      <div class="h-scroll-text">Scroll</div>
+      <div class="h-scroll-line"></div>
     </div>
   </div>
 </section>
@@ -528,31 +597,37 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
       <span class="srv-icon">🏠</span>
       <div class="srv-title">Buy Property</div>
       <div class="srv-desc">Find your perfect home or investment from our curated selection of Dubai's finest properties across all communities.</div>
+      <div class="srv-arrow">→</div>
     </div>
     <div class="srv rv-el d1">
       <span class="srv-icon">🔑</span>
       <div class="srv-title">Rent Property</div>
       <div class="srv-desc">Discover premium rental properties managed by professionals. Short-term and long-term options available.</div>
+      <div class="srv-arrow">→</div>
     </div>
     <div class="srv rv-el d2">
       <span class="srv-icon">💼</span>
       <div class="srv-title">Sell Property</div>
       <div class="srv-desc">Maximize your property's value with our expert marketing, strategic pricing, and international buyer network.</div>
+      <div class="srv-arrow">→</div>
     </div>
     <div class="srv rv-el">
       <span class="srv-icon">📐</span>
       <div class="srv-title">Off-Plan Investments</div>
       <div class="srv-desc">Access exclusive off-plan projects from Dubai's top developers at pre-launch prices with flexible payment plans.</div>
+      <div class="srv-arrow">→</div>
     </div>
     <div class="srv rv-el d1">
       <span class="srv-icon">🌟</span>
       <div class="srv-title">Golden Visa</div>
       <div class="srv-desc">Invest AED 2M+ and secure UAE residency. We guide you through the entire Golden Visa process seamlessly.</div>
+      <div class="srv-arrow">→</div>
     </div>
     <div class="srv rv-el d2">
       <span class="srv-icon">🏢</span>
       <div class="srv-title">Property Management</div>
       <div class="srv-desc">Full-service property management including tenant placement, maintenance, and rental income optimization.</div>
+      <div class="srv-arrow">→</div>
     </div>
   </div>
 </section>
