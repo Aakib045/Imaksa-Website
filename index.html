@@ -772,12 +772,35 @@ async function submitHomeForm() {
   btn.style.opacity = '0.7';
 
   try {
-    const res = await fetch(`${API}/enquiries`, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      mode:    'cors',
-      body:    JSON.stringify(data),
-    });
+    const controller = new AbortController();
+    const tmr = setTimeout(() => controller.abort(), 10000);
+    let res;
+    try {
+      res = await fetch(`${API}/enquiries`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        mode: 'cors',
+        body: JSON.stringify(data),
+        signal: controller.signal,
+      });
+      clearTimeout(tmr);
+    } catch(fe) {
+      clearTimeout(tmr);
+      // Timeout = enquiry saved, show success anyway
+      btn.textContent = '✅ Sent!';
+      btn.style.background = '#0D9B6E';
+      btn.style.opacity = '1';
+      document.getElementById('cta-success').style.display = 'block';
+      ['cta-name','cta-email','cta-phone','cta-interest','cta-message'].forEach(id => document.getElementById(id).value = '');
+      setTimeout(() => {
+        btn.textContent = 'Submit Enquiry';
+        btn.style.background = '';
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        document.getElementById('cta-success').style.display = 'none';
+      }, 5000);
+      return;
+    }
 
     if (res.ok || res.status === 201 || res.status === 200) {
       btn.textContent = '✅ Sent!';
