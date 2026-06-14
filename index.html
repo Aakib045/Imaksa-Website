@@ -23,12 +23,12 @@ a{text-decoration:none;color:inherit;}
 
 /* LOADER */
 #loader{position:fixed;inset:0;background:#0D4F4A;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;}
-.ll{opacity:0;animation:fi .9s .3s forwards;display:flex;flex-direction:column;align-items:center;gap:0;}
-.ll-logo{width:clamp(90px,14vw,130px);height:clamp(90px,14vw,130px);object-fit:contain;mix-blend-mode:screen;}
-.ll-text{font-family:'Fraunces',serif;font-size:clamp(28px,7vw,56px);font-weight:300;color:#F5EFE4;letter-spacing:clamp(6px,2vw,14px);margin-top:4px;}
-.ls{font-size:clamp(8px,2vw,10px);letter-spacing:clamp(4px,2vw,8px);color:rgba(245,239,228,.45);text-transform:uppercase;opacity:0;animation:fi .9s .6s forwards;}
-.lb{width:min(160px,40vw);height:1px;background:rgba(245,239,228,.15);}
-.lbf{height:100%;background:#D4B896;width:0;animation:lf 2s .8s ease forwards;}
+.ll{opacity:0;animation:fi .9s .3s forwards;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.ll-logo{width:clamp(100px,16vw,140px);height:clamp(100px,16vw,140px);object-fit:contain;mix-blend-mode:screen;}
+.ll-text{font-family:'Fraunces',serif;font-size:clamp(28px,7vw,52px);font-weight:300;color:#F5EFE4;letter-spacing:clamp(6px,2vw,14px);}
+.ll-sub{font-size:clamp(8px,1.5vw,10px);letter-spacing:4px;color:#C9A84C;text-transform:uppercase;font-family:'Inter',sans-serif;}
+.lb{width:min(160px,40vw);height:1px;background:rgba(245,239,228,.15);margin-top:16px;}
+.lbf{height:100%;background:#C9A84C;width:0;animation:lf 2s .8s ease forwards;}
 @keyframes fi{to{opacity:1;}}
 @keyframes lf{to{width:100%;}}
 
@@ -388,8 +388,8 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
   <div class="ll">
     <img class="ll-logo" src="logo.jpeg" alt="IMAKSA">
     <div class="ll-text">IMAKSA</div>
+    <div class="ll-sub">Real Estate LLC</div>
   </div>
-  <div class="ls">Properties Dubai</div>
   <div class="lb"><div class="lbf"></div></div>
 </div>
 
