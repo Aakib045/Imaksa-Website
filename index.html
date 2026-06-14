@@ -22,12 +22,14 @@ a{text-decoration:none;color:inherit;}
 @media(hover:none){.cur,.cur-ring{display:none!important;}body{cursor:auto!important;}}
 
 /* LOADER */
-#loader{position:fixed;inset:0;background:#0D4F4A;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;}
-.ll{opacity:0;animation:fi .9s .3s forwards;}
-.ll img{height:clamp(80px,15vw,130px);object-fit:contain;filter:drop-shadow(0 0 20px rgba(212,184,150,.3));}
-.ls{font-size:clamp(8px,2.5vw,11px);letter-spacing:clamp(4px,2vw,8px);color:rgba(245,239,228,.5);text-transform:uppercase;opacity:0;animation:fi .9s .6s forwards;}
-.lb{width:min(200px,50vw);height:1px;background:rgba(245,239,228,.2);}
-.lbf{height:100%;background:#F5EFE4;width:0;animation:lf 2s .8s ease forwards;}
+#loader{position:fixed;inset:0;background:#0D4F4A;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+.ll{opacity:0;animation:fi .9s .3s forwards;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.ll svg{width:clamp(60px,12vw,100px);height:clamp(60px,12vw,100px);}
+.ll-text{font-family:'Fraunces',serif;font-size:clamp(28px,6vw,52px);font-weight:300;color:#F5EFE4;letter-spacing:clamp(6px,2vw,14px);}
+.ll-sub{font-size:clamp(8px,1.5vw,10px);letter-spacing:3px;color:rgba(212,184,150,.7);text-transform:uppercase;font-family:'Inter',sans-serif;}
+.ls{font-size:clamp(7px,1.5vw,9px);letter-spacing:clamp(4px,2vw,6px);color:rgba(245,239,228,.4);text-transform:uppercase;opacity:0;animation:fi .9s .6s forwards;}
+.lb{width:min(160px,40vw);height:1px;background:rgba(245,239,228,.15);}
+.lbf{height:100%;background:#D4B896;width:0;animation:lf 2s .8s ease forwards;}
 @keyframes fi{to{opacity:1;}}
 @keyframes lf{to{width:100%;}}
 
@@ -46,9 +48,15 @@ nav.sc{
   border-bottom:1px solid rgba(13,79,74,.12);
   box-shadow:0 2px 24px rgba(0,0,0,.07);
 }
-.n-logo img{height:44px;object-fit:contain;transition:all .4s;}
-nav.sc .n-logo img{filter:none;}
-nav:not(.sc) .n-logo img{filter:drop-shadow(0 0 8px rgba(255,255,255,0.3));}
+.n-logo{
+  font-family:'Fraunces',serif;
+  font-size:clamp(16px,2.5vw,22px);
+  font-weight:400;color:#F5EFE4;
+  letter-spacing:clamp(2px,1vw,4px);
+  white-space:nowrap;flex-shrink:0;
+  transition:color .4s;
+}
+nav.sc .n-logo{color:#0D4F4A;}
 
 .n-links{display:flex;gap:clamp(12px,2vw,28px);list-style:none;align-items:center;}
 .n-links>li{position:relative;}
@@ -378,8 +386,27 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
 
 <!-- LOADER -->
 <div id="loader">
-  <div class="ll"><img src="logo.jpeg" alt="IMAKSA"></div>
-  <div class="ls">Properties Dubai</div>
+  <div class="ll">
+    <!-- SVG recreation of IMAKSA logo — gold buildings on green, no white bg -->
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer circle -->
+      <circle cx="50" cy="50" r="47" fill="none" stroke="#D4B896" stroke-width="1.5" opacity="0.8"/>
+      <!-- Building left tall -->
+      <rect x="24" y="22" width="10" height="52" fill="#C4973A"/>
+      <rect x="24" y="22" width="4" height="52" fill="#E8C060"/>
+      <!-- Building center medium -->
+      <rect x="37" y="32" width="9" height="42" fill="#C4973A"/>
+      <rect x="37" y="32" width="3.5" height="42" fill="#E8C060"/>
+      <!-- Letter A shape / building right -->
+      <polygon points="49,74 49,34 62,34 62,74" fill="#1A2E5A"/>
+      <polygon points="49,34 55.5,22 62,34" fill="#1A2E5A"/>
+      <rect x="51" y="50" width="8" height="4" fill="#0D4F4A"/>
+      <!-- Gold highlights on dark building -->
+      <polygon points="55.5,22 58,28 55.5,34 53,28" fill="#D4B896" opacity="0.6"/>
+    </svg>
+    <div class="ll-text">IMAKSA</div>
+    <div class="ll-sub">Real Estate LLC</div>
+  </div>
   <div class="lb"><div class="lbf"></div></div>
 </div>
 
