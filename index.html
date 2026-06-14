@@ -45,15 +45,9 @@ nav.sc{
   border-bottom:1px solid rgba(13,79,74,.12);
   box-shadow:0 2px 24px rgba(0,0,0,.07);
 }
-.n-logo{
-  font-family:'Fraunces',serif;
-  font-size:clamp(16px,2.5vw,22px);
-  font-weight:400;color:#F5EFE4;
-  letter-spacing:clamp(2px,1vw,4px);
-  white-space:nowrap;flex-shrink:0;
-  transition:color .4s;
-}
-nav.sc .n-logo{color:#0D4F4A;}
+.n-logo img{height:44px;object-fit:contain;transition:all .4s;}
+nav.sc .n-logo img{filter:none;}
+nav:not(.sc) .n-logo img{filter:drop-shadow(0 0 8px rgba(255,255,255,0.3));}
 
 .n-links{display:flex;gap:clamp(12px,2vw,28px);list-style:none;align-items:center;}
 .n-links>li{position:relative;}
@@ -411,7 +405,7 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="index.html" class="n-logo">IMAKSA</a>
+  <a href="index.html" class="n-logo"><img src="logo.jpeg" alt="IMAKSA" style="height:44px;object-fit:contain;"></a>
   <ul class="n-links">
     <li><a href="properties.html?type=buy">Buy</a></li>
     <li><a href="properties.html?type=rent">Rent</a></li>
@@ -727,7 +721,7 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
 <footer>
   <div class="foot-top">
     <div>
-      <div class="foot-brand">IMAKSA</div>
+      <div class="foot-brand"><img src="logo.jpeg" alt="IMAKSA" style="height:52px;object-fit:contain;filter:brightness(0) invert(1);opacity:.9;"></div>
       <div class="foot-desc">Dubai's trusted real estate partner. Connecting clients with extraordinary homes and smart investments since 2012. RERA Licensed.</div>
     </div>
     <div>
