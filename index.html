@@ -22,13 +22,13 @@ a{text-decoration:none;color:inherit;}
 @media(hover:none){.cur,.cur-ring{display:none!important;}body{cursor:auto!important;}}
 
 /* LOADER */
-#loader{position:fixed;inset:0;background:#0D4F4A;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;}
-.ll{opacity:0;animation:fi .9s .3s forwards;display:flex;flex-direction:column;align-items:center;gap:4px;}
-.ll-logo{width:clamp(100px,16vw,140px);height:clamp(100px,16vw,140px);object-fit:contain;mix-blend-mode:screen;}
-.ll-text{font-family:'Fraunces',serif;font-size:clamp(28px,7vw,52px);font-weight:300;color:#F5EFE4;letter-spacing:clamp(6px,2vw,14px);}
-.ll-sub{font-size:clamp(8px,1.5vw,10px);letter-spacing:4px;color:#C9A84C;text-transform:uppercase;font-family:'Inter',sans-serif;}
-.lb{width:min(160px,40vw);height:1px;background:rgba(245,239,228,.15);margin-top:16px;}
-.lbf{height:100%;background:#C9A84C;width:0;animation:lf 2s .8s ease forwards;}
+#loader{position:fixed;inset:0;background:#0D4F4A;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0;}
+.ll{opacity:0;animation:fi .9s .3s forwards;display:flex;flex-direction:column;align-items:center;gap:0;}
+.ll-circle{width:clamp(140px,18vw,200px);height:clamp(140px,18vw,200px);border-radius:50%;border:1.5px solid #C9A84C;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
+.ll-circle img{width:90%;height:90%;object-fit:contain;mix-blend-mode:screen;}
+.ll-text{font-family:'Fraunces',serif;font-size:clamp(28px,6vw,48px);font-weight:300;color:#F5EFE4;letter-spacing:clamp(8px,2vw,12px);margin-top:20px;}
+.ll-sub{font-size:clamp(8px,1.2vw,10px);letter-spacing:5px;color:#C9A84C;text-transform:uppercase;font-family:'Inter',sans-serif;margin-top:6px;}
+.ll-line{width:80px;height:1px;background:#C9A84C;margin-top:14px;opacity:.6;}
 @keyframes fi{to{opacity:1;}}
 @keyframes lf{to{width:100%;}}
 
@@ -386,11 +386,11 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
 <!-- LOADER -->
 <div id="loader">
   <div class="ll">
-    <img class="ll-logo" src="logo.jpeg" alt="IMAKSA">
+    <div class="ll-circle"><img src="logo.jpeg" alt="IMAKSA"></div>
     <div class="ll-text">IMAKSA</div>
     <div class="ll-sub">Real Estate LLC</div>
+    <div class="ll-line"></div>
   </div>
-  <div class="lb"><div class="lbf"></div></div>
 </div>
 
 <!-- CURSOR -->
