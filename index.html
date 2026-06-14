@@ -22,11 +22,13 @@ a{text-decoration:none;color:inherit;}
 @media(hover:none){.cur,.cur-ring{display:none!important;}body{cursor:auto!important;}}
 
 /* LOADER */
-#loader{position:fixed;inset:0;background:#0D4F4A;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;}
-.ll{font-family:'Fraunces',serif;font-size:clamp(36px,10vw,68px);font-weight:300;color:#F5EFE4;letter-spacing:clamp(8px,3vw,18px);opacity:0;animation:fi .9s .3s forwards;}
-.ls{font-size:clamp(8px,2.5vw,11px);letter-spacing:clamp(4px,2vw,8px);color:rgba(245,239,228,.5);text-transform:uppercase;opacity:0;animation:fi .9s .6s forwards;}
-.lb{width:min(200px,50vw);height:1px;background:rgba(245,239,228,.2);}
-.lbf{height:100%;background:#F5EFE4;width:0;animation:lf 2s .8s ease forwards;}
+#loader{position:fixed;inset:0;background:#0D4F4A;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;}
+.ll{opacity:0;animation:fi .9s .3s forwards;display:flex;flex-direction:column;align-items:center;gap:0;}
+.ll-logo{width:clamp(90px,14vw,130px);height:clamp(90px,14vw,130px);object-fit:contain;mix-blend-mode:screen;}
+.ll-text{font-family:'Fraunces',serif;font-size:clamp(28px,7vw,56px);font-weight:300;color:#F5EFE4;letter-spacing:clamp(6px,2vw,14px);margin-top:4px;}
+.ls{font-size:clamp(8px,2vw,10px);letter-spacing:clamp(4px,2vw,8px);color:rgba(245,239,228,.45);text-transform:uppercase;opacity:0;animation:fi .9s .6s forwards;}
+.lb{width:min(160px,40vw);height:1px;background:rgba(245,239,228,.15);}
+.lbf{height:100%;background:#D4B896;width:0;animation:lf 2s .8s ease forwards;}
 @keyframes fi{to{opacity:1;}}
 @keyframes lf{to{width:100%;}}
 
@@ -383,7 +385,10 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
 
 <!-- LOADER -->
 <div id="loader">
-  <div class="ll">IMAKSA</div>
+  <div class="ll">
+    <img class="ll-logo" src="logo.jpeg" alt="IMAKSA">
+    <div class="ll-text">IMAKSA</div>
+  </div>
   <div class="ls">Properties Dubai</div>
   <div class="lb"><div class="lbf"></div></div>
 </div>
