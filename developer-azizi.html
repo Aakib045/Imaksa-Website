@@ -546,8 +546,51 @@ const hbtn = document.getElementById('hbtn'), mm = document.getElementById('mm')
 hbtn.addEventListener('click', () => { hbtn.classList.toggle('open'); mm.classList.toggle('open'); document.body.style.overflow = mm.classList.contains('open') ? 'hidden' : ''; });
 function closeMM() { hbtn.classList.remove('open'); mm.classList.remove('open'); document.body.style.overflow = ''; }
 
-// INIT
-renderCards(PROJECTS);
+
+// ── FETCH FROM BACKEND FIRST, FALLBACK TO STATIC ──
+const DEV_NAME = 'Azizi';
+async function loadFromBackend() {
+  try {
+    const res = await fetch('https://imaksa-backend-production.up.railway.app/api/properties', { mode: 'cors' });
+    const data = await res.json();
+    if (data.success && data.data && data.data.length) {
+      // Filter by developer name
+      const devProps = data.data.filter(p => {
+        const d = (p.developer || '').toLowerCase();
+        return d === DEV_NAME.toLowerCase() || d.includes(DEV_NAME.toLowerCase());
+      });
+      if (devProps.length) {
+        // Map backend data to our card format
+        const mapped = devProps.map(p => ({
+          name: p.name,
+          dev: DEV_NAME,
+          loc: p.location || 'Dubai, UAE',
+          type: p.type || 'Apartment',
+          status: p.status === 'active' ? 'Available' : (p.status || 'Off-Plan'),
+          beds: p.beds ? String(p.beds) : '—',
+          baths: p.baths ? String(p.baths) : '—',
+          area: p.area || '—',
+          price: Number(p.price) || 0,
+          priceLabel: p.price ? 'AED ' + Number(p.price).toLocaleString() : 'Price on Request',
+          handover: p.handover || 'TBC',
+          payplan: p.payplan || 'Flexible',
+          img: p.img || 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=700&q=80',
+          desc: p.description || '',
+        }));
+        renderCards(mapped);
+        document.getElementById('filter-count').textContent = `Showing ${mapped.length} project${mapped.length > 1 ? 's' : ''} (from your listings)`;
+        return;
+      }
+    }
+  } catch(e) {
+    console.log('Backend fetch failed, using static data');
+  }
+  // Fallback to static hardcoded projects
+  renderCards(PROJECTS);
+}
+
+loadFromBackend();
+
 </script>
 </body>
 </html>
