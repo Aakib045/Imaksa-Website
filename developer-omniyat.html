@@ -3,194 +3,337 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Omniyat — Projects in Dubai | IMAKSA</title>
-<meta name="description" content="Explore Omniyat projects in Dubai. Enquire via IMAKSA.">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Omniyat Projects in Dubai 2025-2026 | IMAKSA Properties</title>
+<meta name="description" content="Explore latest Omniyat projects in Dubai 2025-2026. Real prices, real projects. Enquire via IMAKSA — Dubai trusted property partner.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{font-size:16px;scroll-behavior:smooth;overflow-x:hidden;}
-body{background:#FAFAF8;color:#0A0A0A;font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
+body{background:#FAFAF8;color:#0A0A0A;font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;}
 img{max-width:100%;height:auto;display:block;}a{text-decoration:none;color:inherit;}
 ::-webkit-scrollbar{width:2px;}::-webkit-scrollbar-thumb{background:#0D4F4A;}
-.cur,.cur-ring{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
-.cur{width:9px;height:9px;background:#0D4F4A;}
-.cur-ring{width:38px;height:38px;border:1px solid #0D4F4A;z-index:9998;opacity:.4;}
-@media(hover:none){.cur,.cur-ring{display:none!important;}body{cursor:auto!important;}}
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:clamp(12px,2vw,20px) clamp(16px,4vw,60px);background:rgba(250,250,248,.97);border-bottom:1px solid rgba(13,79,74,.1);}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:clamp(12px,2vw,20px) clamp(16px,4vw,60px);background:rgba(250,250,248,.97);border-bottom:1px solid rgba(13,79,74,.1);transition:all .3s;}
 .n-logo{font-family:'Fraunces',serif;font-size:clamp(16px,2.5vw,22px);font-weight:400;color:#0D4F4A;letter-spacing:clamp(2px,1vw,4px);}
-.n-links{display:flex;gap:clamp(16px,2.5vw,32px);list-style:none;align-items:center;}
-.n-links>li>a{color:#6B6B60;font-size:clamp(9px,1.1vw,11px);letter-spacing:1.5px;text-transform:uppercase;transition:color .3s;}
-.n-links>li>a:hover{color:#0D4F4A;}
+.n-links{display:flex;gap:clamp(16px,2.5vw,28px);list-style:none;align-items:center;}
+.n-links a{color:#6B6B60;font-size:clamp(9px,1vw,11px);letter-spacing:1.5px;text-transform:uppercase;transition:color .3s;}
+.n-links a:hover{color:#0D4F4A;}
 .n-cta{background:#0D4F4A;color:#F5EFE4;padding:clamp(9px,1.4vw,12px) clamp(18px,2.5vw,28px);font-size:10px;letter-spacing:2px;text-transform:uppercase;transition:all .3s;}
 .n-cta:hover{background:#1A6B65;}
 .n-hbtn{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:8px;cursor:pointer;}
-.n-hbtn span{display:block;width:22px;height:1.5px;background:#0D4F4A;transition:all .35s;}
-.n-hbtn.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px);}
-.n-hbtn.open span:nth-child(2){opacity:0;}
-.n-hbtn.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px);}
+.n-hbtn span{display:block;width:22px;height:1.5px;background:#0D4F4A;}
 @media(max-width:900px){.n-links{display:none;}.n-cta{display:none;}.n-hbtn{display:flex;}}
-.mob-menu{display:none;position:fixed;inset:0;background:#0D4F4A;z-index:998;flex-direction:column;align-items:center;justify-content:center;gap:clamp(20px,4vw,36px);}
+.mob-menu{display:none;position:fixed;inset:0;background:#0D4F4A;z-index:998;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
 .mob-menu.open{display:flex;}
-.mob-menu a{font-family:'Fraunces',serif;font-size:clamp(22px,6vw,44px);font-weight:300;color:#F5EFE4;letter-spacing:3px;}
-.mob-cta-link{border:1px solid rgba(245,239,228,.3)!important;padding:12px 40px!important;font-size:14px!important;}
-.dev-hero{position:relative;height:70vh;min-height:400px;margin-top:60px;overflow:hidden;}
-.dev-hero-img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);animation:hz 8s ease forwards;}
+.mob-menu a{font-family:'Fraunces',serif;font-size:clamp(22px,6vw,40px);font-weight:300;color:#F5EFE4;letter-spacing:3px;}
+.mob-cta{border:1px solid rgba(245,239,228,.3)!important;padding:12px 40px!important;font-size:14px!important;}
+
+/* HERO */
+.dev-hero{position:relative;height:clamp(320px,55vw,560px);margin-top:60px;overflow:hidden;}
+.dev-hero img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);animation:hz 8s ease forwards;}
 @keyframes hz{to{transform:scale(1);}}
-.dev-hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.75) 0%,rgba(0,0,0,.3) 60%,transparent 100%);}
-.dev-hero-content{position:absolute;bottom:0;left:0;right:0;padding:clamp(32px,5vw,64px);}
-.dev-breadcrumb{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,239,228,.55);margin-bottom:12px;}
-.dev-breadcrumb a{color:rgba(245,239,228,.55);transition:color .3s;}
-.dev-breadcrumb a:hover{color:#D4B896;}
-.dev-logo-badge{background:rgba(255,255,255,.95);display:inline-block;padding:10px 24px;margin-bottom:16px;}
-.dev-logo-badge-text{font-family:'Fraunces',serif;font-size:clamp(20px,3vw,32px);font-weight:400;color:#0D4F4A;letter-spacing:2px;}
-.dev-logo-badge-sub{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#9B9B8A;margin-top:2px;}
-.dev-hero-h{font-family:'Fraunces',serif;font-size:clamp(28px,4vw,52px);font-weight:300;color:#F5EFE4;line-height:1.15;margin-bottom:12px;}
+.dev-hero-ov{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.8) 0%,rgba(0,0,0,.4) 60%,rgba(0,0,0,.1) 100%);}
+.dev-hero-content{position:absolute;bottom:0;left:0;right:0;padding:clamp(28px,5vw,60px);}
+.breadcrumb{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:16px;}
+.breadcrumb a{color:rgba(255,255,255,.5);transition:color .3s;}
+.breadcrumb a:hover{color:#D4B896;}
+.dev-logo-badge{display:inline-block;margin-bottom:16px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.2);}
+.dev-logo-main{letter-spacing:3px;line-height:1;}
+.dev-logo-sub{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px;font-family:'Inter',sans-serif;font-weight:300;}
+.dev-hero-h{font-family:'Fraunces',serif;font-size:clamp(24px,4vw,48px);font-weight:300;color:#F5EFE4;line-height:1.2;margin-bottom:10px;}
 .dev-hero-h em{font-style:italic;color:#D4B896;}
-.dev-hero-desc{font-size:clamp(12px,1.2vw,14px);color:rgba(245,239,228,.75);max-width:560px;line-height:1.7;}
-@media(max-width:600px){.dev-hero{height:55vh;}}
-.stats-bar{background:#0D4F4A;display:grid;grid-template-columns:repeat(4,1fr);}
-.sb-item{padding:clamp(16px,2.5vw,28px) clamp(16px,2vw,24px);border-right:1px solid rgba(245,239,228,.1);text-align:center;}
-.sb-item:last-child{border-right:none;}
-.sb-val{font-family:'Fraunces',serif;font-size:clamp(22px,3vw,36px);font-weight:300;color:#F5EFE4;}
-.sb-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(245,239,228,.5);margin-top:6px;}
-@media(max-width:600px){.stats-bar{grid-template-columns:1fr 1fr;}.sb-item{border-right:none;border-bottom:1px solid rgba(245,239,228,.1);}}
-.dev-about{padding:clamp(48px,6vw,80px) clamp(16px,5vw,80px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center;}
-.sec-tag{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#0D4F4A;margin-bottom:10px;font-weight:500;}
-.sec-h{font-family:'Fraunces',serif;font-size:clamp(24px,3.5vw,40px);font-weight:300;color:#0A0A0A;margin-bottom:clamp(16px,2vw,24px);}
-.sec-h em{font-style:italic;color:#8B6E47;}
-.dev-about-text{font-size:clamp(13px,1.3vw,15px);color:#4A4A40;line-height:1.85;margin-bottom:20px;}
-.dev-enquire{display:inline-block;background:#0D4F4A;color:#F5EFE4;padding:14px 36px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;transition:background .3s;cursor:pointer;border:none;font-family:'Inter',sans-serif;}
-.dev-enquire:hover{background:#1A6B65;}
-.dev-about-img{width:100%;height:clamp(280px,40vw,460px);object-fit:cover;}
-@media(max-width:768px){.dev-about{grid-template-columns:1fr;}}
-.projects-sec{padding:clamp(40px,5vw,72px) clamp(16px,5vw,80px);background:#F5EFE4;}
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));gap:2px;}
-.proj-card{background:#fff;overflow:hidden;cursor:pointer;transition:transform .3s,box-shadow .3s;}
-.proj-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.12);}
-.proj-card img{width:100%;height:200px;object-fit:cover;transition:transform .5s;}
-.proj-card:hover img{transform:scale(1.05);}
-.proj-body{padding:20px;}
-.proj-name{font-family:'Fraunces',serif;font-size:clamp(16px,2vw,20px);font-weight:300;color:#0A0A0A;margin-bottom:5px;}
-.proj-loc{font-size:10px;color:#9B9B8A;letter-spacing:.5px;margin-bottom:10px;}
-.proj-price{font-size:12px;color:#0D4F4A;font-weight:500;margin-bottom:14px;}
-.proj-enq{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#0D4F4A;border-bottom:1px solid rgba(13,79,74,.3);padding-bottom:2px;transition:all .3s;display:inline-block;}
-.proj-card:hover .proj-enq{letter-spacing:3px;}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9000;align-items:center;justify-content:center;padding:20px;}
-.modal-overlay.open{display:flex;}
-.modal{background:#fff;max-width:460px;width:100%;padding:clamp(24px,4vw,44px);position:relative;max-height:90vh;overflow-y:auto;}
+.dev-hero-desc{font-size:clamp(12px,1.2vw,14px);color:rgba(255,255,255,.7);max-width:520px;line-height:1.7;}
+@media(max-width:600px){.dev-hero{height:260px;}}
+
+/* STATS */
+.stats-bar{background:#1A1A1A;display:grid;grid-template-columns:repeat(4,1fr);}
+.sb{padding:clamp(14px,2.5vw,24px);border-right:1px solid rgba(255,255,255,.12);text-align:center;}
+.sb:last-child{border:none;}
+.sb-v{font-family:'Fraunces',serif;font-size:clamp(20px,3vw,34px);font-weight:300;color:#fff;}
+.sb-l{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:5px;}
+@media(max-width:600px){.stats-bar{grid-template-columns:1fr 1fr;}.sb{border-right:none;border-bottom:1px solid rgba(255,255,255,.12);}}
+
+/* ABOUT */
+.about-sec{padding:clamp(40px,6vw,80px) clamp(16px,5vw,80px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center;}
+.about-tag{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#0D4F4A;margin-bottom:10px;font-weight:500;}
+.about-h{font-family:'Fraunces',serif;font-size:clamp(22px,3.5vw,38px);font-weight:300;line-height:1.2;margin-bottom:16px;}
+.about-h em{font-style:italic;color:#8B6E47;}
+.about-p{font-size:clamp(13px,1.2vw,15px);color:#4A4A40;line-height:1.85;margin-bottom:16px;}
+.enq-btn{display:inline-block;background:#0D4F4A;color:#F5EFE4;padding:14px 36px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;transition:background .3s;cursor:pointer;border:none;font-family:'Inter',sans-serif;margin-top:8px;}
+.enq-btn:hover{background:#1A6B65;}
+.about-img{width:100%;height:clamp(250px,38vw,440px);object-fit:cover;}
+@media(max-width:768px){.about-sec{grid-template-columns:1fr;}}
+
+/* PROJECTS */
+.proj-sec{padding:clamp(36px,5vw,64px) clamp(16px,5vw,80px);background:#F5EFE4;}
+.proj-sec-top{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:clamp(24px,4vw,44px);flex-wrap:wrap;gap:14px;}
+.proj-tag{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#0D4F4A;margin-bottom:8px;font-weight:500;}
+.proj-h{font-family:'Fraunces',serif;font-size:clamp(22px,3.5vw,40px);font-weight:300;}
+.proj-h em{font-style:italic;color:#8B6E47;}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:2px;}
+.pc{background:#fff;overflow:hidden;cursor:pointer;transition:transform .3s,box-shadow .3s;}
+.pc:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(0,0,0,.12);}
+.pc-img{position:relative;height:200px;overflow:hidden;}
+.pc-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s;}
+.pc:hover .pc-img img{transform:scale(1.07);}
+.pc-badge{position:absolute;top:12px;left:12px;background:#1A1A1A;color:#fff;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;}
+.pc-handover{position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,.7);color:#fff;font-size:10px;padding:4px 10px;letter-spacing:1px;}
+.pc-body{padding:20px;}
+.pc-dev{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#9B9B8A;margin-bottom:6px;}
+.pc-name{font-family:'Fraunces',serif;font-size:clamp(16px,1.8vw,20px);font-weight:300;color:#0A0A0A;margin-bottom:4px;}
+.pc-loc{font-size:10px;color:#9B9B8A;margin-bottom:10px;}
+.pc-price{font-size:clamp(13px,1.3vw,15px);color:#1A1A1A;font-weight:600;margin-bottom:10px;}
+.pc-specs{display:flex;gap:14px;border-top:1px solid rgba(13,79,74,.08);padding-top:10px;}
+.pc-spec{font-size:10px;color:#6B6B60;}
+.pc-spec strong{display:block;font-size:12px;color:#0A0A0A;font-weight:500;}
+.pc-enq{display:block;text-align:center;background:#0D4F4A;color:#F5EFE4;padding:10px;font-size:9px;letter-spacing:2px;text-transform:uppercase;margin-top:12px;transition:background .3s;}
+.pc:hover .pc-enq{background:#1A6B65;}
+
+/* BACK */
+.back-sec{padding:clamp(28px,4vw,48px);text-align:center;}
+.back-btn{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#0D4F4A;border-bottom:1px solid rgba(13,79,74,.3);padding-bottom:3px;transition:all .3s;}
+.back-btn:hover{letter-spacing:3.5px;}
+
+/* MODAL */
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9000;align-items:center;justify-content:center;padding:20px;}
+.modal-ov.open{display:flex;}
+.modal{background:#fff;max-width:460px;width:100%;padding:clamp(24px,4vw,40px);position:relative;max-height:90vh;overflow-y:auto;}
 .modal-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:20px;cursor:pointer;color:#9B9B8A;}
-.modal-title{font-family:'Fraunces',serif;font-size:clamp(20px,2.5vw,28px);font-weight:300;color:#0A0A0A;margin-bottom:4px;}
-.modal-sub{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#0D4F4A;margin-bottom:22px;}
+.modal-h{font-family:'Fraunces',serif;font-size:clamp(20px,2.5vw,26px);font-weight:300;color:#0A0A0A;margin-bottom:4px;}
+.modal-sub{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#0D4F4A;margin-bottom:20px;}
 .fi{width:100%;border:1px solid rgba(13,79,74,.15);padding:12px 14px;font-size:12px;font-family:'Inter',sans-serif;background:#fff;color:#0A0A0A;outline:none;margin-bottom:10px;transition:border .3s;}
 .fi:focus{border-color:#0D4F4A;}
 .fi-btn{width:100%;background:#0D4F4A;color:#F5EFE4;border:none;padding:14px;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;transition:background .3s;}
 .fi-btn:hover{background:#1A6B65;}
-.form-success{display:none;background:#0D9B6E;color:#fff;padding:13px;text-align:center;font-size:12px;margin-top:10px;}
-.rv{opacity:0;transform:translateY(24px);}
+.form-ok{display:none;background:#0D9B6E;color:#fff;padding:12px;text-align:center;font-size:12px;margin-top:8px;}
+.rv{opacity:0;transform:translateY(20px);}
 .rv.in{opacity:1;transform:translateY(0);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
-.rv.in.d1{transition-delay:.1s;}.rv.in.d2{transition-delay:.2s;}
-footer{background:#0A0A0A;color:rgba(245,239,228,.5);padding:clamp(36px,5vw,60px) clamp(16px,5vw,80px) clamp(20px,3vw,32px);}
-.foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:clamp(20px,3vw,48px);margin-bottom:clamp(24px,4vw,40px);}
-.foot-brand{font-family:'Fraunces',serif;font-size:clamp(18px,2.5vw,24px);font-weight:300;color:#F5EFE4;letter-spacing:3px;margin-bottom:12px;}
-.foot-desc{font-size:12px;line-height:1.75;color:rgba(245,239,228,.4);}
-.foot-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#D4B896;margin-bottom:16px;font-weight:500;}
-.foot-links{list-style:none;display:flex;flex-direction:column;gap:9px;}
-.foot-links a{font-size:12px;color:rgba(245,239,228,.45);transition:color .3s;}
-.foot-links a:hover{color:#F5EFE4;}
-.foot-bottom{border-top:1px solid rgba(245,239,228,.07);padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
-.foot-copy,.foot-rera{font-size:10px;color:rgba(245,239,228,.28);}
-@media(max-width:768px){.foot-top{grid-template-columns:1fr 1fr;}}
-@media(max-width:480px){.foot-top{grid-template-columns:1fr;}}
+.rv.d1{transition-delay:.1s;}.rv.d2{transition-delay:.2s;}.rv.d3{transition-delay:.3s;}
+footer{background:#0A0A0A;padding:clamp(32px,5vw,56px) clamp(16px,5vw,80px) clamp(16px,3vw,28px);}
+.ft{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:clamp(20px,3vw,40px);margin-bottom:clamp(20px,3vw,36px);}
+.fb{font-family:'Fraunces',serif;font-size:clamp(18px,2.5vw,22px);font-weight:300;color:#F5EFE4;letter-spacing:3px;margin-bottom:10px;}
+.fd{font-size:12px;color:rgba(245,239,228,.4);line-height:1.7;}
+.ft-t{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#D4B896;margin-bottom:14px;font-weight:500;}
+.ft-l{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.ft-l a{font-size:12px;color:rgba(245,239,228,.45);transition:color .3s;}
+.ft-l a:hover{color:#F5EFE4;}
+.fb-b{border-top:1px solid rgba(245,239,228,.07);padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.fc{font-size:10px;color:rgba(245,239,228,.28);}
+@media(max-width:768px){.ft{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.ft{grid-template-columns:1fr;}}
 .wa{position:fixed;bottom:28px;right:28px;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:800;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:transform .3s;}
-.wa:hover{transform:scale(1.1);}.wa svg{width:25px;height:25px;}
+.wa:hover{transform:scale(1.1);}.wa svg{width:24px;height:24px;}
 </style>
 </head>
 <body>
-<div class="cur" id="cur"></div><div class="cur-ring" id="cring"></div>
+
 <a href="https://wa.me/971506957009?text=Hi+IMAKSA%2C+I%27m+interested+in+a+Omniyat+project." target="_blank" class="wa"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
-<div class="mob-menu" id="mm"><a href="index.html" onclick="closeMM()">Home</a><a href="developers.html" onclick="closeMM()">Developers</a><a href="properties.html" onclick="closeMM()">Properties</a><a href="contact.html" onclick="closeMM()" class="mob-cta-link">Enquire</a></div>
-<nav id="nav">
+
+<div class="mob-menu" id="mm">
+  <a href="index.html" onclick="closeMM()">Home</a>
+  <a href="developers.html" onclick="closeMM()">Developers</a>
+  <a href="properties.html" onclick="closeMM()">Properties</a>
+  <a href="contact.html" onclick="closeMM()" class="mob-cta">Enquire Now</a>
+</div>
+
+<nav>
   <a href="index.html" class="n-logo">IMAKSA</a>
   <ul class="n-links">
-    <li><a href="properties.html?type=buy">Buy</a></li><li><a href="properties.html?type=rent">Rent</a></li>
-    <li><a href="properties.html?type=sell">Sell</a></li><li><a href="properties.html?type=offplan">Off-Plan</a></li>
-    <li><a href="developers.html">Developers</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="properties.html?type=buy">Buy</a></li>
+    <li><a href="properties.html?type=rent">Rent</a></li>
+    <li><a href="properties.html?type=offplan">Off-Plan</a></li>
+    <li><a href="developers.html">Developers</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
   <a href="contact.html" class="n-cta">Enquire</a>
   <button class="n-hbtn" id="hbtn"><span></span><span></span><span></span></button>
 </nav>
+
 <div class="dev-hero">
-  <img class="dev-hero-img" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1400&q=90" alt="Omniyat">
-  <div class="dev-hero-overlay"></div>
+  <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1400&q=90" alt="Omniyat">
+  <div class="dev-hero-ov"></div>
   <div class="dev-hero-content">
-    <div class="dev-breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="developers.html">Developers</a> &nbsp;/&nbsp; Omniyat</div>
-    <div class="dev-logo-badge"><div class="dev-logo-badge-text">OMNIYAT</div><div class="dev-logo-badge-sub">Developers</div></div>
+    <div class="breadcrumb"><a href="index.html">Home</a> &nbsp;/&nbsp; <a href="developers.html">Developers</a> &nbsp;/&nbsp; Omniyat</div>
+    <div class="dev-logo-badge">
+      <div class="dev-logo-main" style="font-family:'Georgia',serif;font-size:24px;font-weight:300;color:#fff;letter-spacing:6px;font-style:italic;">OMNIYAT</div>
+      <div class="dev-logo-sub">ULTRA LUXURY</div>
+    </div>
     <h1 class="dev-hero-h">Omniyat <em>Omniyat</em></h1>
-    <p class="dev-hero-desc">Ultra-luxury developer behind The Opus by Zaha Hadid and One at Palm Jumeirah.</p>
+    <p class="dev-hero-desc">Dubai's most prestigious developer. The Opus by Zaha Hadid. One at Palm. Pure architectural art.</p>
   </div>
 </div>
+
 <div class="stats-bar">
-  <div class="sb-item"><div class="sb-val">Ultra</div><div class="sb-label">Luxury Tier</div></div>
-  <div class="sb-item"><div class="sb-val">2005</div><div class="sb-label">Founded</div></div>
-  <div class="sb-item"><div class="sb-val">Dubai</div><div class="sb-label">Primary Market</div></div>
-  <div class="sb-item"><div class="sb-val">IMAKSA</div><div class="sb-label">Official Partner</div></div>
+  <div class="sb"><div class="sb-v">Ultra</div><div class="sb-l">Units Delivered</div></div>
+  <div class="sb"><div class="sb-v">2005</div><div class="sb-l">Established</div></div>
+  <div class="sb"><div class="sb-v">6</div><div class="sb-l">Active Projects</div></div>
+  <div class="sb"><div class="sb-v">IMAKSA</div><div class="sb-l">Verified Partner</div></div>
 </div>
-<div class="dev-about">
+
+<div class="about-sec">
   <div class="rv">
-    <div class="sec-tag">About Omniyat</div>
-    <h2 class="sec-h">Omniyat <em>in Dubai</em></h2>
-    <p class="dev-about-text">Ultra-luxury developer behind The Opus by Zaha Hadid and One at Palm Jumeirah. With a portfolio of landmark projects across Dubai's most sought-after communities, Omniyat continues to set new benchmarks in quality, design, and value.</p>
-    <p class="dev-about-text">Through our exclusive partnership with IMAKSA, you get access to the best units at pre-launch prices with expert guidance from our property specialists — completely free of charge.</p>
-    <button class="dev-enquire" onclick="openModal()">Enquire About Omniyat &#8594;</button>
+    <div class="about-tag">About Omniyat</div>
+    <h2 class="about-h">Omniyat <em>in Dubai</em></h2>
+    <p class="about-p">Dubai's most prestigious developer. The Opus by Zaha Hadid. One at Palm. Pure architectural art. With a strong track record of delivering landmark projects, Omniyat remains one of the most trusted names in Dubai real estate.</p>
+    <p class="about-p">Through IMAKSA's exclusive partnership, you get access to the best units at pre-launch prices with zero commission and expert guidance from our certified consultants.</p>
+    <button class="enq-btn" onclick="openModal('Omniyat')">Enquire Now &#8594;</button>
   </div>
-  <img class="dev-about-img rv d1" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80" alt="Omniyat Dubai">
+  <img class="rv d1 about-img" src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?w=800&q=80" alt="Omniyat Dubai">
 </div>
-<section class="projects-sec">
-  <div class="sec-tag rv">Featured Projects</div>
-  <h2 class="sec-h rv d1">Omniyat <em>Projects</em></h2>
+
+<section class="proj-sec">
+  <div class="proj-sec-top">
+    <div class="rv">
+      <div class="proj-tag">Current & Upcoming</div>
+      <h2 class="proj-h">Latest <em>Omniyat</em> Projects</h2>
+    </div>
+    <a href="contact.html" style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#0D4F4A;border-bottom:1px solid rgba(13,79,74,.3);padding-bottom:3px;" class="rv d1">Enquire About All &#8594;</a>
+  </div>
   <div class="proj-grid">
-    <div class="proj-card rv" onclick="openModal('The Opus')">
-      <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=500&q=80" alt="The Opus">
-      <div class="proj-body"><div class="proj-name">The Opus</div><div class="proj-loc">&#128205; Business Bay, Dubai</div><div class="proj-price">From AED 3,500,000</div><div class="proj-enq">Enquire Now &#8594;</div></div>
+    <div class="pc rv" onclick="openModal('The Opus by Zaha Hadid by Omniyat')">
+      <div class="pc-img">
+        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80" alt="The Opus by Zaha Hadid" loading="lazy">
+        <div class="pc-badge">Ultra Luxury Apts</div>
+        <div class="pc-handover">Handover Ready</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-dev">by Omniyat</div>
+        <div class="pc-name">The Opus by Zaha Hadid</div>
+        <div class="pc-loc">&#128205; Business Bay</div>
+        <div class="pc-price">Starting AED 3,500,000</div>
+        <div class="pc-specs">
+          <div class="pc-spec"><strong>1-3</strong>Bedrooms</div>
+          <div class="pc-spec"><strong>Off-Plan</strong>Status</div>
+        </div>
+        <span class="pc-enq">Enquire Now &#8594;</span>
+      </div>
     </div>
-    <div class="proj-card rv d1" onclick="openModal('One at Palm Jumeirah')">
-      <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=500&q=80" alt="One at Palm Jumeirah">
-      <div class="proj-body"><div class="proj-name">One at Palm Jumeirah</div><div class="proj-loc">&#128205; Palm Jumeirah</div><div class="proj-price">From AED 12,000,000</div><div class="proj-enq">Enquire Now &#8594;</div></div>
+    <div class="pc rv" onclick="openModal('One at Palm Jumeirah by Omniyat')">
+      <div class="pc-img">
+        <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?w=600&q=80" alt="One at Palm Jumeirah" loading="lazy">
+        <div class="pc-badge">Ultra Luxury</div>
+        <div class="pc-handover">Handover Ready</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-dev">by Omniyat</div>
+        <div class="pc-name">One at Palm Jumeirah</div>
+        <div class="pc-loc">&#128205; Palm Jumeirah</div>
+        <div class="pc-price">Starting AED 12,000,000</div>
+        <div class="pc-specs">
+          <div class="pc-spec"><strong>1-5</strong>Bedrooms</div>
+          <div class="pc-spec"><strong>Off-Plan</strong>Status</div>
+        </div>
+        <span class="pc-enq">Enquire Now &#8594;</span>
+      </div>
     </div>
-    <div class="proj-card rv d2" onclick="openModal('AVA at Palm Jumeirah')">
-      <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=500&q=80" alt="AVA at Palm Jumeirah">
-      <div class="proj-body"><div class="proj-name">AVA at Palm Jumeirah</div><div class="proj-loc">&#128205; Palm Jumeirah</div><div class="proj-price">From AED 9,000,000</div><div class="proj-enq">Enquire Now &#8594;</div></div>
+    <div class="pc rv" onclick="openModal('AVA at Palm Jumeirah by Omniyat')">
+      <div class="pc-img">
+        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="AVA at Palm Jumeirah" loading="lazy">
+        <div class="pc-badge">Residences</div>
+        <div class="pc-handover">Handover 2026</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-dev">by Omniyat</div>
+        <div class="pc-name">AVA at Palm Jumeirah</div>
+        <div class="pc-loc">&#128205; Palm Jumeirah</div>
+        <div class="pc-price">Starting AED 9,000,000</div>
+        <div class="pc-specs">
+          <div class="pc-spec"><strong>2-5</strong>Bedrooms</div>
+          <div class="pc-spec"><strong>Off-Plan</strong>Status</div>
+        </div>
+        <span class="pc-enq">Enquire Now &#8594;</span>
+      </div>
     </div>
+    <div class="pc rv" onclick="openModal('Orla Dorchester by Omniyat')">
+      <div class="pc-img">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" alt="Orla Dorchester" loading="lazy">
+        <div class="pc-badge">Ultra Luxury</div>
+        <div class="pc-handover">Handover 2026</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-dev">by Omniyat</div>
+        <div class="pc-name">Orla Dorchester</div>
+        <div class="pc-loc">&#128205; Palm Jumeirah</div>
+        <div class="pc-price">Starting AED 16,000,000</div>
+        <div class="pc-specs">
+          <div class="pc-spec"><strong>3-6</strong>Bedrooms</div>
+          <div class="pc-spec"><strong>Off-Plan</strong>Status</div>
+        </div>
+        <span class="pc-enq">Enquire Now &#8594;</span>
+      </div>
+    </div>
+    <div class="pc rv" onclick="openModal('Vela Viento by Omniyat')">
+      <div class="pc-img">
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" alt="Vela Viento" loading="lazy">
+        <div class="pc-badge">Luxury Apartments</div>
+        <div class="pc-handover">Handover 2027</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-dev">by Omniyat</div>
+        <div class="pc-name">Vela Viento</div>
+        <div class="pc-loc">&#128205; Business Bay</div>
+        <div class="pc-price">Starting AED 7,500,000</div>
+        <div class="pc-specs">
+          <div class="pc-spec"><strong>2-4</strong>Bedrooms</div>
+          <div class="pc-spec"><strong>Off-Plan</strong>Status</div>
+        </div>
+        <span class="pc-enq">Enquire Now &#8594;</span>
+      </div>
+    </div>
+    <div class="pc rv" onclick="openModal('The Lana Residences by Omniyat')">
+      <div class="pc-img">
+        <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=600&q=80" alt="The Lana Residences" loading="lazy">
+        <div class="pc-badge">Branded Residences</div>
+        <div class="pc-handover">Handover 2027</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-dev">by Omniyat</div>
+        <div class="pc-name">The Lana Residences</div>
+        <div class="pc-loc">&#128205; Business Bay</div>
+        <div class="pc-price">Starting AED 5,800,000</div>
+        <div class="pc-specs">
+          <div class="pc-spec"><strong>1-4</strong>Bedrooms</div>
+          <div class="pc-spec"><strong>Off-Plan</strong>Status</div>
+        </div>
+        <span class="pc-enq">Enquire Now &#8594;</span>
+      </div>
+    </div>
+
   </div>
 </section>
-<div style="text-align:center;padding:clamp(32px,4vw,56px);"><a href="developers.html" style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#0D4F4A;border-bottom:1px solid rgba(13,79,74,.3);padding-bottom:4px;">&#8592; Back to All Developers</a></div>
+
+<div class="back-sec">
+  <a href="developers.html" class="back-btn">&#8592; Back to All Developers</a>
+</div>
+
 <footer>
-  <div class="foot-top">
-    <div><div class="foot-brand">IMAKSA</div><div class="foot-desc">Dubai's trusted real estate partner. Connecting clients with extraordinary homes since 2012. RERA Licensed.</div></div>
-    <div><div class="foot-title">Properties</div><ul class="foot-links"><li><a href="properties.html?type=buy">For Sale</a></li><li><a href="properties.html?type=rent">For Rent</a></li><li><a href="properties.html?type=offplan">Off-Plan</a></li></ul></div>
-    <div><div class="foot-title">Developers</div><ul class="foot-links"><li><a href="developer-emaar.html">Emaar</a></li><li><a href="developer-damac.html">Damac</a></li><li><a href="developer-danube.html">Danube</a></li><li><a href="developers.html">All Developers</a></li></ul></div>
-    <div><div class="foot-title">Company</div><ul class="foot-links"><li><a href="about.html">About Us</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div class="ft">
+    <div><div class="fb">IMAKSA</div><div class="fd">Dubai's trusted real estate partner. Connecting clients with extraordinary homes since 2012. RERA Licensed.</div></div>
+    <div><div class="ft-t">Properties</div><ul class="ft-l"><li><a href="properties.html?type=buy">For Sale</a></li><li><a href="properties.html?type=rent">For Rent</a></li><li><a href="properties.html?type=offplan">Off-Plan</a></li></ul></div>
+    <div><div class="ft-t">Developers</div><ul class="ft-l"><li><a href="developer-emaar.html">Emaar</a></li><li><a href="developer-damac.html">Damac</a></li><li><a href="developer-danube.html">Danube</a></li><li><a href="developers.html">All Developers</a></li></ul></div>
+    <div><div class="ft-t">Company</div><ul class="ft-l"><li><a href="about.html">About Us</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
   </div>
-  <div class="foot-bottom"><div class="foot-copy">&#169; 2025 IMAKSA Real Estate. All rights reserved.</div><div class="foot-rera">RERA Licensed &#183; Business Bay, Dubai</div></div>
+  <div class="fb-b"><div class="fc">&#169; 2025 IMAKSA Real Estate LLC. All rights reserved.</div><div class="fc">RERA Licensed &#183; Business Bay, Dubai, UAE</div></div>
 </footer>
-<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+
+<div class="modal-ov" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">&#x2715;</button>
-    <div class="modal-title">Enquire Now</div>
+    <div class="modal-h">Enquire Now</div>
     <div class="modal-sub" id="modal-sub">Omniyat</div>
     <input type="text" class="fi" id="m-name" placeholder="Your Full Name">
     <input type="email" class="fi" id="m-email" placeholder="Email Address">
-    <input type="tel" class="fi" id="m-phone" placeholder="Phone Number">
-    <select class="fi" id="m-budget"><option value="">Budget Range (AED)</option><option>Under 1M</option><option>1M - 3M</option><option>3M - 7M</option><option>7M+</option></select>
-    <textarea class="fi" id="m-msg" rows="3" placeholder="Tell us about your requirements..."></textarea>
-    <button class="fi-btn" id="m-btn" onclick="submitEnquiry()">Submit Enquiry</button>
-    <div class="form-success" id="m-success">&#9989; Thank you! Our team will contact you within 24 hours.</div>
+    <input type="tel" class="fi" id="m-phone" placeholder="Phone / WhatsApp Number">
+    <select class="fi" id="m-budget"><option value="">Budget Range (AED)</option><option>Under 1M</option><option>1M - 3M</option><option>3M - 7M</option><option>7M - 15M</option><option>15M+</option></select>
+    <textarea class="fi" id="m-msg" rows="3" placeholder="Tell us which project interests you..."></textarea>
+    <button class="fi-btn" id="m-btn" onclick="submitEnq()">Submit Enquiry</button>
+    <div class="form-ok" id="m-ok">&#9989; Thank you! Our consultant will call you within 24 hours.</div>
   </div>
 </div>
+
 <script>
 const API='https://imaksa-backend-production.up.railway.app/api';
-const cur=document.getElementById('cur'),cring=document.getElementById('cring');
-document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';cring.style.left=e.clientX+'px';cring.style.top=e.clientY+'px';});
 const hbtn=document.getElementById('hbtn'),mm=document.getElementById('mm');
 hbtn.addEventListener('click',()=>{hbtn.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
 function closeMM(){hbtn.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}
@@ -199,19 +342,17 @@ document.querySelectorAll('.rv').forEach(r=>obs.observe(r));
 let cp='Omniyat';
 function openModal(p){cp=p||'Omniyat';document.getElementById('modal-sub').textContent=cp;document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';}
 function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
-function closeModalOutside(e){if(e.target===document.getElementById('modal'))closeModal();}
-async function submitEnquiry(){
+async function submitEnq(){
   const btn=document.getElementById('m-btn');
-  const data={name:document.getElementById('m-name').value.trim(),email:document.getElementById('m-email').value.trim(),phone:document.getElementById('m-phone').value.trim(),budget:document.getElementById('m-budget').value,message:document.getElementById('m-msg').value.trim(),interest:cp,developer:'Omniyat',source:'developer-page'};
-  if(!data.name||!data.email){alert('Please enter your name and email');return;}
-  btn.textContent='Sending...';btn.disabled=true;btn.style.opacity='0.7';
-  try{const controller=new AbortController();const tmr=setTimeout(()=>controller.abort(),10000);let res;
-  try{res=await fetch(API+'/enquiries',{method:'POST',headers:{'Content-Type':'application/json'},mode:'cors',body:JSON.stringify(data),signal:controller.signal});clearTimeout(tmr);}
-  catch(fe){clearTimeout(tmr);showSuccess(btn);return;}
-  if(res.ok||res.status===201){showSuccess(btn);}else{throw new Error('err');}}
-  catch(err){btn.textContent='Try Again';btn.disabled=false;btn.style.opacity='1';alert('Something went wrong. Please WhatsApp us.');}
+  const d={name:document.getElementById('m-name').value.trim(),email:document.getElementById('m-email').value.trim(),phone:document.getElementById('m-phone').value.trim(),budget:document.getElementById('m-budget').value,message:document.getElementById('m-msg').value.trim(),interest:cp,developer:'Omniyat',source:'developer-page'};
+  if(!d.name||!d.email){alert('Please enter your name and email');return;}
+  btn.textContent='Sending...';btn.disabled=true;btn.style.opacity='.7';
+  try{const c=new AbortController();const t=setTimeout(()=>c.abort(),10000);let r;
+    try{r=await fetch(API+'/enquiries',{method:'POST',headers:{'Content-Type':'application/json'},mode:'cors',body:JSON.stringify(d),signal:c.signal});clearTimeout(t);}catch(e){clearTimeout(t);showOk(btn);return;}
+    if(r.ok||r.status===201){showOk(btn);}else{throw new Error();}
+  }catch(e){btn.textContent='Try Again';btn.disabled=false;btn.style.opacity='1';alert('Error. Please WhatsApp us.');}
 }
-function showSuccess(btn){btn.textContent='Sent!';btn.style.background='#0D9B6E';btn.style.opacity='1';document.getElementById('m-success').style.display='block';['m-name','m-email','m-phone','m-budget','m-msg'].forEach(id=>document.getElementById(id).value='');setTimeout(()=>{closeModal();btn.textContent='Submit Enquiry';btn.style.background='';btn.disabled=false;btn.style.opacity='1';document.getElementById('m-success').style.display='none';},4000);}
+function showOk(btn){btn.textContent='Sent!';btn.style.background='#0D9B6E';btn.style.opacity='1';document.getElementById('m-ok').style.display='block';['m-name','m-email','m-phone','m-budget','m-msg'].forEach(id=>document.getElementById(id).value='');setTimeout(()=>{closeModal();btn.textContent='Submit Enquiry';btn.style.background='';btn.disabled=false;btn.style.opacity='1';document.getElementById('m-ok').style.display='none';},4000);}
 </script>
 </body>
 </html>
