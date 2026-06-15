@@ -409,7 +409,6 @@ select.fi option{background:#fff;}
     <div class="page" id="page-properties">
       <div class="sec-hdr">
         <div><div class="sec-title">Properties</div><div class="sec-sub">Manage all property listings on your website</div></div>
-        <button class="btn btn-primary" onclick="openModal('property')">+ Add Property</button>
       </div>
       <!-- Developer Filter Tabs -->
       <div style="margin-bottom:16px;overflow-x:auto;scrollbar-width:none;">
@@ -910,19 +909,23 @@ async function renderProps() {
     return;
   }
 
-  tb.innerHTML = props.map(p => `<tr data-dev="${p.developer||''}" data-status="${p.status||'active'}">
+  tb.innerHTML = props.map(p => {
+    const price = p.price ? 'AED ' + Number(p.price).toLocaleString() : 'Price on Request';
+    const dev = p.developer || '';
+    return `<tr data-dev="${dev}" data-status="${p.status||'active'}">
     <td>${p.img ? `<img class="tbl-img" src="${p.img}" alt="${p.name}" onerror="this.style.display='none'">` : '<div style="width:52px;height:40px;background:var(--cream2);display:flex;align-items:center;justify-content:center;">🏡</div>'}</td>
     <td><div class="tbl-name">${p.name}</div><div style="font-size:11px;color:var(--text3);margin-top:2px;">${p.location || ''}</div></td>
-    <td><span style="font-size:11px;font-weight:500;color:var(--teal);">${p.developer || '—'}</span></td>
+    <td><span style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.5px;">${dev || '<span style="color:var(--text3);font-weight:300;">No Developer</span>'}</span></td>
     <td style="text-transform:capitalize;">${p.type || '—'}</td>
-    <td>AED ${Number(p.price).toLocaleString() || '—'}</td>
+    <td style="font-weight:500;">${price}</td>
     <td>${p.location || '—'}</td>
     <td><span class="bdg bdg-${p.status || 'active'}">${p.status || 'active'}</span></td>
     <td><div class="tbl-actions">
       <button class="btn btn-outline btn-sm" onclick="openPropModal('${p._id}')">✏️ Edit</button>
       <button class="btn btn-danger btn-sm" onclick="delProp('${p._id}')">🗑️</button>
     </div></td>
-  </tr>`).join('');
+  </tr>`;
+  }).join('');
 }
 
 function openPropModal(id = null) {
@@ -933,25 +936,29 @@ function openPropModal(id = null) {
     api(`/properties/${id}`).then(res => {
       const p = res.data;
       if (!p) return;
-      document.getElementById('mp-id').value    = p._id     || '';
-      document.getElementById('mp-name').value  = p.name    || '';
-      document.getElementById('mp-price').value = p.price   || '';
-      document.getElementById('mp-type').value  = p.type    || '';
-      document.getElementById('mp-status').value= p.status  || 'active';
-      document.getElementById('mp-loc').value   = p.location|| '';
-      document.getElementById('mp-beds').value  = p.beds    || '';
-      document.getElementById('mp-baths').value = p.baths   || '';
-      document.getElementById('mp-area').value  = p.area    || '';
-      document.getElementById('mp-badge').value = p.badge   || '';
-      document.getElementById('mp-desc').value  = p.desc    || '';
-      document.getElementById('mp-img').value   = p.img     || '';
+      document.getElementById('mp-id').value        = p._id        || '';
+      document.getElementById('mp-name').value      = p.name       || '';
+      document.getElementById('mp-price').value     = p.price      || '';
+      document.getElementById('mp-type').value      = p.type       || '';
+      document.getElementById('mp-listing').value   = p.listingType|| 'buy';
+      document.getElementById('mp-status').value    = p.status     || 'active';
+      document.getElementById('mp-developer').value = p.developer  || '';
+      document.getElementById('mp-loc').value       = p.location   || '';
+      document.getElementById('mp-beds').value      = p.beds       || '';
+      document.getElementById('mp-baths').value     = p.baths      || '';
+      document.getElementById('mp-area').value      = p.area       || '';
+      document.getElementById('mp-badge').value     = p.badge      || '';
+      document.getElementById('mp-desc').value      = p.desc       || '';
+      document.getElementById('mp-img').value       = p.img        || '';
       om('m-prop');
     });
   } else {
     ['mp-name','mp-price','mp-loc','mp-beds','mp-baths','mp-area','mp-badge','mp-desc','mp-img'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('mp-id').value = '';
-    document.getElementById('mp-type').selectedIndex = 0;
-    document.getElementById('mp-status').selectedIndex = 0;
+    document.getElementById('mp-id').value        = '';
+    document.getElementById('mp-type').selectedIndex    = 0;
+    document.getElementById('mp-listing').selectedIndex = 0;
+    document.getElementById('mp-status').selectedIndex  = 0;
+    document.getElementById('mp-developer').selectedIndex = 0;
     om('m-prop');
   }
 }
@@ -963,15 +970,17 @@ async function saveProp() {
 
   const data = {
     name, price,
-    type:     document.getElementById('mp-type').value,
-    status:   document.getElementById('mp-status').value,
-    location: document.getElementById('mp-loc').value,
-    beds:     document.getElementById('mp-beds').value,
-    baths:    document.getElementById('mp-baths').value,
-    area:     document.getElementById('mp-area').value,
-    badge:    document.getElementById('mp-badge').value,
-    desc:     document.getElementById('mp-desc').value,
-    img:      document.getElementById('mp-img').value,
+    type:        document.getElementById('mp-type').value,
+    listingType: document.getElementById('mp-listing').value,
+    status:      document.getElementById('mp-status').value,
+    developer:   document.getElementById('mp-developer').value,
+    location:    document.getElementById('mp-loc').value,
+    beds:        document.getElementById('mp-beds').value,
+    baths:       document.getElementById('mp-baths').value,
+    area:        document.getElementById('mp-area').value,
+    badge:       document.getElementById('mp-badge').value,
+    desc:        document.getElementById('mp-desc').value,
+    img:         document.getElementById('mp-img').value,
   };
 
   const res = editId
