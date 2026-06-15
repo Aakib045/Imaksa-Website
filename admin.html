@@ -27,7 +27,9 @@ button,input,textarea,select{font-family:'Inter',sans-serif;}
 }
 
 /* ── LOGIN ── */
-#login-screen{position:fixed;inset:0;background:var(--teal);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;}
+@keyframes drawcircle{to{stroke-dashoffset:0;}}
+@keyframes rise{to{transform:translateY(0);opacity:1;}}
+display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;}
 #login-screen::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1400&q=80') center/cover no-repeat;opacity:.08;}
 .login-box{width:min(420px,92vw);background:var(--cream);border:1px solid rgba(245,239,228,.2);padding:clamp(36px,5vw,52px);position:relative;z-index:1;}
 .login-logo{font-family:'Fraunces',serif;font-size:clamp(24px,5vw,32px);font-weight:400;color:var(--teal);letter-spacing:5px;margin-bottom:4px;}
@@ -77,7 +79,10 @@ button,input,textarea,select{font-family:'Inter',sans-serif;}
 .page.active{display:block;}
 
 /* ── STATS ── */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,2vw,18px);margin-bottom:clamp(18px,3vw,28px);}
+.dev-filter-btn{padding:7px 14px;font-size:10px;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--border);background:var(--cream);color:var(--text2);cursor:pointer;transition:all .2s;border-radius:2px;font-family:'Inter',sans-serif;white-space:nowrap;}
+.dev-filter-btn:hover{border-color:var(--teal);color:var(--teal);}
+.dev-filter-btn.active{background:var(--teal);color:var(--cream);border-color:var(--teal);}
+grid-template-columns:repeat(4,1fr);gap:clamp(10px,2vw,18px);margin-bottom:clamp(18px,3vw,28px);}
 .stat-card{background:var(--cream);border:1px solid var(--border);padding:clamp(16px,2.5vw,24px);position:relative;overflow:hidden;transition:box-shadow .3s;}
 .stat-card:hover{box-shadow:0 4px 20px rgba(13,79,74,.1);}
 .stat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
@@ -85,7 +90,8 @@ button,input,textarea,select{font-family:'Inter',sans-serif;}
 .stat-badge{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--teal3);background:rgba(13,79,74,.08);padding:3px 8px;}
 .stat-val{font-family:'Fraunces',serif;font-size:clamp(32px,5vw,48px);font-weight:300;color:var(--teal);line-height:1;margin-bottom:4px;}
 .stat-label{font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;}
-@media(max-width:700px){.stats-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(3,1fr)!important;}}
+@media(max-width:700px){.stats-grid{grid-template-columns:1fr 1fr!important;}}
 
 /* ── DASH GRID ── */
 .dash-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:clamp(12px,2vw,18px);}
@@ -220,7 +226,30 @@ select.fi option{background:#fff;}
 <!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
-    <div class="login-logo"><img src="logo.jpeg" alt="IMAKSA" style="height:64px;object-fit:contain;margin-bottom:8px;"></div>
+    <div class="login-logo">
+      <svg width="110" height="110" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="display:block;margin:0 auto 8px;">
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-dasharray="502" stroke-dashoffset="502" style="animation:drawcircle 1.4s .2s cubic-bezier(.4,0,.2,1) forwards;"/>
+        <g style="transform:translateY(60px);opacity:0;animation:rise .8s .7s cubic-bezier(.16,1,.3,1) forwards;">
+          <rect x="48" y="55" width="14" height="90" fill="#1A2E5A"/><rect x="48" y="55" width="5" height="90" fill="#C9A84C"/>
+          <polygon points="48,55 55,43 62,55" fill="#C9A84C"/>
+        </g>
+        <g style="transform:translateY(60px);opacity:0;animation:rise .8s .85s cubic-bezier(.16,1,.3,1) forwards;">
+          <rect x="66" y="72" width="12" height="73" fill="#1A2E5A"/><rect x="66" y="72" width="4" height="73" fill="#C9A84C"/>
+          <polygon points="66,72 72,62 78,72" fill="#C9A84C"/>
+        </g>
+        <g style="transform:translateY(60px);opacity:0;animation:rise .8s .95s cubic-bezier(.16,1,.3,1) forwards;">
+          <rect x="82" y="60" width="32" height="85" fill="#1A2E5A"/><rect x="82" y="60" width="6" height="85" fill="#C9A84C"/>
+          <rect x="84" y="105" width="28" height="5" fill="#0D4F4A"/>
+          <polygon points="98,48 82,60 114,60" fill="#1A2E5A"/>
+          <polygon points="98,48 104,60 92,60" fill="#C9A84C" opacity=".7"/>
+        </g>
+        <g style="transform:translateY(60px);opacity:0;animation:rise .8s 1.05s cubic-bezier(.16,1,.3,1) forwards;">
+          <rect x="118" y="80" width="11" height="65" fill="#1A2E5A"/><rect x="118" y="80" width="4" height="65" fill="#C9A84C"/>
+          <polygon points="118,80 123.5,70 129,80" fill="#C9A84C"/>
+        </g>
+      </svg>
+      <div style="font-family:'Fraunces',serif;font-size:28px;font-weight:300;color:#0D4F4A;letter-spacing:10px;text-align:center;opacity:0;animation:rise .8s 1.2s cubic-bezier(.16,1,.3,1) forwards;">IMAKSA</div>
+    </div>
     <div class="login-sub">Admin Panel · Secure Access</div>
     <label class="login-label">Username</label>
     <input type="text" class="login-input" id="lu" placeholder="admin" autocomplete="off">
@@ -248,6 +277,17 @@ select.fi option{background:#fff;}
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sb-logo">
+      <svg width="36" height="36" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+        <circle cx="100" cy="100" r="80" fill="none" stroke="#C9A84C" stroke-width="2"/>
+        <rect x="48" y="55" width="14" height="90" fill="#1A2E5A"/><rect x="48" y="55" width="5" height="90" fill="#C9A84C"/>
+        <polygon points="48,55 55,43 62,55" fill="#C9A84C"/>
+        <rect x="66" y="72" width="12" height="73" fill="#1A2E5A"/><rect x="66" y="72" width="4" height="73" fill="#C9A84C"/>
+        <polygon points="66,72 72,62 78,72" fill="#C9A84C"/>
+        <rect x="82" y="60" width="32" height="85" fill="#1A2E5A"/><rect x="82" y="60" width="6" height="85" fill="#C9A84C"/>
+        <polygon points="98,48 82,60 114,60" fill="#1A2E5A"/><polygon points="98,48 104,60 92,60" fill="#C9A84C" opacity=".7"/>
+        <rect x="118" y="80" width="11" height="65" fill="#1A2E5A"/><rect x="118" y="80" width="4" height="65" fill="#C9A84C"/>
+        <polygon points="118,80 123.5,70 129,80" fill="#C9A84C"/>
+      </svg>
       <div class="sb-logo-text">IMAKSA</div>
       <div class="sb-badge">Admin</div>
     </div>
@@ -288,32 +328,113 @@ select.fi option{background:#fff;}
 
     <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
-      <div class="stats-grid">
+      <div class="stats-grid" style="grid-template-columns:repeat(5,1fr);">
         <div class="stat-card"><div class="stat-top"><div class="stat-icon">🏡</div><div class="stat-badge">Listings</div></div><div class="stat-val" id="d-props">0</div><div class="stat-label">Total Properties</div></div>
+        <div class="stat-card"><div class="stat-top"><div class="stat-icon">🏗️</div><div class="stat-badge">Partners</div></div><div class="stat-val" id="d-devs">14</div><div class="stat-label">Active Developers</div></div>
         <div class="stat-card"><div class="stat-top"><div class="stat-icon">📝</div><div class="stat-badge">Articles</div></div><div class="stat-val" id="d-blogs">0</div><div class="stat-label">Blog Posts</div></div>
-        <div class="stat-card"><div class="stat-top"><div class="stat-icon">📩</div><div class="stat-badge">Leads</div></div><div class="stat-val" id="d-enqs">0</div><div class="stat-label">New Enquiries</div></div>
+        <div class="stat-card"><div class="stat-top"><div class="stat-icon">📩</div><div class="stat-badge">Leads</div></div><div class="stat-val" id="d-enqs">0</div><div class="stat-label">Enquiries</div></div>
         <div class="stat-card"><div class="stat-top"><div class="stat-icon">👥</div><div class="stat-badge">Staff</div></div><div class="stat-val" id="d-team">0</div><div class="stat-label">Team Members</div></div>
       </div>
       <div class="dash-grid">
-        <div class="dash-card"><div class="dc-title">Recent Activity</div><div id="activity-list"><div class="act-item"><div class="act-dot"></div><div class="act-text">Welcome to IMAKSA Admin Panel!</div><div class="act-time">Now</div></div></div></div>
-        <div class="dash-card"><div class="dc-title">Quick Overview</div>
+        <div class="dash-card">
+          <div class="dc-title">Recent Activity</div>
+          <div id="activity-list">
+            <div class="act-item"><div class="act-dot"></div><div class="act-text">Welcome to IMAKSA Admin Panel!</div><div class="act-time">Now</div></div>
+          </div>
+        </div>
+        <div class="dash-card">
+          <div class="dc-title">Quick Overview</div>
           <div class="qi"><span class="qi-label">🏡 Active Listings</span><span class="qi-val" id="qs-active">0</span></div>
+          <div class="qi"><span class="qi-label">🏗️ Developer Partners</span><span class="qi-val" style="color:var(--teal);">14</span></div>
           <div class="qi"><span class="qi-label">📝 Published Posts</span><span class="qi-val" id="qs-pub">0</span></div>
           <div class="qi"><span class="qi-label">📩 Unread Enquiries</span><span class="qi-val" id="qs-unread">0</span></div>
           <div class="qi"><span class="qi-label">👥 Team Members</span><span class="qi-val" id="qs-team">0</span></div>
           <div class="qi"><span class="qi-label">🌐 Website</span><span class="qi-val" style="color:var(--success);">● Live</span></div>
+        </div>
+        <div class="dash-card" style="grid-column:1/-1;">
+          <div class="dc-title">Developer Partners — 14 Active</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:14px;">
+            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:18px;">🏙️</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">EMAAR</div><div style="font-size:9px;color:var(--text3);">Properties</div>
+            </div>
+            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:18px;">🏗️</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">DAMAC</div><div style="font-size:9px;color:var(--text3);">Properties</div>
+            </div>
+            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:18px;">🌴</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">NAKHEEL</div><div style="font-size:9px;color:var(--text3);">Properties</div>
+            </div>
+            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:18px;">⭐</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">SOBHA</div><div style="font-size:9px;color:var(--text3);">Realty</div>
+            </div>
+            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:18px;">💎</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">DANUBE</div><div style="font-size:9px;color:var(--text3);">Properties</div>
+            </div>
+            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:18px;">🏢</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">BINGHATTI</div><div style="font-size:9px;color:var(--text3);">Developers</div>
+            </div>
+            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:18px;">🎨</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">ELLINGTON</div><div style="font-size:9px;color:var(--text3);">Properties</div>
+            </div>
+            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:18px;">🔵</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">AZIZI</div><div style="font-size:9px;color:var(--text3);">Developers</div>
+            </div>
+            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:18px;">🌆</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">MERAAS</div><div style="font-size:9px;color:var(--text3);">Holding</div>
+            </div>
+            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:18px;">🏛️</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">ALDAR</div><div style="font-size:9px;color:var(--text3);">Properties</div>
+            </div>
+            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:18px;">🌟</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">IMTIAZ</div><div style="font-size:9px;color:var(--text3);">Developments</div>
+            </div>
+            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:18px;">🏊</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">SAMANA</div><div style="font-size:9px;color:var(--text3);">Developers</div>
+            </div>
+            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:18px;">🏘️</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">ARADA</div><div style="font-size:9px;color:var(--text3);">Properties</div>
+            </div>
+            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
+              <div style="font-size:18px;">💠</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">OMNIYAT</div><div style="font-size:9px;color:var(--text3);">Developers</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- PROPERTIES -->
     <div class="page" id="page-properties">
-      <div class="sec-hdr"><div><div class="sec-title">Properties</div><div class="sec-sub">Manage all property listings on your website</div></div></div>
+      <div class="sec-hdr">
+        <div><div class="sec-title">Properties</div><div class="sec-sub">Manage all property listings on your website</div></div>
+        <button class="btn btn-primary" onclick="openModal('property')">+ Add Property</button>
+      </div>
+      <!-- Developer Filter Tabs -->
+      <div style="margin-bottom:16px;overflow-x:auto;scrollbar-width:none;">
+        <div style="display:flex;gap:6px;padding-bottom:4px;min-width:max-content;">
+          <button class="dev-filter-btn active" onclick="filterByDev('',this)">All Developers</button>
+          <button class="dev-filter-btn" onclick="filterByDev('Emaar',this)">Emaar</button>
+          <button class="dev-filter-btn" onclick="filterByDev('Damac',this)">Damac</button>
+          <button class="dev-filter-btn" onclick="filterByDev('Nakheel',this)">Nakheel</button>
+          <button class="dev-filter-btn" onclick="filterByDev('Sobha',this)">Sobha</button>
+          <button class="dev-filter-btn" onclick="filterByDev('Danube',this)">Danube</button>
+          <button class="dev-filter-btn" onclick="filterByDev('Binghatti',this)">Binghatti</button>
+          <button class="dev-filter-btn" onclick="filterByDev('Ellington',this)">Ellington</button>
+          <button class="dev-filter-btn" onclick="filterByDev('Azizi',this)">Azizi</button>
+          <button class="dev-filter-btn" onclick="filterByDev('Meraas',this)">Meraas</button>
+          <button class="dev-filter-btn" onclick="filterByDev('Aldar',this)">Aldar</button>
+          <button class="dev-filter-btn" onclick="filterByDev('Imtiaz',this)">Imtiaz</button>
+          <button class="dev-filter-btn" onclick="filterByDev('Samana',this)">Samana</button>
+          <button class="dev-filter-btn" onclick="filterByDev('Arada',this)">Arada</button>
+          <button class="dev-filter-btn" onclick="filterByDev('Omniyat',this)">Omniyat</button>
+          <button class="dev-filter-btn" onclick="filterByDev('none',this)">No Developer</button>
+        </div>
+      </div>
       <div class="filter-bar">
         <div class="search-wrap"><span class="search-icon">🔍</span><input type="text" class="search-inp" placeholder="Search properties..." oninput="filterP(this.value)"></div>
         <select class="filter-sel" onchange="filterPType(this.value)"><option value="all">All Types</option><option value="villa">Villas</option><option value="penthouse">Penthouses</option><option value="apartment">Apartments</option><option value="offplan">Off-Plan</option><option value="commercial">Commercial</option></select>
+        <select class="filter-sel" onchange="filterPStatus(this.value)"><option value="all">All Status</option><option value="active">Active</option><option value="sold">Sold</option><option value="rented">Rented</option><option value="draft">Draft</option></select>
       </div>
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Image</th><th>Property Name</th><th>Type</th><th>Price (AED)</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead><tbody id="p-tbody"></tbody></table></div>
+      <div id="dev-filter-label" style="font-size:12px;color:var(--text3);margin-bottom:10px;"></div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Image</th><th>Property Name</th><th>Developer</th><th>Type</th><th>Price (AED)</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead><tbody id="p-tbody"></tbody></table></div>
     </div>
 
     <!-- BLOG -->
@@ -785,11 +906,12 @@ async function renderProps() {
     return;
   }
 
-  tb.innerHTML = props.map(p => `<tr>
+  tb.innerHTML = props.map(p => `<tr data-dev="${p.developer||''}" data-status="${p.status||'active'}">
     <td>${p.img ? `<img class="tbl-img" src="${p.img}" alt="${p.name}" onerror="this.style.display='none'">` : '<div style="width:52px;height:40px;background:var(--cream2);display:flex;align-items:center;justify-content:center;">🏡</div>'}</td>
     <td><div class="tbl-name">${p.name}</div><div style="font-size:11px;color:var(--text3);margin-top:2px;">${p.location || ''}</div></td>
+    <td><span style="font-size:11px;font-weight:500;color:var(--teal);">${p.developer || '—'}</span></td>
     <td style="text-transform:capitalize;">${p.type || '—'}</td>
-    <td>AED ${p.price || '—'}</td>
+    <td>AED ${Number(p.price).toLocaleString() || '—'}</td>
     <td>${p.location || '—'}</td>
     <td><span class="bdg bdg-${p.status || 'active'}">${p.status || 'active'}</span></td>
     <td><div class="tbl-actions">
@@ -1237,7 +1359,35 @@ function saveDev(devName) {
   toast(`${devName.charAt(0).toUpperCase() + devName.slice(1)} details saved ✓`);
 }
 
-/* ── AUTO LOGIN CHECK (stay logged in on refresh) ── */
+/* ── FILTER BY DEVELOPER ── */
+let currentDevFilter = '';
+function filterByDev(dev, btn) {
+  currentDevFilter = dev;
+  document.querySelectorAll('.dev-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const label = document.getElementById('dev-filter-label');
+  if (dev === '') { label.textContent = ''; }
+  else if (dev === 'none') { label.textContent = 'Showing: Properties with no developer assigned'; }
+  else { label.textContent = `Showing: ${dev} properties`; }
+  renderFilteredProps();
+}
+function filterPStatus(val) {
+  renderFilteredProps(val);
+}
+function renderFilteredProps(statusFilter) {
+  const rows = document.querySelectorAll('#p-tbody tr');
+  rows.forEach(r => {
+    const dev = r.dataset.dev || '';
+    const status = r.dataset.status || '';
+    let show = true;
+    if (currentDevFilter === 'none' && dev !== '') show = false;
+    else if (currentDevFilter && currentDevFilter !== 'none' && dev.toLowerCase() !== currentDevFilter.toLowerCase()) show = false;
+    if (statusFilter && statusFilter !== 'all' && status !== statusFilter) show = false;
+    r.style.display = show ? '' : 'none';
+  });
+}
+
+
 window.addEventListener('load', () => {
   const token = getToken();
   if (token) {
