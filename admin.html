@@ -29,7 +29,7 @@ button,input,textarea,select{font-family:'Inter',sans-serif;}
 /* ── LOGIN ── */
 @keyframes drawcircle{to{stroke-dashoffset:0;}}
 @keyframes rise{to{transform:translateY(0);opacity:1;}}
-display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;}
+#login-screen{position:fixed;inset:0;background:var(--teal);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;}
 #login-screen::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1400&q=80') center/cover no-repeat;opacity:.08;}
 .login-box{width:min(420px,92vw);background:var(--cream);border:1px solid rgba(245,239,228,.2);padding:clamp(36px,5vw,52px);position:relative;z-index:1;}
 .login-logo{font-family:'Fraunces',serif;font-size:clamp(24px,5vw,32px);font-weight:400;color:var(--teal);letter-spacing:5px;margin-bottom:4px;}
@@ -82,7 +82,9 @@ display:flex;align-items:center;justify-content:center;z-index:9999;flex-directi
 .dev-filter-btn{padding:7px 14px;font-size:10px;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--border);background:var(--cream);color:var(--text2);cursor:pointer;transition:all .2s;border-radius:2px;font-family:'Inter',sans-serif;white-space:nowrap;}
 .dev-filter-btn:hover{border-color:var(--teal);color:var(--teal);}
 .dev-filter-btn.active{background:var(--teal);color:var(--cream);border-color:var(--teal);}
-grid-template-columns:repeat(4,1fr);gap:clamp(10px,2vw,18px);margin-bottom:clamp(18px,3vw,28px);}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,2vw,18px);margin-bottom:clamp(18px,3vw,28px);}
+.stats-grid-5{grid-template-columns:repeat(5,1fr)!important;}
+@media(max-width:1100px){.stats-grid-5{grid-template-columns:repeat(3,1fr)!important;}}
 .stat-card{background:var(--cream);border:1px solid var(--border);padding:clamp(16px,2.5vw,24px);position:relative;overflow:hidden;transition:box-shadow .3s;}
 .stat-card:hover{box-shadow:0 4px 20px rgba(13,79,74,.1);}
 .stat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
@@ -328,7 +330,7 @@ select.fi option{background:#fff;}
 
     <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
-      <div class="stats-grid" style="grid-template-columns:repeat(5,1fr);">
+      <div class="stats-grid stats-grid-5">
         <div class="stat-card"><div class="stat-top"><div class="stat-icon">🏡</div><div class="stat-badge">Listings</div></div><div class="stat-val" id="d-props">0</div><div class="stat-label">Total Properties</div></div>
         <div class="stat-card"><div class="stat-top"><div class="stat-icon">🏗️</div><div class="stat-badge">Partners</div></div><div class="stat-val" id="d-devs">14</div><div class="stat-label">Active Developers</div></div>
         <div class="stat-card"><div class="stat-top"><div class="stat-icon">📝</div><div class="stat-badge">Articles</div></div><div class="stat-val" id="d-blogs">0</div><div class="stat-label">Blog Posts</div></div>
