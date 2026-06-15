@@ -23,36 +23,22 @@ a{text-decoration:none;color:inherit;}
 
 /* LOADER */
 #loader{position:fixed;inset:0;background:#0D4F4A;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0;}
-
-/* Subtle bg shimmer */
 #loader::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(212,184,150,.06) 0%,transparent 70%);pointer-events:none;}
-
-/* Circle draws itself with glow */
-.ll-circle-svg{opacity:0;animation:fi .4s .1s forwards;filter:drop-shadow(0 0 12px rgba(201,168,76,.25));}
-.ll-circle-svg circle{stroke-dasharray:502;stroke-dashoffset:502;animation:drawcircle 1.6s .3s cubic-bezier(.4,0,.2,1) forwards;}
+.ll-circle-svg{opacity:0;animation:fi .3s .1s forwards;filter:drop-shadow(0 0 12px rgba(201,168,76,.25));}
+.ll-circle-svg circle{stroke-dasharray:502;stroke-dashoffset:502;animation:drawcircle 1.2s .2s cubic-bezier(.4,0,.2,1) forwards;}
 @keyframes drawcircle{to{stroke-dashoffset:0;}}
-
-/* Buildings rise with stagger + fade */
-.ll-b1{transform:translateY(80px);opacity:0;animation:rise .9s .9s cubic-bezier(.16,1,.3,1) forwards;}
-.ll-b2{transform:translateY(80px);opacity:0;animation:rise .9s 1.05s cubic-bezier(.16,1,.3,1) forwards;}
-.ll-b3{transform:translateY(80px);opacity:0;animation:rise .9s 1.15s cubic-bezier(.16,1,.3,1) forwards;}
-.ll-b4{transform:translateY(80px);opacity:0;animation:rise .9s 1.25s cubic-bezier(.16,1,.3,1) forwards;}
+.ll-b1{transform:translateY(80px);opacity:0;animation:rise .7s .6s cubic-bezier(.16,1,.3,1) forwards;}
+.ll-b2{transform:translateY(80px);opacity:0;animation:rise .7s .72s cubic-bezier(.16,1,.3,1) forwards;}
+.ll-b3{transform:translateY(80px);opacity:0;animation:rise .7s .82s cubic-bezier(.16,1,.3,1) forwards;}
+.ll-b4{transform:translateY(80px);opacity:0;animation:rise .7s .9s cubic-bezier(.16,1,.3,1) forwards;}
 @keyframes rise{to{transform:translateY(0);opacity:1;}}
-
-/* Divider line */
-.ll-divider{width:0;height:1px;background:linear-gradient(to right,transparent,#C9A84C,transparent);margin-top:18px;opacity:0;animation:divexp 1s 1.5s cubic-bezier(.16,1,.3,1) forwards;}
+.ll-divider{width:0;height:1px;background:linear-gradient(to right,transparent,#C9A84C,transparent);margin-top:18px;opacity:0;animation:divexp .8s 1.1s cubic-bezier(.16,1,.3,1) forwards;}
 @keyframes divexp{to{width:160px;opacity:.7;}}
-
-/* IMAKSA text — letter by letter shimmer */
-.ll-text{font-family:'Fraunces',serif;font-size:clamp(28px,6vw,48px);font-weight:300;color:#F5EFE4;letter-spacing:clamp(8px,2vw,14px);margin-top:18px;opacity:0;animation:textrise .9s 1.5s cubic-bezier(.16,1,.3,1) forwards;}
+.ll-text{font-family:'Fraunces',serif;font-size:clamp(28px,6vw,48px);font-weight:300;color:#F5EFE4;letter-spacing:clamp(8px,2vw,14px);margin-top:18px;opacity:0;animation:textrise .7s 1.2s cubic-bezier(.16,1,.3,1) forwards;}
 @keyframes textrise{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
-
-/* Subtitle */
-.ll-sub{font-size:clamp(8px,1.2vw,10px);letter-spacing:5px;color:#C9A84C;text-transform:uppercase;font-family:'Inter',sans-serif;margin-top:6px;opacity:0;animation:fi .8s 1.75s forwards;}
-
-/* Loading bar */
-.ll-bar-wrap{width:min(180px,45vw);height:1px;background:rgba(245,239,228,.1);margin-top:20px;overflow:hidden;opacity:0;animation:fi .5s 2s forwards;}
-.ll-bar{height:100%;width:0;background:linear-gradient(to right,#C9A84C,#F5EFE4,#C9A84C);animation:barfill 1.8s 2.1s cubic-bezier(.4,0,.2,1) forwards;}
+.ll-sub{font-size:clamp(8px,1.2vw,10px);letter-spacing:5px;color:#C9A84C;text-transform:uppercase;font-family:'Inter',sans-serif;margin-top:6px;opacity:0;animation:fi .6s 1.4s forwards;}
+.ll-bar-wrap{width:min(180px,45vw);height:1px;background:rgba(245,239,228,.1);margin-top:20px;overflow:hidden;opacity:0;animation:fi .4s 1.6s forwards;}
+.ll-bar{height:100%;width:0;background:linear-gradient(to right,#C9A84C,#F5EFE4,#C9A84C);animation:barfill 1.5s 1.7s cubic-bezier(.4,0,.2,1) forwards;}
 @keyframes barfill{to{width:100%;}}
 @keyframes fi{to{opacity:1;}}
 
