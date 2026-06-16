@@ -1421,7 +1421,11 @@ function filterByDev(dev, btn) {
   pDevFilter = dev;
   document.querySelectorAll('.dev-filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  applyPropFilters();
+  if (!allProps.length) {
+    renderProps();
+  } else {
+    applyPropFilters();
+  }
 }
 
 
