@@ -231,7 +231,7 @@ function renderCards(props) {
       </div>
       <div class="pc-body">
         <div class="pc-type">${p.type || 'Property'}</div>
-        <div class="pc-price">AED ${p.price}</div>
+        <div class="pc-price">AED ${Number(String(p.price).replace(/,/g,'')).toLocaleString()}</div>
         <div class="pc-name">${p.name}</div>
         <div class="pc-loc">📍 ${p.location}</div>
         <div class="pc-specs">

@@ -890,7 +890,7 @@ function renderHomeProps(props) {
       <div class="pc-grad"></div>
       ${p.badge ? `<div class="pc-badge">${p.badge}</div>` : ''}
       <div class="pc-body">
-        <div class="pc-price">AED ${Number(p.price).toLocaleString()}</div>
+        <div class="pc-price">AED ${Number(String(p.price).replace(/,/g,'')).toLocaleString()}</div>
         <div class="pc-name">${p.name}</div>
         <div class="pc-loc">📍 ${p.location}</div>
         <div class="pc-specs">

@@ -960,7 +960,7 @@ function applyPropFilters() {
   }
 
   tb.innerHTML = list.map(p => {
-    const price = p.price ? 'AED ' + Number(p.price).toLocaleString() : 'Price on Request';
+    const price = p.price ? 'AED ' + Number(String(p.price).replace(/,/g, '')).toLocaleString() : 'Price on Request';
     const dev = p.developer || '';
     return `<tr>
     <td>${p.img ? `<img class="tbl-img" src="${p.img}" alt="${p.name}" onerror="this.style.display='none'">` : '<div style="width:52px;height:40px;background:var(--cream2);display:flex;align-items:center;justify-content:center;">🏡</div>'}</td>
@@ -1023,7 +1023,7 @@ async function saveProp() {
   if (!name || !price) { toast('Please fill required fields', '⚠️'); return; }
 
   const data = {
-    name, price,
+    price: String(price).replace(/,/g, '').replace(/AED/gi, '').trim(),
     type:        document.getElementById('mp-type').value,
     listingType: document.getElementById('mp-listing').value,
     status:      document.getElementById('mp-status').value,
