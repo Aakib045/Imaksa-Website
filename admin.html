@@ -648,13 +648,24 @@ select.fi option{background:#fff;}
     <div class="modal-body">
       <input type="hidden" id="mp-id">
       <div class="fr"><div class="fg"><label class="fl">Property Name *</label><input type="text" class="fi" id="mp-name" placeholder="e.g. Sunset Palm Villa"></div><div class="fg"><label class="fl">Price (AED) *</label><input type="text" class="fi" id="mp-price" placeholder="e.g. 28,500,000"></div></div>
-      <div class="fr"><div class="fg"><label class="fl">Type *</label><select class="fi" id="mp-type"><option value="">Select</option><option value="Villa">Villa / Mansion</option><option value="Penthouse">Penthouse</option><option value="Apartment">Apartment</option><option value="Offplan">Off-Plan</option><option value="Commercial">Commercial</option><option value="Townhouse">Townhouse</option></select></div><div class="fg"><label class="fl">Listing Type *</label><select class="fi" id="mp-listing"><option value="buy">For Sale</option><option value="rent">For Rent</option><option value="sell">Seller Listed</option><option value="offplan">Off-Plan</option></select></div></div>
+      <div class="fr"><div class="fg"><label class="fl">Type *</label><select class="fi" id="mp-type"><option value="">Select</option><option value="villa">Villa / Mansion</option><option value="penthouse">Penthouse</option><option value="apartment">Apartment</option><option value="offplan">Off-Plan</option><option value="commercial">Commercial</option><option value="townhouse">Townhouse</option></select></div><div class="fg"><label class="fl">Listing Type *</label><select class="fi" id="mp-listing"><option value="buy">For Sale</option><option value="rent">For Rent</option><option value="sell">Seller Listed</option><option value="offplan">Off-Plan</option></select></div></div>
       <div class="fr"><div class="fg"><label class="fl">Status</label><select class="fi" id="mp-status"><option value="active">Active</option><option value="sold">Sold</option><option value="rented">Rented</option><option value="draft">Draft</option></select></div><div class="fg"><label class="fl">Developer</label><select class="fi" id="mp-developer"><option value="">No Developer</option><option value="Emaar">Emaar</option><option value="Damac">Damac</option><option value="Nakheel">Nakheel</option><option value="Sobha">Sobha</option><option value="Danube">Danube</option><option value="Binghatti">Binghatti</option><option value="Ellington">Ellington</option><option value="Azizi">Azizi</option><option value="Meraas">Meraas</option><option value="Aldar">Aldar</option><option value="Imtiaz">Imtiaz</option><option value="Samana">Samana</option><option value="Arada">Arada</option><option value="Omniyat">Omniyat</option></select></div></div>
       <div class="fg"><label class="fl">Location *</label><input type="text" class="fi" id="mp-loc" placeholder="e.g. Palm Jumeirah, Dubai"></div>
       <div class="fr"><div class="fg"><label class="fl">Bedrooms</label><input type="number" class="fi" id="mp-beds" placeholder="4"></div><div class="fg"><label class="fl">Bathrooms</label><input type="number" class="fi" id="mp-baths" placeholder="5"></div></div>
       <div class="fr"><div class="fg"><label class="fl">Area (Sq.Ft)</label><input type="text" class="fi" id="mp-area" placeholder="6,800"></div><div class="fg"><label class="fl">Badge</label><input type="text" class="fi" id="mp-badge" placeholder="e.g. New Launch"></div></div>
       <div class="fg"><label class="fl">Description</label><textarea class="fi" id="mp-desc" placeholder="Describe the property..."></textarea></div>
-      <div class="fg"><label class="fl">Image URL</label><input type="url" class="fi" id="mp-img" placeholder="https://..."><div class="fhint">Paste a direct image link</div></div>
+      <div class="fg"><label class="fl">Property Image</label>
+        <div style="border:1px solid var(--border);background:var(--cream);padding:12px;margin-bottom:8px;">
+          <div style="display:flex;gap:8px;margin-bottom:10px;">
+            <button type="button" onclick="document.getElementById('img-file').click()" style="flex:1;padding:9px;background:var(--teal);color:var(--cream);border:none;font-size:11px;letter-spacing:1px;cursor:pointer;">📁 Upload Image</button>
+            <button type="button" onclick="toggleImgMode()" style="flex:1;padding:9px;background:var(--cream2);color:var(--text2);border:1px solid var(--border);font-size:11px;letter-spacing:1px;cursor:pointer;">🔗 Use URL</button>
+          </div>
+          <input type="file" id="img-file" accept="image/*" style="display:none;" onchange="handleImgUpload(this)">
+          <input type="url" class="fi" id="mp-img" placeholder="https://... or upload above" style="margin-bottom:4px;">
+          <div id="img-preview" style="display:none;margin-top:8px;"><img id="img-preview-el" style="width:100%;max-height:160px;object-fit:cover;border:1px solid var(--border);" src="" alt="Preview"></div>
+          <div class="fhint">Upload from your device OR paste an image URL</div>
+        </div>
+      </div>
     </div>
     <div class="modal-ftr"><button class="btn btn-outline" onclick="cm('m-prop')">Cancel</button><button class="btn btn-primary" onclick="saveProp()">💾 Save Property</button></div>
   </div>
@@ -1023,7 +1034,7 @@ async function saveProp() {
     area:        document.getElementById('mp-area').value,
     badge:       document.getElementById('mp-badge').value,
     desc:        document.getElementById('mp-desc').value,
-    img:         document.getElementById('mp-img').value,
+    img:         document.getElementById('mp-img').dataset.base64 || document.getElementById('mp-img').value,
   };
 
   const res = editId
@@ -1413,6 +1424,30 @@ function saveDev(devName) {
   };
   localStorage.setItem('imaksa_devs', JSON.stringify(saved));
   toast(`${devName.charAt(0).toUpperCase() + devName.slice(1)} details saved ✓`);
+}
+
+// ── IMAGE UPLOAD ──
+function toggleImgMode() { document.getElementById('mp-img').focus(); }
+
+function handleImgUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const localUrl = URL.createObjectURL(file);
+  document.getElementById('img-preview').style.display = 'block';
+  document.getElementById('img-preview-el').src = localUrl;
+  const inp = document.getElementById('mp-img');
+  inp.placeholder = 'Uploading...';
+  inp.disabled = true;
+  // Convert to base64 for storage
+  const reader = new FileReader();
+  reader.onload = e => {
+    inp.value = localUrl; // use object URL for preview
+    inp.dataset.base64 = e.target.result;
+    inp.placeholder = 'Image ready!';
+    inp.disabled = false;
+    toast('✅ Image ready!');
+  };
+  reader.readAsDataURL(file);
 }
 
 /* ── FILTER BY DEVELOPER ── */
