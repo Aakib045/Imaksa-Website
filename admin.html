@@ -890,32 +890,71 @@ async function refreshDash() {
 }
 
 /* ── PROPERTIES ── */
-let pSearch = '', pType = 'all';
-function filterP(v) { pSearch = v.toLowerCase(); renderProps(); }
-function filterPType(v) { pType = v; renderProps(); }
+// ── PROPERTIES STATE ──
+let allProps = [];       // all properties from backend
+let pSearch = '';
+let pType = 'all';
+let pDevFilter = '';
+let pStatusFilter = 'all';
 
+// Called once on page load and after add/edit/delete
 async function renderProps() {
   const tb = document.getElementById('p-tbody');
-  tb.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:24px;color:var(--text3);">Loading...</td></tr>';
-
+  tb.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--text3);">Loading...</td></tr>';
   const res = await api('/properties', 'GET', null, true);
-  let props = res.data || [];
+  allProps = res.data || [];
+  applyPropFilters();
+}
 
-  if (pSearch) props = props.filter(p => (p.name + p.location).toLowerCase().includes(pSearch));
-  if (pType !== 'all') props = props.filter(p => (p.type || '').toLowerCase() === pType.toLowerCase());
+// Apply all active filters to allProps and render
+function applyPropFilters() {
+  const tb = document.getElementById('p-tbody');
+  let list = [...allProps];
 
-  if (!props.length) {
-    tb.innerHTML = `<tr><td colspan="7"><div class="empty"><div class="empty-icon">🏡</div><div class="empty-title">No properties found</div><div class="empty-desc">Click "Add Property" to add your first listing</div></div></td></tr>`;
+  // Developer filter
+  if (pDevFilter === 'none') {
+    list = list.filter(p => !p.developer || p.developer.trim() === '');
+  } else if (pDevFilter) {
+    list = list.filter(p => (p.developer || '').toLowerCase() === pDevFilter.toLowerCase());
+  }
+
+  // Search filter
+  if (pSearch) {
+    list = list.filter(p => (p.name + ' ' + (p.location || '')).toLowerCase().includes(pSearch));
+  }
+
+  // Type filter
+  if (pType !== 'all') {
+    list = list.filter(p => (p.type || '').toLowerCase() === pType.toLowerCase());
+  }
+
+  // Status filter
+  if (pStatusFilter !== 'all') {
+    list = list.filter(p => (p.status || 'active') === pStatusFilter);
+  }
+
+  // Update label
+  const label = document.getElementById('dev-filter-label');
+  if (pDevFilter && pDevFilter !== '') {
+    const devName = pDevFilter === 'none' ? 'No Developer' : pDevFilter;
+    label.style.display = 'block';
+    label.textContent = `Showing ${list.length} ${devName} properties`;
+  } else {
+    label.style.display = 'none';
+  }
+
+  if (!list.length) {
+    tb.innerHTML = `<tr><td colspan="8"><div class="empty"><div class="empty-icon">🏡</div><div class="empty-title">No properties found</div><div class="empty-desc">${pDevFilter ? `No ${pDevFilter} properties yet. Add one using the button above.` : 'Click "+ Add Property" to add your first listing'}</div></div></td></tr>`;
     return;
   }
 
-  tb.innerHTML = props.map(p => {
+  tb.innerHTML = list.map(p => {
     const price = p.price ? 'AED ' + Number(p.price).toLocaleString() : 'Price on Request';
     const dev = p.developer || '';
-    return `<tr data-dev="${dev}" data-status="${p.status||'active'}">
+    return `<tr>
     <td>${p.img ? `<img class="tbl-img" src="${p.img}" alt="${p.name}" onerror="this.style.display='none'">` : '<div style="width:52px;height:40px;background:var(--cream2);display:flex;align-items:center;justify-content:center;">🏡</div>'}</td>
     <td><div class="tbl-name">${p.name}</div><div style="font-size:11px;color:var(--text3);margin-top:2px;">${p.location || ''}</div></td>
-    <td><span style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.5px;">${dev || '<span style="color:var(--text3);font-weight:300;">No Developer</span>'}</span></td>
+    <td><span style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.5px;">${dev || '<span style="color:var(--text3);font-weight:300;">—</span>'}</span></td>
     <td style="text-transform:capitalize;">${p.type || '—'}</td>
     <td style="font-weight:500;">${price}</td>
     <td>${p.location || '—'}</td>
@@ -927,6 +966,10 @@ async function renderProps() {
   </tr>`;
   }).join('');
 }
+
+function filterP(v) { pSearch = v.toLowerCase(); applyPropFilters(); }
+function filterPType(v) { pType = v; applyPropFilters(); }
+function filterPStatus(v) { pStatusFilter = v; applyPropFilters(); }
 
 function openPropModal(id = null) {
   editId = id;
@@ -1375,39 +1418,10 @@ function saveDev(devName) {
 /* ── FILTER BY DEVELOPER ── */
 let currentDevFilter = '';
 function filterByDev(dev, btn) {
-  currentDevFilter = dev;
+  pDevFilter = dev;
   document.querySelectorAll('.dev-filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  const label = document.getElementById('dev-filter-label');
-  label.style.display = dev ? 'block' : 'none';
-  let visible = 0;
-
-  rows.forEach(r => {
-    const rowDev = (r.dataset.dev || '').toLowerCase().trim();
-    let show = true;
-    if (dev === '') {
-      show = true; // All
-    } else if (dev === 'none') {
-      show = rowDev === '';
-    } else {
-      show = rowDev === dev.toLowerCase();
-    }
-    r.style.display = show ? '' : 'none';
-    if (show) visible++;
-  });
-
-  if (dev === '') label.textContent = `Showing all ${rows.length} properties`;
-  else if (dev === 'none') label.textContent = `Showing ${visible} properties with no developer`;
-  else label.textContent = `Showing ${visible} ${dev} properties. ${visible === 0 ? '(Add properties with developer = "' + dev + '" from Add Property)' : ''}`;
-}
-
-function filterPStatus(val) {
-  const rows = document.querySelectorAll('#p-tbody tr');
-  rows.forEach(r => {
-    const status = (r.dataset.status || '').toLowerCase();
-    if (!val || val === 'all') { r.style.display = ''; return; }
-    r.style.display = status === val ? '' : 'none';
-  });
+  applyPropFilters();
 }
 
 
