@@ -1058,7 +1058,7 @@ async function markAllRead() {
 }
 
 /* ── SETTINGS ── */
-function saveSettings() {
+async function saveSettings() {
   const s = {
     phone: document.getElementById('s-phone').value,
     email: document.getElementById('s-email').value,
@@ -1073,12 +1073,18 @@ function saveSettings() {
     rera:  document.getElementById('s-rera').value,
     year:  document.getElementById('s-year').value,
   };
-  localStorage.setItem('imaksa_settings', JSON.stringify(s));
-  toast('Settings saved successfully!');
+  const res = await api('/settings', 'PUT', s, true);
+  if (res.success) {
+    toast('Settings saved successfully!');
+  } else {
+    toast(res.message || 'Failed to save settings', '❌');
+  }
 }
 
-function loadSettings() {
-  const s   = JSON.parse(localStorage.getItem('imaksa_settings') || '{}');
+async function loadSettings() {
+  const res = await api('/settings', 'GET');
+  if (!res.success) return;
+  const s   = res.data || {};
   const map = { phone:'s-phone', email:'s-email', wa:'s-wa', addr:'s-addr', hrs:'s-hrs', maps:'s-maps', li:'s-li', ig:'s-ig', fb:'s-fb', co:'s-co', rera:'s-rera', year:'s-year' };
   Object.entries(map).forEach(([k, id]) => {
     const el = document.getElementById(id);
