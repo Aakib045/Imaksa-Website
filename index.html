@@ -80,30 +80,6 @@ nav.sc .n-links>li>a{color:#6B6B60;}
 .n-links>li>a:hover{color:#fff;}
 nav.sc .n-links>li>a:hover{color:#0D4F4A;}
 
-/* DEVELOPER DROPDOWN — fixed with padding bridge */
-.dev-dd{
-  position:absolute;top:calc(100% + 8px);left:50%;
-  transform:translateX(-50%) translateY(8px);
-  background:#fff;border:1px solid rgba(13,79,74,.1);
-  box-shadow:0 24px 64px rgba(0,0,0,.18);
-  padding:24px 28px;min-width:380px;
-  opacity:0;visibility:hidden;pointer-events:none;
-  transition:all .35s cubic-bezier(.16,1,.3,1);z-index:2000;
-}
-/* Bridge gap between nav link and dropdown so it doesn't disappear */
-.dev-dd::after{content:'';position:absolute;top:-20px;left:0;right:0;height:20px;}
-.n-links>li:hover .dev-dd{opacity:1;visibility:visible;pointer-events:all;transform:translateX(-50%) translateY(0);}
-.dev-dd::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%) rotate(45deg);width:11px;height:11px;background:#fff;border-left:1px solid rgba(13,79,74,.1);border-top:1px solid rgba(13,79,74,.1);}
-.dd-head{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:#0D4F4A;font-weight:600;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid rgba(13,79,74,.08);}
-.dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:14px;}
-.dd-link{display:flex;align-items:center;gap:8px;padding:9px 10px;color:#3A3A32;font-size:11px;transition:all .25s cubic-bezier(.16,1,.3,1);}
-.dd-link:hover{background:#F5EFE4;color:#0D4F4A;padding-left:16px;letter-spacing:.5px;}
-.dd-link::before{content:'';width:4px;height:4px;background:#D4B896;border-radius:50%;flex-shrink:0;transition:all .25s;}
-.dd-link:hover::before{background:#0D4F4A;width:6px;height:6px;}
-.dd-foot{padding-top:12px;border-top:1px solid rgba(13,79,74,.08);}
-.dd-all{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#0D4F4A;display:flex;align-items:center;gap:8px;transition:all .25s;}
-.dd-all:hover{gap:14px;letter-spacing:3px;}
-
 .n-cta{
   background:rgba(255,255,255,.15);
   border:1px solid rgba(255,255,255,.4);
@@ -271,17 +247,6 @@ nav.sc .n-hbtn span{background:#0D4F4A;}
 @media(max-width:900px){.pgrid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:480px){.pgrid{grid-template-columns:1fr;}.pc img{height:240px;}}
 
-/* DEV STRIP MARQUEE */
-.dev-strip{background:#fff;padding:clamp(32px,4vw,56px) 0;border-top:1px solid rgba(13,79,74,.08);border-bottom:1px solid rgba(13,79,74,.08);overflow:hidden;}
-.dev-strip-label{text-align:center;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#9B9B8A;margin-bottom:28px;}
-.dev-marquee-track{display:flex;animation:devmq 20s linear infinite;width:max-content;gap:0;}
-.dev-marquee-track:hover{animation-play-state:paused;}
-.dev-logo-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:20px 48px;border-right:1px solid rgba(13,79,74,.06);transition:background .3s;cursor:pointer;min-width:180px;}
-.dev-logo-item:hover{background:#F5EFE4;}
-.dev-logo-name{font-family:'Fraunces',serif;font-size:clamp(16px,2vw,22px);font-weight:400;color:#0D4F4A;letter-spacing:2px;}
-.dev-logo-tag{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#9B9B8A;}
-@keyframes devmq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-
 /* ABOUT */
 .about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center;}
 .about-img-wrap{position:relative;flex-shrink:0;}
@@ -367,7 +332,7 @@ nav.sc .n-hbtn span{background:#0D4F4A;}
 
 /* FOOTER */
 footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px) clamp(16px,5vw,80px) clamp(20px,3vw,36px);}
-.foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:clamp(20px,3vw,48px);margin-bottom:clamp(28px,4vw,48px);}
+.foot-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:clamp(20px,3vw,48px);margin-bottom:clamp(28px,4vw,48px);}
 .foot-brand{font-family:'Fraunces',serif;font-size:clamp(18px,2.5vw,26px);font-weight:300;color:#F5EFE4;letter-spacing:3px;margin-bottom:14px;}
 .foot-desc{font-size:12px;line-height:1.75;color:rgba(245,239,228,.45);}
 .foot-title{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#D4B896;margin-bottom:18px;font-weight:500;}
@@ -443,7 +408,6 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
   <a href="properties.html?type=rent" onclick="closeMM()">Rent</a>
   <a href="properties.html?type=sell" onclick="closeMM()">Sell</a>
   <a href="properties.html?type=offplan" onclick="closeMM()">Off-Plan</a>
-  <a href="developers.html" onclick="closeMM()">Developers</a>
   <a href="about.html" onclick="closeMM()">About</a>
   <a href="blog.html" onclick="closeMM()">Blog</a>
   <a href="contact.html" onclick="closeMM()" class="mob-cta-link">Enquire Now</a>
@@ -457,31 +421,6 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
     <li><a href="properties.html?type=rent">Rent</a></li>
     <li><a href="properties.html?type=sell">Sell</a></li>
     <li><a href="properties.html?type=offplan">Off-Plan</a></li>
-    <li>
-      <a href="developers.html">Developers ▾</a>
-      <div class="dev-dd">
-        <div class="dd-head">Top Developers in Dubai</div>
-        <div class="dd-grid">
-          <a href="developers.html#emaar" class="dd-link">Emaar Properties</a>
-          <a href="developers.html#damac" class="dd-link">Damac Properties</a>
-          <a href="developers.html#nakheel" class="dd-link">Nakheel</a>
-          <a href="developers.html#sobha" class="dd-link">Sobha Realty</a>
-          <a href="developers.html#danube" class="dd-link">Danube Properties</a>
-          <a href="developers.html#binghatti" class="dd-link">Binghatti</a>
-          <a href="developers.html#ellington" class="dd-link">Ellington Properties</a>
-          <a href="developers.html#azizi" class="dd-link">Azizi Developers</a>
-          <a href="developers.html#meraas" class="dd-link">Meraas</a>
-          <a href="developers.html#aldar" class="dd-link">Aldar Properties</a>
-          <a href="developers.html#imtiaz" class="dd-link">Imtiaz Developments</a>
-          <a href="developers.html#samana" class="dd-link">Samana Developers</a>
-          <a href="developers.html#arada" class="dd-link">Arada Properties</a>
-          <a href="developers.html#omniyat" class="dd-link">Omniyat</a>
-        </div>
-        <div class="dd-foot">
-          <a href="developers.html" class="dd-all">View All Developers →</a>
-        </div>
-      </div>
-    </li>
     <li><a href="about.html">About</a></li>
     <li><a href="blog.html">Blog</a></li>
     <li><a href="contact.html">Contact</a></li>
@@ -581,44 +520,6 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
     <div class="pc" style="background:#163028;height:280px;"></div>
   </div>
 </section>
-
-<!-- DEVELOPER STRIP — ANIMATED MARQUEE -->
-<div class="dev-strip">
-  <div class="dev-strip-label">Trusted Developer Partners</div>
-  <div style="overflow:hidden;">
-    <div class="dev-marquee-track">
-      <a href="developers.html#emaar" class="dev-logo-item"><div class="dev-logo-name">EMAAR</div><div class="dev-logo-tag">Properties</div></a>
-      <a href="developers.html#damac" class="dev-logo-item"><div class="dev-logo-name">DAMAC</div><div class="dev-logo-tag">Properties</div></a>
-      <a href="developers.html#nakheel" class="dev-logo-item"><div class="dev-logo-name">NAKHEEL</div><div class="dev-logo-tag">Properties</div></a>
-      <a href="developers.html#sobha" class="dev-logo-item"><div class="dev-logo-name">SOBHA</div><div class="dev-logo-tag">Realty</div></a>
-      <a href="developers.html#danube" class="dev-logo-item"><div class="dev-logo-name">DANUBE</div><div class="dev-logo-tag">Properties</div></a>
-      <a href="developers.html#binghatti" class="dev-logo-item"><div class="dev-logo-name">BINGHATTI</div><div class="dev-logo-tag">Developers</div></a>
-      <a href="developers.html#ellington" class="dev-logo-item"><div class="dev-logo-name">ELLINGTON</div><div class="dev-logo-tag">Properties</div></a>
-      <a href="developers.html#azizi" class="dev-logo-item"><div class="dev-logo-name">AZIZI</div><div class="dev-logo-tag">Developers</div></a>
-      <a href="developers.html#meraas" class="dev-logo-item"><div class="dev-logo-name">MERAAS</div><div class="dev-logo-tag">Holding</div></a>
-      <a href="developers.html#aldar" class="dev-logo-item"><div class="dev-logo-name">ALDAR</div><div class="dev-logo-tag">Properties</div></a>
-      <a href="developers.html#imtiaz" class="dev-logo-item"><div class="dev-logo-name">IMTIAZ</div><div class="dev-logo-tag">Developments</div></a>
-      <a href="developers.html#samana" class="dev-logo-item"><div class="dev-logo-name">SAMANA</div><div class="dev-logo-tag">Developers</div></a>
-      <a href="developers.html#arada" class="dev-logo-item"><div class="dev-logo-name">ARADA</div><div class="dev-logo-tag">Properties</div></a>
-      <a href="developers.html#omniyat" class="dev-logo-item"><div class="dev-logo-name">OMNIYAT</div><div class="dev-logo-tag">Developers</div></a>
-      <!-- Duplicate for seamless loop -->
-      <a href="developers.html#emaar" class="dev-logo-item"><div class="dev-logo-name">EMAAR</div><div class="dev-logo-tag">Properties</div></a>
-      <a href="developers.html#damac" class="dev-logo-item"><div class="dev-logo-name">DAMAC</div><div class="dev-logo-tag">Properties</div></a>
-      <a href="developers.html#nakheel" class="dev-logo-item"><div class="dev-logo-name">NAKHEEL</div><div class="dev-logo-tag">Properties</div></a>
-      <a href="developers.html#sobha" class="dev-logo-item"><div class="dev-logo-name">SOBHA</div><div class="dev-logo-tag">Realty</div></a>
-      <a href="developers.html#danube" class="dev-logo-item"><div class="dev-logo-name">DANUBE</div><div class="dev-logo-tag">Properties</div></a>
-      <a href="developers.html#binghatti" class="dev-logo-item"><div class="dev-logo-name">BINGHATTI</div><div class="dev-logo-tag">Developers</div></a>
-      <a href="developers.html#ellington" class="dev-logo-item"><div class="dev-logo-name">ELLINGTON</div><div class="dev-logo-tag">Properties</div></a>
-      <a href="developers.html#azizi" class="dev-logo-item"><div class="dev-logo-name">AZIZI</div><div class="dev-logo-tag">Developers</div></a>
-      <a href="developers.html#meraas" class="dev-logo-item"><div class="dev-logo-name">MERAAS</div><div class="dev-logo-tag">Holding</div></a>
-      <a href="developers.html#aldar" class="dev-logo-item"><div class="dev-logo-name">ALDAR</div><div class="dev-logo-tag">Properties</div></a>
-      <a href="developers.html#imtiaz" class="dev-logo-item"><div class="dev-logo-name">IMTIAZ</div><div class="dev-logo-tag">Developments</div></a>
-      <a href="developers.html#samana" class="dev-logo-item"><div class="dev-logo-name">SAMANA</div><div class="dev-logo-tag">Developers</div></a>
-      <a href="developers.html#arada" class="dev-logo-item"><div class="dev-logo-name">ARADA</div><div class="dev-logo-tag">Properties</div></a>
-      <a href="developers.html#omniyat" class="dev-logo-item"><div class="dev-logo-name">OMNIYAT</div><div class="dev-logo-tag">Developers</div></a>
-    </div>
-  </div>
-</div>
 
 <!-- ABOUT -->
 <section class="sec">
@@ -777,17 +678,6 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
         <li><a href="properties.html?type=rent">For Rent</a></li>
         <li><a href="properties.html?type=sell">Sell Property</a></li>
         <li><a href="properties.html?type=offplan">Off-Plan</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="foot-title">Developers</div>
-      <ul class="foot-links">
-        <li><a href="developers.html#emaar">Emaar</a></li>
-        <li><a href="developers.html#damac">Damac</a></li>
-        <li><a href="developers.html#nakheel">Nakheel</a></li>
-        <li><a href="developers.html#sobha">Sobha</a></li>
-        <li><a href="developers.html#danube">Danube</a></li>
-        <li><a href="developers.html#binghatti">Binghatti</a></li>
       </ul>
     </div>
     <div>

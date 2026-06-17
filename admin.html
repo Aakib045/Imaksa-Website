@@ -79,12 +79,11 @@ button,input,textarea,select{font-family:'Inter',sans-serif;}
 .page.active{display:block;}
 
 /* ── STATS ── */
-.dev-filter-btn{padding:7px 14px;font-size:10px;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--border);background:var(--cream);color:var(--text2);cursor:pointer;transition:all .2s;border-radius:2px;font-family:'Inter',sans-serif;white-space:nowrap;}
-.dev-filter-btn:hover{border-color:var(--teal);color:var(--teal);}
-.dev-filter-btn.active{background:var(--teal);color:var(--cream);border-color:var(--teal);}
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(10px,2vw,18px);margin-bottom:clamp(18px,3vw,28px);}
 .stats-grid-5{grid-template-columns:repeat(5,1fr)!important;}
 @media(max-width:1100px){.stats-grid-5{grid-template-columns:repeat(3,1fr)!important;}}
+.stats-grid-4{grid-template-columns:repeat(4,1fr)!important;}
+@media(max-width:1100px){.stats-grid-4{grid-template-columns:repeat(2,1fr)!important;}}
 .stat-card{background:var(--cream);border:1px solid var(--border);padding:clamp(16px,2.5vw,24px);position:relative;overflow:hidden;transition:box-shadow .3s;}
 .stat-card:hover{box-shadow:0 4px 20px rgba(13,79,74,.1);}
 .stat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
@@ -300,7 +299,6 @@ select.fi option{background:#fff;}
       <div class="nav-item active" onclick="go('dashboard',this)"><span class="nav-icon">📊</span>Dashboard</div>
       <div class="sb-section">Content</div>
       <div class="nav-item" onclick="go('properties',this)"><span class="nav-icon">🏡</span>Properties</div>
-      <div class="nav-item" onclick="go('developers',this)"><span class="nav-icon">🏗️</span>Developers</div>
       <div class="nav-item" onclick="go('blog',this)"><span class="nav-icon">📝</span>Blog Posts</div>
       <div class="nav-item" onclick="go('team',this)"><span class="nav-icon">👥</span>Team Members</div>
       <div class="sb-section">CRM</div>
@@ -332,9 +330,8 @@ select.fi option{background:#fff;}
 
     <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
-      <div class="stats-grid stats-grid-5">
+      <div class="stats-grid stats-grid-4">
         <div class="stat-card"><div class="stat-top"><div class="stat-icon">🏡</div><div class="stat-badge">Listings</div></div><div class="stat-val" id="d-props">0</div><div class="stat-label">Total Properties</div></div>
-        <div class="stat-card"><div class="stat-top"><div class="stat-icon">🏗️</div><div class="stat-badge">Partners</div></div><div class="stat-val" id="d-devs">14</div><div class="stat-label">Active Developers</div></div>
         <div class="stat-card"><div class="stat-top"><div class="stat-icon">📝</div><div class="stat-badge">Articles</div></div><div class="stat-val" id="d-blogs">0</div><div class="stat-label">Blog Posts</div></div>
         <div class="stat-card"><div class="stat-top"><div class="stat-icon">📩</div><div class="stat-badge">Leads</div></div><div class="stat-val" id="d-enqs">0</div><div class="stat-label">Enquiries</div></div>
         <div class="stat-card"><div class="stat-top"><div class="stat-icon">👥</div><div class="stat-badge">Staff</div></div><div class="stat-val" id="d-team">0</div><div class="stat-label">Team Members</div></div>
@@ -349,58 +346,10 @@ select.fi option{background:#fff;}
         <div class="dash-card">
           <div class="dc-title">Quick Overview</div>
           <div class="qi"><span class="qi-label">🏡 Active Listings</span><span class="qi-val" id="qs-active">0</span></div>
-          <div class="qi"><span class="qi-label">🏗️ Developer Partners</span><span class="qi-val" style="color:var(--teal);">14</span></div>
           <div class="qi"><span class="qi-label">📝 Published Posts</span><span class="qi-val" id="qs-pub">0</span></div>
           <div class="qi"><span class="qi-label">📩 Unread Enquiries</span><span class="qi-val" id="qs-unread">0</span></div>
           <div class="qi"><span class="qi-label">👥 Team Members</span><span class="qi-val" id="qs-team">0</span></div>
           <div class="qi"><span class="qi-label">🌐 Website</span><span class="qi-val" style="color:var(--success);">● Live</span></div>
-        </div>
-        <div class="dash-card" style="grid-column:1/-1;">
-          <div class="dc-title">Developer Partners — 14 Active</div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:14px;">
-            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
-              <div style="font-size:18px;">🏙️</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">EMAAR</div><div style="font-size:9px;color:var(--text3);">Properties</div>
-            </div>
-            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
-              <div style="font-size:18px;">🏗️</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">DAMAC</div><div style="font-size:9px;color:var(--text3);">Properties</div>
-            </div>
-            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
-              <div style="font-size:18px;">🌴</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">NAKHEEL</div><div style="font-size:9px;color:var(--text3);">Properties</div>
-            </div>
-            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
-              <div style="font-size:18px;">⭐</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">SOBHA</div><div style="font-size:9px;color:var(--text3);">Realty</div>
-            </div>
-            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
-              <div style="font-size:18px;">💎</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">DANUBE</div><div style="font-size:9px;color:var(--text3);">Properties</div>
-            </div>
-            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
-              <div style="font-size:18px;">🏢</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">BINGHATTI</div><div style="font-size:9px;color:var(--text3);">Developers</div>
-            </div>
-            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
-              <div style="font-size:18px;">🎨</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">ELLINGTON</div><div style="font-size:9px;color:var(--text3);">Properties</div>
-            </div>
-            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
-              <div style="font-size:18px;">🔵</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">AZIZI</div><div style="font-size:9px;color:var(--text3);">Developers</div>
-            </div>
-            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
-              <div style="font-size:18px;">🌆</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">MERAAS</div><div style="font-size:9px;color:var(--text3);">Holding</div>
-            </div>
-            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
-              <div style="font-size:18px;">🏛️</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">ALDAR</div><div style="font-size:9px;color:var(--text3);">Properties</div>
-            </div>
-            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
-              <div style="font-size:18px;">🌟</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">IMTIAZ</div><div style="font-size:9px;color:var(--text3);">Developments</div>
-            </div>
-            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
-              <div style="font-size:18px;">🏊</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">SAMANA</div><div style="font-size:9px;color:var(--text3);">Developers</div>
-            </div>
-            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
-              <div style="font-size:18px;">🏘️</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">ARADA</div><div style="font-size:9px;color:var(--text3);">Properties</div>
-            </div>
-            <div onclick="go('developers',document.querySelector('[onclick*=developers]'))" style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:var(--cream);border:1px solid var(--border);cursor:pointer;border-radius:2px;transition:all .2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">
-              <div style="font-size:18px;">💠</div><div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;">OMNIYAT</div><div style="font-size:9px;color:var(--text3);">Developers</div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -410,34 +359,12 @@ select.fi option{background:#fff;}
       <div class="sec-hdr">
         <div><div class="sec-title">Properties</div><div class="sec-sub">Manage all property listings on your website</div></div>
       </div>
-      <!-- Developer Filter Tabs -->
-      <div style="margin-bottom:16px;overflow-x:auto;scrollbar-width:none;">
-        <div style="display:flex;gap:6px;padding-bottom:4px;min-width:max-content;">
-          <button class="dev-filter-btn active" onclick="filterByDev('',this)">All Developers</button>
-          <button class="dev-filter-btn" onclick="filterByDev('Emaar',this)">Emaar</button>
-          <button class="dev-filter-btn" onclick="filterByDev('Damac',this)">Damac</button>
-          <button class="dev-filter-btn" onclick="filterByDev('Nakheel',this)">Nakheel</button>
-          <button class="dev-filter-btn" onclick="filterByDev('Sobha',this)">Sobha</button>
-          <button class="dev-filter-btn" onclick="filterByDev('Danube',this)">Danube</button>
-          <button class="dev-filter-btn" onclick="filterByDev('Binghatti',this)">Binghatti</button>
-          <button class="dev-filter-btn" onclick="filterByDev('Ellington',this)">Ellington</button>
-          <button class="dev-filter-btn" onclick="filterByDev('Azizi',this)">Azizi</button>
-          <button class="dev-filter-btn" onclick="filterByDev('Meraas',this)">Meraas</button>
-          <button class="dev-filter-btn" onclick="filterByDev('Aldar',this)">Aldar</button>
-          <button class="dev-filter-btn" onclick="filterByDev('Imtiaz',this)">Imtiaz</button>
-          <button class="dev-filter-btn" onclick="filterByDev('Samana',this)">Samana</button>
-          <button class="dev-filter-btn" onclick="filterByDev('Arada',this)">Arada</button>
-          <button class="dev-filter-btn" onclick="filterByDev('Omniyat',this)">Omniyat</button>
-          <button class="dev-filter-btn" onclick="filterByDev('none',this)">No Developer</button>
-        </div>
-      </div>
       <div class="filter-bar">
         <div class="search-wrap"><span class="search-icon">🔍</span><input type="text" class="search-inp" placeholder="Search properties..." oninput="filterP(this.value)"></div>
         <select class="filter-sel" onchange="filterPType(this.value)"><option value="all">All Types</option><option value="villa">Villas</option><option value="penthouse">Penthouses</option><option value="apartment">Apartments</option><option value="offplan">Off-Plan</option><option value="commercial">Commercial</option></select>
         <select class="filter-sel" onchange="filterPStatus(this.value)"><option value="all">All Status</option><option value="active">Active</option><option value="sold">Sold</option><option value="rented">Rented</option><option value="draft">Draft</option></select>
       </div>
-      <div id="dev-filter-label" style="font-size:12px;color:var(--text3);margin-bottom:10px;padding:8px 12px;background:var(--cream);border-left:3px solid var(--teal);display:none;"></div>
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Image</th><th>Property Name</th><th>Developer</th><th>Type</th><th>Price (AED)</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead><tbody id="p-tbody"></tbody></table></div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Image</th><th>Property Name</th><th>Type</th><th>Price (AED)</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead><tbody id="p-tbody"></tbody></table></div>
     </div>
 
     <!-- BLOG -->
@@ -468,134 +395,6 @@ select.fi option{background:#fff;}
         </div>
       </div>
       <div id="enq-list"></div>
-    </div>
-
-    <!-- DEVELOPERS -->
-    <div class="page" id="page-developers">
-      <div class="sec-hdr">
-        <div><div class="sec-title">Developers</div><div class="sec-sub">Manage developer partners and their email contacts</div></div>
-      </div>
-      <!-- Developer email cards -->
-      <div class="settings-grid">
-        <div class="s-card">
-          <div class="s-card-title">🏙️ Emaar Properties</div>
-          <div class="s-card-sub">Configure Emaar contact for enquiry routing</div>
-          <div class="fg"><label class="fl">Contact Email</label><input type="email" class="fi" id="dev-emaar-email" placeholder="sales@emaar.ae"></div>
-          <div class="fg"><label class="fl">Contact Person</label><input type="text" class="fi" id="dev-emaar-contact" placeholder="Sales Manager Name"></div>
-          <div class="fg"><label class="fl">Phone</label><input type="text" class="fi" id="dev-emaar-phone" placeholder="+971 4 XXX XXXX"></div>
-          <button class="btn btn-primary btn-sm" onclick="saveDev('emaar')">💾 Save</button>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title">🏗️ Damac Properties</div>
-          <div class="s-card-sub">Configure Damac contact for enquiry routing</div>
-          <div class="fg"><label class="fl">Contact Email</label><input type="email" class="fi" id="dev-damac-email" placeholder="sales@damacproperties.com"></div>
-          <div class="fg"><label class="fl">Contact Person</label><input type="text" class="fi" id="dev-damac-contact" placeholder="Sales Manager Name"></div>
-          <div class="fg"><label class="fl">Phone</label><input type="text" class="fi" id="dev-damac-phone" placeholder="+971 4 XXX XXXX"></div>
-          <button class="btn btn-primary btn-sm" onclick="saveDev('damac')">💾 Save</button>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title">🌴 Nakheel</div>
-          <div class="s-card-sub">Configure Nakheel contact for enquiry routing</div>
-          <div class="fg"><label class="fl">Contact Email</label><input type="email" class="fi" id="dev-nakheel-email" placeholder="sales@nakheel.com"></div>
-          <div class="fg"><label class="fl">Contact Person</label><input type="text" class="fi" id="dev-nakheel-contact" placeholder="Sales Manager Name"></div>
-          <div class="fg"><label class="fl">Phone</label><input type="text" class="fi" id="dev-nakheel-phone" placeholder="+971 4 XXX XXXX"></div>
-          <button class="btn btn-primary btn-sm" onclick="saveDev('nakheel')">💾 Save</button>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title">⭐ Sobha Realty</div>
-          <div class="s-card-sub">Configure Sobha contact for enquiry routing</div>
-          <div class="fg"><label class="fl">Contact Email</label><input type="email" class="fi" id="dev-sobha-email" placeholder="sales@sobharealty.com"></div>
-          <div class="fg"><label class="fl">Contact Person</label><input type="text" class="fi" id="dev-sobha-contact" placeholder="Sales Manager Name"></div>
-          <div class="fg"><label class="fl">Phone</label><input type="text" class="fi" id="dev-sobha-phone" placeholder="+971 4 XXX XXXX"></div>
-          <button class="btn btn-primary btn-sm" onclick="saveDev('sobha')">💾 Save</button>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title">💎 Danube Properties</div>
-          <div class="s-card-sub">Configure Danube contact for enquiry routing</div>
-          <div class="fg"><label class="fl">Contact Email</label><input type="email" class="fi" id="dev-danube-email" placeholder="sales@danubeproperties.com"></div>
-          <div class="fg"><label class="fl">Contact Person</label><input type="text" class="fi" id="dev-danube-contact" placeholder="Sales Manager Name"></div>
-          <div class="fg"><label class="fl">Phone</label><input type="text" class="fi" id="dev-danube-phone" placeholder="+971 4 XXX XXXX"></div>
-          <button class="btn btn-primary btn-sm" onclick="saveDev('danube')">💾 Save</button>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title">🏢 Binghatti</div>
-          <div class="s-card-sub">Configure Binghatti contact for enquiry routing</div>
-          <div class="fg"><label class="fl">Contact Email</label><input type="email" class="fi" id="dev-binghatti-email" placeholder="sales@binghatti.com"></div>
-          <div class="fg"><label class="fl">Contact Person</label><input type="text" class="fi" id="dev-binghatti-contact" placeholder="Sales Manager Name"></div>
-          <div class="fg"><label class="fl">Phone</label><input type="text" class="fi" id="dev-binghatti-phone" placeholder="+971 4 XXX XXXX"></div>
-          <button class="btn btn-primary btn-sm" onclick="saveDev('binghatti')">💾 Save</button>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title">🎨 Ellington Properties</div>
-          <div class="s-card-sub">Configure Ellington contact for enquiry routing</div>
-          <div class="fg"><label class="fl">Contact Email</label><input type="email" class="fi" id="dev-ellington-email" placeholder="sales@ellingtonproperties.com"></div>
-          <div class="fg"><label class="fl">Contact Person</label><input type="text" class="fi" id="dev-ellington-contact" placeholder="Sales Manager Name"></div>
-          <div class="fg"><label class="fl">Phone</label><input type="text" class="fi" id="dev-ellington-phone" placeholder="+971 4 XXX XXXX"></div>
-          <button class="btn btn-primary btn-sm" onclick="saveDev('ellington')">💾 Save</button>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title">🏗️ Azizi Developers</div>
-          <div class="s-card-sub">Configure Azizi contact for enquiry routing</div>
-          <div class="fg"><label class="fl">Contact Email</label><input type="email" class="fi" id="dev-azizi-email" placeholder="sales@azizidevelopments.com"></div>
-          <div class="fg"><label class="fl">Contact Person</label><input type="text" class="fi" id="dev-azizi-contact" placeholder="Sales Manager Name"></div>
-          <div class="fg"><label class="fl">Phone</label><input type="text" class="fi" id="dev-azizi-phone" placeholder="+971 4 XXX XXXX"></div>
-          <button class="btn btn-primary btn-sm" onclick="saveDev('azizi')">💾 Save</button>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title">🌆 Meraas</div>
-          <div class="s-card-sub">Configure Meraas contact for enquiry routing</div>
-          <div class="fg"><label class="fl">Contact Email</label><input type="email" class="fi" id="dev-meraas-email" placeholder="sales@meraas.ae"></div>
-          <div class="fg"><label class="fl">Contact Person</label><input type="text" class="fi" id="dev-meraas-contact" placeholder="Sales Manager Name"></div>
-          <div class="fg"><label class="fl">Phone</label><input type="text" class="fi" id="dev-meraas-phone" placeholder="+971 4 XXX XXXX"></div>
-          <button class="btn btn-primary btn-sm" onclick="saveDev('meraas')">💾 Save</button>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title">🏛️ Aldar Properties</div>
-          <div class="s-card-sub">Configure Aldar contact for enquiry routing</div>
-          <div class="fg"><label class="fl">Contact Email</label><input type="email" class="fi" id="dev-aldar-email" placeholder="sales@aldar.com"></div>
-          <div class="fg"><label class="fl">Contact Person</label><input type="text" class="fi" id="dev-aldar-contact" placeholder="Sales Manager Name"></div>
-          <div class="fg"><label class="fl">Phone</label><input type="text" class="fi" id="dev-aldar-phone" placeholder="+971 2 XXX XXXX"></div>
-          <button class="btn btn-primary btn-sm" onclick="saveDev('aldar')">💾 Save</button>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title">🌟 Imtiaz Developments</div>
-          <div class="s-card-sub">Configure Imtiaz contact for enquiry routing</div>
-          <div class="fg"><label class="fl">Contact Email</label><input type="email" class="fi" id="dev-imtiaz-email" placeholder="sales@imtiazdevelopments.com"></div>
-          <div class="fg"><label class="fl">Contact Person</label><input type="text" class="fi" id="dev-imtiaz-contact" placeholder="Sales Manager Name"></div>
-          <div class="fg"><label class="fl">Phone</label><input type="text" class="fi" id="dev-imtiaz-phone" placeholder="+971 4 XXX XXXX"></div>
-          <button class="btn btn-primary btn-sm" onclick="saveDev('imtiaz')">💾 Save</button>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title">🏊 Samana Developers</div>
-          <div class="s-card-sub">Configure Samana contact for enquiry routing</div>
-          <div class="fg"><label class="fl">Contact Email</label><input type="email" class="fi" id="dev-samana-email" placeholder="sales@samana.ae"></div>
-          <div class="fg"><label class="fl">Contact Person</label><input type="text" class="fi" id="dev-samana-contact" placeholder="Sales Manager Name"></div>
-          <div class="fg"><label class="fl">Phone</label><input type="text" class="fi" id="dev-samana-phone" placeholder="+971 4 XXX XXXX"></div>
-          <button class="btn btn-primary btn-sm" onclick="saveDev('samana')">💾 Save</button>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title">🏘️ Arada Properties</div>
-          <div class="s-card-sub">Configure Arada contact for enquiry routing</div>
-          <div class="fg"><label class="fl">Contact Email</label><input type="email" class="fi" id="dev-arada-email" placeholder="sales@arada.com"></div>
-          <div class="fg"><label class="fl">Contact Person</label><input type="text" class="fi" id="dev-arada-contact" placeholder="Sales Manager Name"></div>
-          <div class="fg"><label class="fl">Phone</label><input type="text" class="fi" id="dev-arada-phone" placeholder="+971 6 XXX XXXX"></div>
-          <button class="btn btn-primary btn-sm" onclick="saveDev('arada')">💾 Save</button>
-        </div>
-        <div class="s-card">
-          <div class="s-card-title">💎 Omniyat</div>
-          <div class="s-card-sub">Configure Omniyat contact for enquiry routing</div>
-          <div class="fg"><label class="fl">Contact Email</label><input type="email" class="fi" id="dev-omniyat-email" placeholder="sales@omniyat.com"></div>
-          <div class="fg"><label class="fl">Contact Person</label><input type="text" class="fi" id="dev-omniyat-contact" placeholder="Sales Manager Name"></div>
-          <div class="fg"><label class="fl">Phone</label><input type="text" class="fi" id="dev-omniyat-phone" placeholder="+971 4 XXX XXXX"></div>
-          <button class="btn btn-primary btn-sm" onclick="saveDev('omniyat')">💾 Save</button>
-        </div>
-      </div>
-
-      <!-- Note about email routing -->
-      <div style="margin-top:24px;padding:16px 20px;background:#F5EFE4;border-left:3px solid #D4B896;">
-        <div style="font-size:12px;font-weight:500;color:#0D4F4A;margin-bottom:6px;">📌 How Developer Enquiry Routing Works</div>
-        <div style="font-size:12px;color:#6B6B60;line-height:1.7;">When a visitor clicks "Enquire About Emaar" on the developers page, their enquiry is saved to this admin panel. Once you add developer emails above, the system will automatically forward enquiries to both IMAKSA and the relevant developer. Currently pending email setup — enquiries are saved to admin panel regardless.</div>
-      </div>
     </div>
 
     <!-- SETTINGS -->
@@ -649,7 +448,7 @@ select.fi option{background:#fff;}
       <input type="hidden" id="mp-id">
       <div class="fr"><div class="fg"><label class="fl">Property Name *</label><input type="text" class="fi" id="mp-name" placeholder="e.g. Sunset Palm Villa"></div><div class="fg"><label class="fl">Price (AED) *</label><input type="text" class="fi" id="mp-price" placeholder="e.g. 28,500,000"></div></div>
       <div class="fr"><div class="fg"><label class="fl">Type *</label><select class="fi" id="mp-type"><option value="">Select</option><option value="villa">Villa / Mansion</option><option value="penthouse">Penthouse</option><option value="apartment">Apartment</option><option value="offplan">Off-Plan</option><option value="commercial">Commercial</option><option value="townhouse">Townhouse</option></select></div><div class="fg"><label class="fl">Listing Type *</label><select class="fi" id="mp-listing"><option value="buy">For Sale</option><option value="rent">For Rent</option><option value="sell">Seller Listed</option><option value="offplan">Off-Plan</option></select></div></div>
-      <div class="fr"><div class="fg"><label class="fl">Status</label><select class="fi" id="mp-status"><option value="active">Active</option><option value="sold">Sold</option><option value="rented">Rented</option><option value="draft">Draft</option></select></div><div class="fg"><label class="fl">Developer</label><select class="fi" id="mp-developer"><option value="">No Developer</option><option value="Emaar">Emaar</option><option value="Damac">Damac</option><option value="Nakheel">Nakheel</option><option value="Sobha">Sobha</option><option value="Danube">Danube</option><option value="Binghatti">Binghatti</option><option value="Ellington">Ellington</option><option value="Azizi">Azizi</option><option value="Meraas">Meraas</option><option value="Aldar">Aldar</option><option value="Imtiaz">Imtiaz</option><option value="Samana">Samana</option><option value="Arada">Arada</option><option value="Omniyat">Omniyat</option></select></div></div>
+      <div class="fr"><div class="fg"><label class="fl">Status</label><select class="fi" id="mp-status"><option value="active">Active</option><option value="sold">Sold</option><option value="rented">Rented</option><option value="draft">Draft</option></select></div></div>
       <div class="fg"><label class="fl">Location *</label><input type="text" class="fi" id="mp-loc" placeholder="e.g. Palm Jumeirah, Dubai"></div>
       <div class="fr"><div class="fg"><label class="fl">Bedrooms</label><input type="number" class="fi" id="mp-beds" placeholder="4"></div><div class="fg"><label class="fl">Bathrooms</label><input type="number" class="fi" id="mp-baths" placeholder="5"></div></div>
       <div class="fr"><div class="fg"><label class="fl">Area (Sq.Ft)</label><input type="text" class="fi" id="mp-area" placeholder="6,800"></div><div class="fg"><label class="fl">Badge</label><input type="text" class="fi" id="mp-badge" placeholder="e.g. New Launch"></div></div>
@@ -806,7 +605,7 @@ async function loadAllData() {
 /* ── NAVIGATION ── */
 const titles = {
   dashboard: 'Dashboard', properties: 'Properties', blog: 'Blog Posts',
-  team: 'Team Members', enquiries: 'Enquiries', developers: 'Developer Partners',
+  team: 'Team Members', enquiries: 'Enquiries',
   settings: 'Site Settings', password: 'Change Password'
 };
 const addLabels = { properties: 'Add Property', blog: 'Add Post', team: 'Add Member' };
@@ -826,7 +625,6 @@ function go(p, el) {
   if (p === 'blog') renderBlogs();
   if (p === 'team') renderTeam();
   if (p === 'enquiries') renderEnqs();
-  if (p === 'developers') loadDevs();
   closeSB();
 }
 
@@ -905,13 +703,12 @@ async function refreshDash() {
 let allProps = [];       // all properties from backend
 let pSearch = '';
 let pType = 'all';
-let pDevFilter = '';
 let pStatusFilter = 'all';
 
 // Called once on page load and after add/edit/delete
 async function renderProps() {
   const tb = document.getElementById('p-tbody');
-  tb.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--text3);">Loading...</td></tr>';
+  tb.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:24px;color:var(--text3);">Loading...</td></tr>';
   const res = await api('/properties', 'GET', null, true);
   allProps = res.data || [];
   applyPropFilters();
@@ -921,13 +718,6 @@ async function renderProps() {
 function applyPropFilters() {
   const tb = document.getElementById('p-tbody');
   let list = [...allProps];
-
-  // Developer filter
-  if (pDevFilter === 'none') {
-    list = list.filter(p => !p.developer || p.developer.trim() === '');
-  } else if (pDevFilter) {
-    list = list.filter(p => (p.developer || '').toLowerCase() === pDevFilter.toLowerCase());
-  }
 
   // Search filter
   if (pSearch) {
@@ -944,28 +734,16 @@ function applyPropFilters() {
     list = list.filter(p => (p.status || 'active') === pStatusFilter);
   }
 
-  // Update label
-  const label = document.getElementById('dev-filter-label');
-  if (pDevFilter && pDevFilter !== '') {
-    const devName = pDevFilter === 'none' ? 'No Developer' : pDevFilter;
-    label.style.display = 'block';
-    label.textContent = `Showing ${list.length} ${devName} properties`;
-  } else {
-    label.style.display = 'none';
-  }
-
   if (!list.length) {
-    tb.innerHTML = `<tr><td colspan="8"><div class="empty"><div class="empty-icon">🏡</div><div class="empty-title">No properties found</div><div class="empty-desc">${pDevFilter ? `No ${pDevFilter} properties yet. Add one using the button above.` : 'Click "+ Add Property" to add your first listing'}</div></div></td></tr>`;
+    tb.innerHTML = `<tr><td colspan="7"><div class="empty"><div class="empty-icon">🏡</div><div class="empty-title">No properties found</div><div class="empty-desc">Click "+ Add Property" to add your first listing</div></div></td></tr>`;
     return;
   }
 
   tb.innerHTML = list.map(p => {
     const price = p.price ? 'AED ' + Number(String(p.price).replace(/,/g, '')).toLocaleString() : 'Price on Request';
-    const dev = p.developer || '';
     return `<tr>
     <td>${p.img ? `<img class="tbl-img" src="${p.img}" alt="${p.name}" onerror="this.style.display='none'">` : '<div style="width:52px;height:40px;background:var(--cream2);display:flex;align-items:center;justify-content:center;">🏡</div>'}</td>
     <td><div class="tbl-name">${p.name}</div><div style="font-size:11px;color:var(--text3);margin-top:2px;">${p.location || ''}</div></td>
-    <td><span style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:.5px;">${dev || '<span style="color:var(--text3);font-weight:300;">—</span>'}</span></td>
     <td style="text-transform:capitalize;">${p.type || '—'}</td>
     <td style="font-weight:500;">${price}</td>
     <td>${p.location || '—'}</td>
@@ -996,7 +774,6 @@ function openPropModal(id = null) {
       document.getElementById('mp-type').value      = p.type       || '';
       document.getElementById('mp-listing').value   = p.listingType|| 'buy';
       document.getElementById('mp-status').value    = p.status     || 'active';
-      document.getElementById('mp-developer').value = p.developer  || '';
       document.getElementById('mp-loc').value       = p.location   || '';
       document.getElementById('mp-beds').value      = p.beds       || '';
       document.getElementById('mp-baths').value     = p.baths      || '';
@@ -1012,7 +789,6 @@ function openPropModal(id = null) {
     document.getElementById('mp-type').selectedIndex    = 0;
     document.getElementById('mp-listing').selectedIndex = 0;
     document.getElementById('mp-status').selectedIndex  = 0;
-    document.getElementById('mp-developer').selectedIndex = 0;
     om('m-prop');
   }
 }
@@ -1027,7 +803,6 @@ async function saveProp() {
     type:        document.getElementById('mp-type').value,
     listingType: document.getElementById('mp-listing').value,
     status:      document.getElementById('mp-status').value,
-    developer:   document.getElementById('mp-developer').value,
     location:    document.getElementById('mp-loc').value,
     beds:        document.getElementById('mp-beds').value,
     baths:       document.getElementById('mp-baths').value,
@@ -1359,14 +1134,12 @@ function renderEnqList(list) {
   if (!list.length) { el.innerHTML = '<div style="padding:40px;text-align:center;color:#9B9B8A;">No enquiries found.</div>'; return; }
   el.innerHTML = list.map(e => {
     const isNew = !e.read;
-    const devTag = e.developer ? `<span style="background:#F5EFE4;color:#0D4F4A;font-size:9px;letter-spacing:1px;padding:3px 8px;margin-left:8px;">${e.developer}</span>` : '';
     return `
     <div class="enq-card ${isNew ? 'enq-new' : ''}" id="ec-${e._id}">
       <div class="enq-top">
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
           ${isNew ? '<span class="enq-dot"></span>' : ''}
           <div class="enq-name">${e.name}</div>
-          ${devTag}
           <span style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#9B9B8A;">${e.interest || ''}</span>
         </div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
@@ -1399,33 +1172,6 @@ async function updateEnqStatus(id, status) {
   document.getElementById('ec-' + id)?.classList.remove('enq-new');
 }
 
-/* ── DEVELOPERS ── */
-const devNames = ['emaar','damac','nakheel','sobha','danube','binghatti','ellington','azizi','meraas','aldar','imtiaz','samana','arada','omniyat'];
-
-function loadDevs() {
-  const saved = JSON.parse(localStorage.getItem('imaksa_devs') || '{}');
-  devNames.forEach(d => {
-    const data = saved[d] || {};
-    const emailEl = document.getElementById(`dev-${d}-email`);
-    const contactEl = document.getElementById(`dev-${d}-contact`);
-    const phoneEl = document.getElementById(`dev-${d}-phone`);
-    if (emailEl) emailEl.value = data.email || '';
-    if (contactEl) contactEl.value = data.contact || '';
-    if (phoneEl) phoneEl.value = data.phone || '';
-  });
-}
-
-function saveDev(devName) {
-  const saved = JSON.parse(localStorage.getItem('imaksa_devs') || '{}');
-  saved[devName] = {
-    email:   document.getElementById(`dev-${devName}-email`)?.value || '',
-    contact: document.getElementById(`dev-${devName}-contact`)?.value || '',
-    phone:   document.getElementById(`dev-${devName}-phone`)?.value || '',
-  };
-  localStorage.setItem('imaksa_devs', JSON.stringify(saved));
-  toast(`${devName.charAt(0).toUpperCase() + devName.slice(1)} details saved ✓`);
-}
-
 // ── IMAGE UPLOAD ──
 function toggleImgMode() { document.getElementById('mp-img').focus(); }
 
@@ -1448,19 +1194,6 @@ function handleImgUpload(input) {
     toast('✅ Image ready!');
   };
   reader.readAsDataURL(file);
-}
-
-/* ── FILTER BY DEVELOPER ── */
-let currentDevFilter = '';
-function filterByDev(dev, btn) {
-  pDevFilter = dev;
-  document.querySelectorAll('.dev-filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  if (!allProps.length) {
-    renderProps();
-  } else {
-    applyPropFilters();
-  }
 }
 
 
