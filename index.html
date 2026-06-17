@@ -448,10 +448,6 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
         <button class="s-tab" onclick="setHeroTab(this,'sell')">Sell</button>
         <button class="s-tab" onclick="setHeroTab(this,'offplan')">Off-Plan</button>
       </div>
-      <div class="s-input-row">
-        <input type="text" class="s-input" id="hero-search" placeholder="Area, project or community...">
-        <button class="s-btn" onclick="heroSearch()">Search</button>
-      </div>
     </div>
     <div class="h-btns">
       <a href="properties.html" class="h-btn1">Explore Properties</a>
@@ -735,11 +731,6 @@ function setHeroTab(btn, type) {
   btn.classList.add('active');
   heroTabActive = type;
 }
-function heroSearch() {
-  const q = document.getElementById('hero-search').value.trim();
-  window.location.href = `properties.html?type=${heroTabActive}&q=${encodeURIComponent(q)}`;
-}
-document.getElementById('hero-search').addEventListener('keypress', e => { if (e.key === 'Enter') heroSearch(); });
 
 // COUNTERS
 const cobs = new IntersectionObserver(en => {
