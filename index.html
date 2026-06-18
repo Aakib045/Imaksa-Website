@@ -736,6 +736,7 @@ function setHeroTab(btn, type) {
   document.querySelectorAll('.s-tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   heroTabActive = type;
+  window.location.href = `properties.html?type=${type}`;
 }
 
 // COUNTERS

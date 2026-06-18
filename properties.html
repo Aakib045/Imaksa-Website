@@ -140,8 +140,17 @@ const API = 'https://imaksa-backend-production.up.railway.app/api';
   <h1 class="page-hero-title">Our <em>Properties</em></h1>
 </div>
 
+<!-- LISTING TYPE FILTER (Buy/Rent/Sell/Off-Plan) -->
+<div class="filter-bar" id="listing-filter-bar" style="border-bottom:none;padding-bottom:0;">
+  <button class="filter-btn active" data-listing="all" onclick="setListingFilter('all',this)">All</button>
+  <button class="filter-btn" data-listing="buy" onclick="setListingFilter('buy',this)">Buy</button>
+  <button class="filter-btn" data-listing="rent" onclick="setListingFilter('rent',this)">Rent</button>
+  <button class="filter-btn" data-listing="sell" onclick="setListingFilter('sell',this)">Sell</button>
+  <button class="filter-btn" data-listing="offplan" onclick="setListingFilter('offplan',this)">Off-Plan</button>
+</div>
+
 <!-- FILTER BUTTONS -->
-<div class="filter-bar">
+<div class="filter-bar" id="type-filter-bar">
   <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)">All Properties</button>
   <button class="filter-btn" data-filter="villa" onclick="setFilter('villa',this)">Villas</button>
   <button class="filter-btn" data-filter="penthouse" onclick="setFilter('penthouse',this)">Penthouses</button>
@@ -179,6 +188,7 @@ const API = 'https://imaksa-backend-production.up.railway.app/api';
 // ── STATE ──
 let allProperties = [];
 let activeFilter  = 'all';
+let activeListingFilter = 'all';
 
 // ── NAV ──
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>50));
@@ -193,7 +203,7 @@ async function fetchProperties() {
     const data = await res.json();
     if (data.success) {
       allProperties = data.data;
-      renderCards(allProperties);
+      applyFilters();
     } else {
       showError();
     }
@@ -245,15 +255,30 @@ function renderCards(props) {
   `).join('');
 }
 
-// ── FILTER ──
+// ── FILTER (combines property type + listing type) ──
+function applyFilters() {
+  let filtered = allProperties;
+  if (activeListingFilter !== 'all') {
+    filtered = filtered.filter(p => (p.listingType || 'buy').toLowerCase() === activeListingFilter.toLowerCase());
+  }
+  if (activeFilter !== 'all') {
+    filtered = filtered.filter(p => (p.type || '').toLowerCase() === activeFilter.toLowerCase());
+  }
+  renderCards(filtered);
+}
+
 function setFilter(type, btn) {
   activeFilter = type;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('#type-filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  const filtered = type === 'all'
-    ? allProperties
-    : allProperties.filter(p => (p.type || '').toLowerCase() === type.toLowerCase());
-  renderCards(filtered);
+  applyFilters();
+}
+
+function setListingFilter(listing, btn) {
+  activeListingFilter = listing;
+  document.querySelectorAll('#listing-filter-bar .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
 }
 
 // ── ERROR STATE ──
@@ -274,10 +299,17 @@ const obs = new IntersectionObserver(en => {
 document.querySelectorAll('.rv').forEach(r => obs.observe(r));
 
 // ── INIT ──
+const urlParams = new URLSearchParams(window.location.search);
+const initialListingType = urlParams.get('type'); // buy / rent / sell / offplan from header & hero links
+if (initialListingType && ['buy','rent','sell','offplan'].includes(initialListingType.toLowerCase())) {
+  activeListingFilter = initialListingType.toLowerCase();
+  document.querySelectorAll('#listing-filter-bar .filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.listing === activeListingFilter);
+  });
+}
 fetchProperties();
 
 // ── Pre-fill enquiry if coming from property link ──
-const urlParams = new URLSearchParams(window.location.search);
 const propertyName = urlParams.get('property');
 if (propertyName) {
   // Store for contact page to use
