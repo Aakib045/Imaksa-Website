@@ -624,15 +624,15 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
       <div class="cta-contacts rv-el d2">
         <div class="cta-contact">
           <div class="cta-contact-icon">📞</div>
-          <div><div class="cta-contact-text">Call Us</div><div class="cta-contact-val">+971 4 XXX XXXX</div></div>
+          <div><div class="cta-contact-text">Call Us</div><div class="cta-contact-val" id="cta-phone">+971 4 XXX XXXX</div></div>
         </div>
         <div class="cta-contact">
           <div class="cta-contact-icon">💬</div>
-          <div><div class="cta-contact-text">WhatsApp</div><div class="cta-contact-val">+971 50 695 7009</div></div>
+          <div><div class="cta-contact-text">WhatsApp</div><div class="cta-contact-val" id="cta-wa">+971 50 695 7009</div></div>
         </div>
         <div class="cta-contact">
           <div class="cta-contact-icon">✉️</div>
-          <div><div class="cta-contact-text">Email</div><div class="cta-contact-val">info@imaksa.ae</div></div>
+          <div><div class="cta-contact-text">Email</div><div class="cta-contact-val" id="cta-email">info@imaksa.ae</div></div>
         </div>
       </div>
     </div>
@@ -833,20 +833,58 @@ function showCTASuccess(btn) {
   setTimeout(() => { btn.textContent = 'Submit Enquiry'; btn.style.background = ''; btn.disabled = false; btn.style.opacity = '1'; document.getElementById('cta-success').style.display = 'none'; }, 5000);
 }
 
-/* ── LIVE WHATSAPP NUMBER (from admin panel settings) ── */
+/* ── LIVE SETTINGS (from admin panel) ── */
 (async function applyLiveSettings(){
   try {
     const res = await fetch(`${API}/settings`);
     const data = await res.json();
     if (!data.success || !data.data) return;
     const s = data.data;
-    if (s.wa) {
-      const waBtn = document.getElementById('wa-btn');
-      if (waBtn) {
-        const msg = encodeURIComponent('Hello IMAKSA 🏡\n\nI am interested in purchasing a property in Dubai. Could you please help me find the right property?\n\nThank you!');
-        waBtn.href = `https://wa.me/${s.wa}?text=${msg}`;
-      }
-    }
+    const waMsg = encodeURIComponent('Hello IMAKSA 🏡\n\nI am interested in your services. Could you please help me?\n\nThank you!');
+
+    // WhatsApp floating button
+    const waBtn = document.getElementById('wa-btn');
+    if (waBtn && s.wa) waBtn.href = `https://wa.me/${s.wa}?text=${waMsg}`;
+
+    // Footer contact block
+    const ftPhone = document.getElementById('ft-phone');
+    if (ftPhone && s.phone) { ftPhone.textContent = s.phone; ftPhone.href = `tel:${s.phone.replace(/[^0-9+]/g, '')}`; }
+    const ftEmail = document.getElementById('ft-email');
+    if (ftEmail && s.email) { ftEmail.textContent = s.email; ftEmail.href = `mailto:${s.email}`; }
+    const ftAddr = document.getElementById('ft-addr');
+    if (ftAddr && s.addr) ftAddr.textContent = s.addr;
+    const ftHrs = document.getElementById('ft-hrs');
+    if (ftHrs && s.hrs) ftHrs.textContent = s.hrs;
+
+    // Footer social icons
+    document.querySelectorAll('[data-soc]').forEach(el => {
+      const key = el.getAttribute('data-soc');
+      const map = { li: s.li, ig: s.ig, wa: s.wa ? `https://wa.me/${s.wa}` : '', fb: s.fb };
+      if (map[key]) el.href = map[key];
+    });
+
+    // Contact page detail block (if present)
+    const ciPhone = document.getElementById('ci-phone');
+    if (ciPhone && s.phone) { ciPhone.textContent = s.phone; ciPhone.href = `tel:${s.phone.replace(/[^0-9+]/g, '')}`; }
+    const ciEmail = document.getElementById('ci-email');
+    if (ciEmail && s.email) { ciEmail.textContent = s.email; ciEmail.href = `mailto:${s.email}`; }
+    const ciAddr = document.getElementById('ci-addr');
+    if (ciAddr && s.addr) ciAddr.textContent = s.addr;
+    const ciHrs = document.getElementById('ci-hrs');
+    if (ciHrs && s.hrs) ciHrs.textContent = s.hrs;
+    if (s.li) { const el = document.getElementById('ci-li'); if (el) el.href = s.li; }
+    if (s.ig) { const el = document.getElementById('ci-ig'); if (el) el.href = s.ig; }
+    if (s.fb) { const el = document.getElementById('ci-fb'); if (el) el.href = s.fb; }
+    if (s.wa) { const el = document.getElementById('ci-wa-soc'); if (el) el.href = `https://wa.me/${s.wa}`; }
+
+    // Homepage CTA block (if present)
+    const ctaPhone = document.getElementById('cta-phone');
+    if (ctaPhone && s.phone) ctaPhone.textContent = s.phone;
+    const ctaWa = document.getElementById('cta-wa');
+    if (ctaWa && s.wa) ctaWa.textContent = '+' + s.wa.replace(/(\d{3})(\d{2})(\d{3})(\d{4})/, '$1 $2 $3 $4');
+    const ctaEmail = document.getElementById('cta-email');
+    if (ctaEmail && s.email) ctaEmail.textContent = s.email;
+
   } catch (err) {
     console.error('Could not load live settings:', err);
   }

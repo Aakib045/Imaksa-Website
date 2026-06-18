@@ -153,9 +153,9 @@ footer{background:#080808;padding:clamp(44px,6vw,80px) clamp(16px,5vw,72px) 0;bo
     <div><span class="ft-logo">IMAKSA</span><p class="ft-about">Dubai's trusted property partner. Connecting clients with extraordinary homes since 2012. RERA Licensed.</p></div>
     <div><div class="ft-head">Properties</div><ul class="ft-links"><li><a href="properties.html">Villas & Mansions</a></li><li><a href="properties.html">Penthouses</a></li><li><a href="properties.html">Apartments</a></li><li><a href="properties.html">Off-Plan</a></li><li><a href="properties.html">Commercial</a></li></ul></div>
     <div><div class="ft-head">Company</div><ul class="ft-links"><li><a href="about.html">About IMAKSA</a></li><li><a href="about.html#team">Our Team</a></li><li><a href="careers.html">Careers</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-    <div><div class="ft-head">Contact</div><ul class="ft-links"><li><a href="contact.html">Business Bay, Dubai</a></li><li><a href="tel:+971XXXXXXXX">+971 4 XXX XXXX</a></li><li><a href="mailto:info@imaksa.ae">info@imaksa.ae</a></li><li>Mon–Sat 9am–7pm</li></ul></div>
+    <div><div class="ft-head">Contact</div><ul class="ft-links"><li><a href="contact.html" id="ft-addr">Business Bay, Dubai</a></li><li><a href="tel:+971XXXXXXXX" id="ft-phone">+971 4 XXX XXXX</a></li><li><a href="mailto:info@imaksa.ae" id="ft-email">info@imaksa.ae</a></li><li id="ft-hrs">Mon–Sat 9am–7pm</li></ul></div>
   </div>
-  <div class="ft-bottom"><div class="ft-socs"><a href="#" class="ft-soc">in</a><a href="#" class="ft-soc">ig</a><a href="#" class="ft-soc">wa</a><a href="#" class="ft-soc">fb</a></div><p class="ft-copy">© 2025 IMAKSA Properties LLC. RERA Licensed. All Rights Reserved.</p></div>
+  <div class="ft-bottom"><div class="ft-socs"><a href="#" class="ft-soc" data-soc="li" target="_blank">in</a><a href="#" class="ft-soc" data-soc="ig" target="_blank">ig</a><a href="#" class="ft-soc" data-soc="wa" target="_blank">wa</a><a href="#" class="ft-soc" data-soc="fb" target="_blank">fb</a></div><p class="ft-copy">© 2025 IMAKSA Properties LLC. RERA Licensed. All Rights Reserved.</p></div>
 </footer>
 <script>
 const API = 'https://imaksa-backend-production.up.railway.app/api';
@@ -224,20 +224,58 @@ async function loadBlogs() {
 }
 loadBlogs();
 
-/* ── LIVE WHATSAPP NUMBER (from admin panel settings) ── */
+/* ── LIVE SETTINGS (from admin panel) ── */
 (async function applyLiveSettings(){
   try {
     const res = await fetch(`${API}/settings`);
     const data = await res.json();
     if (!data.success || !data.data) return;
     const s = data.data;
-    if (s.wa) {
-      const waBtn = document.getElementById('wa-btn');
-      if (waBtn) {
-        const msg = encodeURIComponent('Hello IMAKSA 🏡\n\nI am interested in your services. Could you please help me?\n\nThank you!');
-        waBtn.href = `https://wa.me/${s.wa}?text=${msg}`;
-      }
-    }
+    const waMsg = encodeURIComponent('Hello IMAKSA 🏡\n\nI am interested in your services. Could you please help me?\n\nThank you!');
+
+    // WhatsApp floating button
+    const waBtn = document.getElementById('wa-btn');
+    if (waBtn && s.wa) waBtn.href = `https://wa.me/${s.wa}?text=${waMsg}`;
+
+    // Footer contact block
+    const ftPhone = document.getElementById('ft-phone');
+    if (ftPhone && s.phone) { ftPhone.textContent = s.phone; ftPhone.href = `tel:${s.phone.replace(/[^0-9+]/g, '')}`; }
+    const ftEmail = document.getElementById('ft-email');
+    if (ftEmail && s.email) { ftEmail.textContent = s.email; ftEmail.href = `mailto:${s.email}`; }
+    const ftAddr = document.getElementById('ft-addr');
+    if (ftAddr && s.addr) ftAddr.textContent = s.addr;
+    const ftHrs = document.getElementById('ft-hrs');
+    if (ftHrs && s.hrs) ftHrs.textContent = s.hrs;
+
+    // Footer social icons
+    document.querySelectorAll('[data-soc]').forEach(el => {
+      const key = el.getAttribute('data-soc');
+      const map = { li: s.li, ig: s.ig, wa: s.wa ? `https://wa.me/${s.wa}` : '', fb: s.fb };
+      if (map[key]) el.href = map[key];
+    });
+
+    // Contact page detail block (if present)
+    const ciPhone = document.getElementById('ci-phone');
+    if (ciPhone && s.phone) { ciPhone.textContent = s.phone; ciPhone.href = `tel:${s.phone.replace(/[^0-9+]/g, '')}`; }
+    const ciEmail = document.getElementById('ci-email');
+    if (ciEmail && s.email) { ciEmail.textContent = s.email; ciEmail.href = `mailto:${s.email}`; }
+    const ciAddr = document.getElementById('ci-addr');
+    if (ciAddr && s.addr) ciAddr.textContent = s.addr;
+    const ciHrs = document.getElementById('ci-hrs');
+    if (ciHrs && s.hrs) ciHrs.textContent = s.hrs;
+    if (s.li) { const el = document.getElementById('ci-li'); if (el) el.href = s.li; }
+    if (s.ig) { const el = document.getElementById('ci-ig'); if (el) el.href = s.ig; }
+    if (s.fb) { const el = document.getElementById('ci-fb'); if (el) el.href = s.fb; }
+    if (s.wa) { const el = document.getElementById('ci-wa-soc'); if (el) el.href = `https://wa.me/${s.wa}`; }
+
+    // Homepage CTA block (if present)
+    const ctaPhone = document.getElementById('cta-phone');
+    if (ctaPhone && s.phone) ctaPhone.textContent = s.phone;
+    const ctaWa = document.getElementById('cta-wa');
+    if (ctaWa && s.wa) ctaWa.textContent = '+' + s.wa.replace(/(\d{3})(\d{2})(\d{3})(\d{4})/, '$1 $2 $3 $4');
+    const ctaEmail = document.getElementById('cta-email');
+    if (ctaEmail && s.email) ctaEmail.textContent = s.email;
+
   } catch (err) {
     console.error('Could not load live settings:', err);
   }
