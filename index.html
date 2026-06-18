@@ -24,10 +24,16 @@ a{text-decoration:none;color:inherit;}
 /* LOADER */
 #loader{position:fixed;inset:0;background:#0D4F4A;z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0;}
 #loader::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(212,184,150,.06) 0%,transparent 70%);pointer-events:none;}
-.ll-circle-svg{opacity:0;transform:scale(.25) rotate(-50deg);animation:logoEntrance 1.1s .1s cubic-bezier(.16,1,.3,1) forwards, logoFloat 3s 1.2s ease-in-out infinite, logoGlow 2.2s 1.2s ease-in-out infinite;}
-@keyframes logoEntrance{0%{opacity:0;transform:scale(.25) rotate(-50deg);filter:drop-shadow(0 0 0 rgba(201,168,76,0));}55%{opacity:1;transform:scale(1.15) rotate(8deg);}75%{transform:scale(.95) rotate(-3deg);}100%{opacity:1;transform:scale(1) rotate(0deg);filter:drop-shadow(0 0 20px rgba(201,168,76,.5));}}
-@keyframes logoFloat{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-8px) scale(1.02);}}
-@keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 14px rgba(201,168,76,.35));}50%{filter:drop-shadow(0 0 30px rgba(201,168,76,.7));}}
+.ll-circle-svg{opacity:0;animation:svgFadeIn .3s .1s forwards, logoFloat 3s 1.3s ease-in-out infinite, logoGlow 2.2s 1.3s ease-in-out infinite;filter:drop-shadow(0 0 14px rgba(201,168,76,.35));}
+@keyframes svgFadeIn{to{opacity:1;}}
+.ll-ring1{stroke-dasharray:754;stroke-dashoffset:754;animation:drawring 1s .15s cubic-bezier(.4,0,.2,1) forwards;}
+.ll-ring2{stroke-dasharray:723;stroke-dashoffset:723;animation:drawring 1s .25s cubic-bezier(.4,0,.2,1) forwards;}
+@keyframes drawring{to{stroke-dashoffset:0;}}
+.ll-letterI{transform:translateY(60px);opacity:0;animation:letterRise .6s .65s cubic-bezier(.16,1,.3,1) forwards;}
+.ll-letterA{transform:translateY(60px);opacity:0;animation:letterRise .6s .8s cubic-bezier(.16,1,.3,1) forwards;}
+@keyframes letterRise{to{transform:translateY(0);opacity:1;}}
+@keyframes logoFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+@keyframes logoGlow{0%,100%{filter:drop-shadow(0 0 14px rgba(201,168,76,.35));}50%{filter:drop-shadow(0 0 28px rgba(201,168,76,.65));}}
 .ll-divider{width:0;height:1px;background:linear-gradient(to right,transparent,#C9A84C,transparent);margin-top:18px;opacity:0;animation:divexp .8s 1.1s cubic-bezier(.16,1,.3,1) forwards;}
 @keyframes divexp{to{width:160px;opacity:.7;}}
 .ll-text{font-family:'Fraunces',serif;font-size:clamp(28px,6vw,48px);font-weight:300;color:#F5EFE4;letter-spacing:clamp(8px,2vw,14px);margin-top:18px;opacity:0;animation:textrise .7s 1.2s cubic-bezier(.16,1,.3,1) forwards;}
@@ -358,7 +364,35 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
 
 <!-- LOADER -->
 <div id="loader">
-  <img class="ll-circle-svg" src="logo-icon.png" alt="IMAKSA" width="200" height="200">
+  <svg class="ll-circle-svg" width="200" height="200" viewBox="0 0 271 271" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="goldGrad" x1="0%" y1="10%" x2="100%" y2="90%">
+        <stop offset="0%" stop-color="#9C7B30"/>
+        <stop offset="30%" stop-color="#E8C978"/>
+        <stop offset="50%" stop-color="#FBEAB8"/>
+        <stop offset="70%" stop-color="#D4AE5C"/>
+        <stop offset="100%" stop-color="#A9843A"/>
+      </linearGradient>
+      <linearGradient id="goldGradA" x1="0%" y1="10%" x2="100%" y2="90%">
+        <stop offset="0%" stop-color="#9C7B30"/>
+        <stop offset="40%" stop-color="#EFD08A"/>
+        <stop offset="60%" stop-color="#D4AE5C"/>
+        <stop offset="100%" stop-color="#A9843A"/>
+      </linearGradient>
+    </defs>
+    <circle class="ll-ring1" cx="135" cy="135" r="120" fill="none" stroke="#C9A84C" stroke-width="2.2"/>
+    <circle class="ll-ring2" cx="135" cy="135" r="115" fill="none" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+    <g class="ll-letterI">
+      <polygon points="80,108 90,108 90,210 80,210" fill="#F5EFE4"/>
+      <polygon points="90,108 113,108 113,210 90,210" fill="url(#goldGrad)"/>
+      <polygon points="90,108 113,80 113,108" fill="url(#goldGrad)"/>
+      <polygon points="111,92 117,92 117,210 111,210" fill="#0D4F4A" opacity="0.9"/>
+    </g>
+    <g class="ll-letterA">
+      <path d="M 117,210 L 117,195 L 155,55 L 168,55 L 206,195 L 206,210 L 182,210 L 174,182 L 149,182 L 141,210 Z" fill="url(#goldGradA)"/>
+      <polygon points="161.5,100 172,174 151,174" fill="#0D4F4A"/>
+    </g>
+  </svg>
   <div class="ll-divider"></div>
   <div class="ll-text">IMAKSA</div>
   <div class="ll-sub">Real Estate LLC</div>
