@@ -152,6 +152,10 @@ button,input,textarea,select{font-family:'Inter',sans-serif;}
 .bdg-active{background:rgba(13,155,110,.1);color:var(--success);}
 .bdg-sold{background:rgba(220,38,38,.1);color:var(--danger);}
 .bdg-draft{background:rgba(217,119,6,.1);color:var(--warning);}
+.bdg-listing-buy{background:rgba(13,79,74,.1);color:var(--teal);}
+.bdg-listing-rent{background:rgba(99,102,241,.1);color:#6366F1;}
+.bdg-listing-sell{background:rgba(217,119,6,.1);color:var(--warning);}
+.bdg-listing-offplan{background:rgba(201,168,76,.15);color:#9C7B30;}
 .bdg-new{background:rgba(13,79,74,.1);color:var(--teal);}
 
 /* ── MODAL ── */
@@ -370,9 +374,10 @@ select.fi option{background:#fff;}
       <div class="filter-bar">
         <div class="search-wrap"><span class="search-icon">🔍</span><input type="text" class="search-inp" placeholder="Search properties..." oninput="filterP(this.value)"></div>
         <select class="filter-sel" onchange="filterPType(this.value)"><option value="all">All Types</option><option value="villa">Villas</option><option value="penthouse">Penthouses</option><option value="apartment">Apartments</option><option value="offplan">Off-Plan</option><option value="commercial">Commercial</option></select>
+        <select class="filter-sel" onchange="filterPListing(this.value)"><option value="all">All Listing</option><option value="buy">For Sale</option><option value="rent">For Rent</option><option value="sell">Seller Listed</option><option value="offplan">Off-Plan</option></select>
         <select class="filter-sel" onchange="filterPStatus(this.value)"><option value="all">All Status</option><option value="active">Active</option><option value="sold">Sold</option><option value="rented">Rented</option><option value="draft">Draft</option></select>
       </div>
-      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Image</th><th>Property Name</th><th>Type</th><th>Price (AED)</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead><tbody id="p-tbody"></tbody></table></div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Image</th><th>Property Name</th><th>Type</th><th>Listing</th><th>Price (AED)</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead><tbody id="p-tbody"></tbody></table></div>
     </div>
 
     <!-- BLOG -->
@@ -711,16 +716,19 @@ async function refreshDash() {
 let allProps = [];       // all properties from backend
 let pSearch = '';
 let pType = 'all';
+let pListingFilter = 'all';
 let pStatusFilter = 'all';
 
 // Called once on page load and after add/edit/delete
 async function renderProps() {
   const tb = document.getElementById('p-tbody');
-  tb.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:24px;color:var(--text3);">Loading...</td></tr>';
+  tb.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--text3);">Loading...</td></tr>';
   const res = await api('/properties', 'GET', null, true);
   allProps = res.data || [];
   applyPropFilters();
 }
+
+const LISTING_LABELS = { buy: 'For Sale', rent: 'For Rent', sell: 'Seller Listed', offplan: 'Off-Plan' };
 
 // Apply all active filters to allProps and render
 function applyPropFilters() {
@@ -737,22 +745,30 @@ function applyPropFilters() {
     list = list.filter(p => (p.type || '').toLowerCase() === pType.toLowerCase());
   }
 
+  // Listing filter (buy/rent/sell/offplan)
+  if (pListingFilter !== 'all') {
+    list = list.filter(p => (p.listingType || 'buy').toLowerCase() === pListingFilter.toLowerCase());
+  }
+
   // Status filter
   if (pStatusFilter !== 'all') {
     list = list.filter(p => (p.status || 'active') === pStatusFilter);
   }
 
   if (!list.length) {
-    tb.innerHTML = `<tr><td colspan="7"><div class="empty"><div class="empty-icon">🏡</div><div class="empty-title">No properties found</div><div class="empty-desc">Click "+ Add Property" to add your first listing</div></div></td></tr>`;
+    tb.innerHTML = `<tr><td colspan="8"><div class="empty"><div class="empty-icon">🏡</div><div class="empty-title">No properties found</div><div class="empty-desc">Click "+ Add Property" to add your first listing</div></div></td></tr>`;
     return;
   }
 
   tb.innerHTML = list.map(p => {
     const price = p.price ? 'AED ' + Number(String(p.price).replace(/,/g, '')).toLocaleString() : 'Price on Request';
+    const listingKey = (p.listingType || 'buy').toLowerCase();
+    const listingLabel = LISTING_LABELS[listingKey] || listingKey;
     return `<tr>
     <td>${p.img ? `<img class="tbl-img" src="${p.img}" alt="${p.name}" onerror="this.style.display='none'">` : '<div style="width:52px;height:40px;background:var(--cream2);display:flex;align-items:center;justify-content:center;">🏡</div>'}</td>
     <td><div class="tbl-name">${p.name}</div><div style="font-size:11px;color:var(--text3);margin-top:2px;">${p.location || ''}</div></td>
     <td style="text-transform:capitalize;">${p.type || '—'}</td>
+    <td><span class="bdg bdg-listing-${listingKey}">${listingLabel}</span></td>
     <td style="font-weight:500;">${price}</td>
     <td>${p.location || '—'}</td>
     <td><span class="bdg bdg-${p.status || 'active'}">${p.status || 'active'}</span></td>
@@ -766,6 +782,7 @@ function applyPropFilters() {
 
 function filterP(v) { pSearch = v.toLowerCase(); applyPropFilters(); }
 function filterPType(v) { pType = v; applyPropFilters(); }
+function filterPListing(v) { pListingFilter = v; applyPropFilters(); }
 function filterPStatus(v) { pStatusFilter = v; applyPropFilters(); }
 
 function openPropModal(id = null) {
