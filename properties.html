@@ -249,7 +249,7 @@ function renderCards(props) {
           ${p.baths ? `<div class="pcs"><div class="pcs-n">${p.baths}</div><div class="pcs-l">Baths</div></div>` : ''}
           ${p.area ? `<div class="pcs"><div class="pcs-n">${p.area}</div><div class="pcs-l">Sq.Ft</div></div>` : ''}
         </div>
-        <a href="contact.html?property=${encodeURIComponent(p.name)}" class="pc-cta">Enquire Now</a>
+        <a href="contact.html?property=${encodeURIComponent(p.name)}&price=${encodeURIComponent('AED ' + Number(String(p.price).replace(/,/g,'')).toLocaleString())}" class="pc-cta">Enquire Now</a>
       </div>
     </div>
   `).join('');

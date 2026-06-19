@@ -1084,13 +1084,16 @@ async function viewEnq(eOrId) {
   }
   if (!e) return;
 
+  const genericInterests = ['Villa / Townhouse','Apartment / Penthouse','Off-Plan Investment','Commercial Property','Property Management','Golden Visa','Other',''];
+  const isSpecificProperty = e.interest && !genericInterests.includes(e.interest);
+
   document.getElementById('enq-detail').innerHTML = `
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
       <div><div class="fl">Full Name</div><div style="font-weight:500;color:var(--dark);margin-top:4px;">${e.name}</div></div>
       <div><div class="fl">Email Address</div><div style="margin-top:4px;"><a href="mailto:${e.email}" style="color:var(--teal);">${e.email || '—'}</a></div></div>
       <div><div class="fl">Phone</div><div style="margin-top:4px;">${e.phone || '—'}</div></div>
-      <div><div class="fl">Property Interest</div><div style="margin-top:4px;">${e.interest || '—'}</div></div>
-      <div><div class="fl">Budget Range</div><div style="margin-top:4px;">${e.budget || '—'}</div></div>
+      <div><div class="fl">${isSpecificProperty ? '🏡 Specific Property' : 'Property Interest'}</div><div style="margin-top:4px;${isSpecificProperty ? 'font-weight:600;color:var(--teal);' : ''}">${e.interest || '—'}</div></div>
+      <div><div class="fl">${isSpecificProperty ? 'Listed Price' : 'Budget Range'}</div><div style="margin-top:4px;">${e.budget || '—'}</div></div>
       <div><div class="fl">Date Received</div><div style="margin-top:4px;">${new Date(e.createdAt).toLocaleDateString('en-AE', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</div></div>
     </div>
     <div class="fl">Message</div>
@@ -1308,13 +1311,17 @@ function renderEnqList(list) {
   if (!list.length) { el.innerHTML = '<div style="padding:40px;text-align:center;color:#9B9B8A;">No enquiries found.</div>'; return; }
   el.innerHTML = list.map(e => {
     const isNew = !e.read;
+    const genericInterests = ['Villa / Townhouse','Apartment / Penthouse','Off-Plan Investment','Commercial Property','Property Management','Golden Visa','Other',''];
+    const isSpecificProperty = e.interest && !genericInterests.includes(e.interest);
     return `
     <div class="enq-card ${isNew ? 'enq-new' : ''}" id="ec-${e._id}">
       <div class="enq-top">
         <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
           ${isNew ? '<span class="enq-dot"></span>' : ''}
           <div class="enq-name">${e.name}</div>
-          <span style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#9B9B8A;">${e.interest || ''}</span>
+          ${isSpecificProperty
+            ? `<span style="font-size:10px;letter-spacing:.5px;color:#0D4F4A;background:rgba(13,79,74,.08);padding:3px 8px;font-weight:600;">🏡 ${e.interest}</span>`
+            : `<span style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#9B9B8A;">${e.interest || ''}</span>`}
         </div>
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
           <select onchange="updateEnqStatus('${e._id}',this.value)" style="border:1px solid rgba(13,79,74,.15);padding:5px 8px;font-size:11px;background:#fff;color:#3A3A32;cursor:pointer;" title="Update Status">
