@@ -315,6 +315,7 @@ select.fi option{background:#fff;}
       <div class="nav-item" onclick="go('team',this)"><span class="nav-icon">👥</span>Team Members</div>
       <div class="sb-section">CRM</div>
       <div class="nav-item" onclick="go('enquiries',this)"><span class="nav-icon">📩</span>Enquiries<span class="nav-badge" id="enq-badge">0</span></div>
+      <div class="nav-item" onclick="go('sellrequests',this)"><span class="nav-icon">🏷️</span>Sell Requests<span class="nav-badge" id="sell-badge">0</span></div>
       <div class="sb-section">Config</div>
       <div class="nav-item" onclick="go('settings',this)"><span class="nav-icon">⚙️</span>Site Settings</div>
       <div class="nav-item" onclick="go('password',this)"><span class="nav-icon">🔑</span>Change Password</div>
@@ -374,7 +375,7 @@ select.fi option{background:#fff;}
       <div class="filter-bar">
         <div class="search-wrap"><span class="search-icon">🔍</span><input type="text" class="search-inp" placeholder="Search properties..." oninput="filterP(this.value)"></div>
         <select class="filter-sel" onchange="filterPType(this.value)"><option value="all">All Types</option><option value="villa">Villas</option><option value="penthouse">Penthouses</option><option value="apartment">Apartments</option><option value="offplan">Off-Plan</option><option value="commercial">Commercial</option></select>
-        <select class="filter-sel" onchange="filterPListing(this.value)"><option value="all">All Listing</option><option value="buy">For Sale</option><option value="rent">For Rent</option><option value="sell">Seller Listed</option><option value="offplan">Off-Plan</option></select>
+        <select class="filter-sel" onchange="filterPListing(this.value)"><option value="all">All Listing</option><option value="buy">For Sale</option><option value="rent">For Rent</option><option value="offplan">Off-Plan</option></select>
         <select class="filter-sel" onchange="filterPStatus(this.value)"><option value="all">All Status</option><option value="active">Active</option><option value="sold">Sold</option><option value="rented">Rented</option><option value="draft">Draft</option></select>
       </div>
       <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Image</th><th>Property Name</th><th>Type</th><th>Listing</th><th>Price (AED)</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead><tbody id="p-tbody"></tbody></table></div>
@@ -408,6 +409,22 @@ select.fi option{background:#fff;}
         </div>
       </div>
       <div id="enq-list"></div>
+    </div>
+
+    <!-- SELL REQUESTS -->
+    <div class="page" id="page-sellrequests">
+      <div class="sec-hdr">
+        <div><div class="sec-title">Sell Requests</div><div class="sec-sub">People who want to sell their property through IMAKSA</div></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <select class="fi" id="sell-filter" onchange="filterSellRequests()" style="width:auto;padding:8px 12px;font-size:12px;">
+            <option value="all">All Requests</option>
+            <option value="unread">New / Unread</option>
+            <option value="contacted">Contacted</option>
+          </select>
+          <button class="btn btn-outline btn-sm" onclick="markAllSellRead()">✓ Mark All Read</button>
+        </div>
+      </div>
+      <div id="sell-list"></div>
     </div>
 
     <!-- SETTINGS -->
@@ -460,7 +477,7 @@ select.fi option{background:#fff;}
     <div class="modal-body">
       <input type="hidden" id="mp-id">
       <div class="fr"><div class="fg"><label class="fl">Property Name *</label><input type="text" class="fi" id="mp-name" placeholder="e.g. Sunset Palm Villa"></div><div class="fg"><label class="fl">Price (AED) *</label><input type="text" class="fi" id="mp-price" placeholder="e.g. 28,500,000"></div></div>
-      <div class="fr"><div class="fg"><label class="fl">Type *</label><select class="fi" id="mp-type"><option value="">Select</option><option value="villa">Villa / Mansion</option><option value="penthouse">Penthouse</option><option value="apartment">Apartment</option><option value="offplan">Off-Plan</option><option value="commercial">Commercial</option><option value="townhouse">Townhouse</option></select></div><div class="fg"><label class="fl">Listing Type *</label><select class="fi" id="mp-listing"><option value="buy">For Sale</option><option value="rent">For Rent</option><option value="sell">Seller Listed</option><option value="offplan">Off-Plan</option></select></div></div>
+      <div class="fr"><div class="fg"><label class="fl">Type *</label><select class="fi" id="mp-type"><option value="">Select</option><option value="villa">Villa / Mansion</option><option value="penthouse">Penthouse</option><option value="apartment">Apartment</option><option value="offplan">Off-Plan</option><option value="commercial">Commercial</option><option value="townhouse">Townhouse</option></select></div><div class="fg"><label class="fl">Listing Type *</label><select class="fi" id="mp-listing"><option value="buy">For Sale</option><option value="rent">For Rent</option><option value="offplan">Off-Plan</option></select></div></div>
       <div class="fr"><div class="fg"><label class="fl">Status</label><select class="fi" id="mp-status"><option value="active">Active</option><option value="sold">Sold</option><option value="rented">Rented</option><option value="draft">Draft</option></select></div></div>
       <div class="fg"><label class="fl">Location *</label><input type="text" class="fi" id="mp-loc" placeholder="e.g. Palm Jumeirah, Dubai"></div>
       <div class="fr"><div class="fg"><label class="fl">Bedrooms</label><input type="number" class="fi" id="mp-beds" placeholder="4"></div><div class="fg"><label class="fl">Bathrooms</label><input type="number" class="fi" id="mp-baths" placeholder="5"></div></div>
@@ -520,6 +537,14 @@ select.fi option{background:#fff;}
     <div class="modal-hdr"><div class="modal-title">Enquiry Details</div><button class="modal-close" onclick="cm('m-enq')">✕</button></div>
     <div class="modal-body" id="enq-detail"></div>
     <div class="modal-ftr"><button class="btn btn-outline" onclick="cm('m-enq')">Close</button><a class="btn btn-primary" id="enq-reply" href="#" target="_blank">✉️ Reply via Email</a></div>
+  </div>
+</div>
+
+<div class="modal-ov" id="m-sell">
+  <div class="modal">
+    <div class="modal-hdr"><div class="modal-title">Sell Request Details</div><button class="modal-close" onclick="cm('m-sell')">✕</button></div>
+    <div class="modal-body" id="sell-detail"></div>
+    <div class="modal-ftr"><button class="btn btn-outline" onclick="cm('m-sell')">Close</button><a class="btn btn-primary" id="sell-reply" href="#" target="_blank">✉️ Reply via Email</a></div>
   </div>
 </div>
 
@@ -618,7 +643,7 @@ async function loadAllData() {
 /* ── NAVIGATION ── */
 const titles = {
   dashboard: 'Dashboard', properties: 'Properties', blog: 'Blog Posts',
-  team: 'Team Members', enquiries: 'Enquiries',
+  team: 'Team Members', enquiries: 'Enquiries', sellrequests: 'Sell Requests',
   settings: 'Site Settings', password: 'Change Password'
 };
 const addLabels = { properties: 'Add Property', blog: 'Add Post', team: 'Add Member' };
@@ -638,6 +663,7 @@ function go(p, el) {
   if (p === 'blog') renderBlogs();
   if (p === 'team') renderTeam();
   if (p === 'enquiries') renderEnqs();
+  if (p === 'sellrequests') renderSellRequests();
   closeSB();
 }
 
@@ -670,11 +696,12 @@ function om(id) { document.getElementById(id).classList.add('open'); }
 /* ── DASHBOARD ── */
 async function refreshDash() {
   try {
-    const [props, blogs, team, enqs] = await Promise.all([
+    const [props, blogs, team, enqs, sellReqs] = await Promise.all([
       api('/properties', 'GET', null, true),
       api('/blogs', 'GET', null, true),
       api('/team'),
       api('/enquiries', 'GET', null, true),
+      api('/sellrequests', 'GET', null, true),
     ]);
 
     const propData  = props.data  || [];
@@ -682,6 +709,7 @@ async function refreshDash() {
     const teamData  = team.data   || [];
     const enqData   = enqs.data   || [];
     const unread    = enqs.unreadCount || 0;
+    const sellUnread = sellReqs.unreadCount || 0;
 
     document.getElementById('d-props').textContent = propData.length;
     document.getElementById('d-blogs').textContent = blogData.length;
@@ -692,6 +720,8 @@ async function refreshDash() {
     document.getElementById('qs-unread').textContent = unread;
     document.getElementById('qs-team').textContent   = teamData.length;
     document.getElementById('enq-badge').textContent = unread > 0 ? unread : '';
+    document.getElementById('sell-badge').textContent = sellUnread > 0 ? sellUnread : '';
+    document.getElementById('sell-badge').style.display = sellUnread > 0 ? '' : 'none';
 
     // Recent activity from enquiries
     const al = document.getElementById('activity-list');
@@ -728,7 +758,7 @@ async function renderProps() {
   applyPropFilters();
 }
 
-const LISTING_LABELS = { buy: 'For Sale', rent: 'For Rent', sell: 'Seller Listed', offplan: 'Off-Plan' };
+const LISTING_LABELS = { buy: 'For Sale', rent: 'For Rent', offplan: 'Off-Plan' };
 
 // Apply all active filters to allProps and render
 function applyPropFilters() {
@@ -1080,6 +1110,119 @@ async function delEnq(id) {
 async function markAllRead() {
   const res = await api('/enquiries/read-all', 'PUT', null, true);
   if (res.success) { renderEnqs(); toast('All marked as read ✓'); }
+}
+
+/* ── SELL REQUESTS ── */
+let allSellRequests = [];
+
+async function renderSellRequests() {
+  const res = await api('/sellrequests', 'GET', null, true);
+  allSellRequests = res.data || [];
+  const el = document.getElementById('sell-list');
+
+  if (!allSellRequests.length) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">🏷️</div><div class="empty-title">No sell requests yet</div><div class="empty-desc">Submissions from your "Sell With Us" page will appear here</div></div>';
+    document.getElementById('sell-badge').style.display = 'none';
+    return;
+  }
+
+  const unread = allSellRequests.filter(r => !r.read).length;
+  document.getElementById('sell-badge').textContent = unread;
+  document.getElementById('sell-badge').style.display = unread > 0 ? '' : 'none';
+
+  renderSellList(allSellRequests);
+}
+
+function filterSellRequests() {
+  const v = document.getElementById('sell-filter').value;
+  if (v === 'all') { renderSellList(allSellRequests); return; }
+  let filtered = allSellRequests;
+  if (v === 'unread')    filtered = allSellRequests.filter(r => !r.read);
+  if (v === 'contacted') filtered = allSellRequests.filter(r => r.contacted);
+  renderSellList(filtered);
+}
+
+function renderSellList(list) {
+  const el = document.getElementById('sell-list');
+  if (!list.length) { el.innerHTML = '<div style="padding:40px;text-align:center;color:#9B9B8A;">No sell requests found.</div>'; return; }
+  el.innerHTML = list.map(r => {
+    const isNew = !r.read;
+    return `
+    <div class="enq-card ${isNew ? 'enq-new' : ''}" id="sc-${r._id}">
+      <div class="enq-top">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          ${isNew ? '<span class="enq-dot"></span>' : ''}
+          <div class="enq-name">${r.name}</div>
+          <span style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#9B9B8A;">${r.propertyType || ''}</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:#3A3A32;cursor:pointer;">
+            <input type="checkbox" ${r.contacted ? 'checked' : ''} onchange="toggleContacted('${r._id}',this.checked)"> Contacted
+          </label>
+          <button class="btn btn-outline btn-sm" onclick="viewSellRequest(${JSON.stringify(r).replace(/"/g,'&quot;')})">View</button>
+          <a href="mailto:${r.email}?subject=Re: Your Property Sell Request - IMAKSA" class="btn btn-primary btn-sm">Reply ✉️</a>
+          <a href="https://wa.me/${(r.phone||'').replace(/[^0-9]/g,'')}" target="_blank" class="btn btn-sm" style="background:#25D366;color:#fff;border:none;">WhatsApp</a>
+          <button class="btn btn-danger btn-sm" onclick="delSellRequest('${r._id}')">🗑️</button>
+        </div>
+      </div>
+      <div class="enq-meta">
+        <span>📧 ${r.email}</span>
+        <span>📞 ${r.phone || '—'}</span>
+        <span>📍 ${r.location || '—'}</span>
+        <span>💰 ${r.askingPrice || 'Not specified'}</span>
+        <span>🕐 ${new Date(r.createdAt).toLocaleDateString('en-AE',{day:'numeric',month:'short',year:'numeric'})}</span>
+      </div>
+      ${r.notes ? `<div class="enq-msg">${r.notes}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+async function toggleContacted(id, contacted) {
+  await api(`/sellrequests/${id}/notes`, 'PUT', { contacted }, true);
+  const r = allSellRequests.find(x => x._id === id);
+  if (r) r.contacted = contacted;
+}
+
+async function viewSellRequest(rOrId) {
+  let r = typeof rOrId === 'object' ? rOrId : null;
+  if (!r) {
+    await api(`/sellrequests/${rOrId}/read`, 'PUT', null, true);
+    const res = await api('/sellrequests', 'GET', null, true);
+    r = (res.data || []).find(x => x._id === rOrId);
+  } else {
+    await api(`/sellrequests/${r._id}/read`, 'PUT', null, true);
+    r.read = true;
+  }
+  if (!r) return;
+
+  document.getElementById('sell-detail').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;">
+      <div><div class="fl">Full Name</div><div style="font-weight:500;color:var(--dark);margin-top:4px;">${r.name}</div></div>
+      <div><div class="fl">Email Address</div><div style="margin-top:4px;"><a href="mailto:${r.email}" style="color:var(--teal);">${r.email || '—'}</a></div></div>
+      <div><div class="fl">Phone</div><div style="margin-top:4px;">${r.phone || '—'}</div></div>
+      <div><div class="fl">Property Type</div><div style="margin-top:4px;">${r.propertyType || '—'}</div></div>
+      <div><div class="fl">Location</div><div style="margin-top:4px;">${r.location || '—'}</div></div>
+      <div><div class="fl">Size</div><div style="margin-top:4px;">${r.size || '—'}</div></div>
+      <div><div class="fl">Asking Price</div><div style="margin-top:4px;">${r.askingPrice || 'Not specified'}</div></div>
+      <div><div class="fl">Date Received</div><div style="margin-top:4px;">${new Date(r.createdAt).toLocaleDateString('en-AE', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</div></div>
+    </div>
+    <div class="fl">Notes from Seller</div>
+    <div style="background:var(--cream2);padding:16px;font-size:13px;color:var(--text2);line-height:1.8;margin-top:8px;">${r.notes || 'No notes provided'}</div>
+  `;
+  document.getElementById('sell-reply').href = `mailto:${r.email}?subject=Re: Your Property Sell Request - IMAKSA`;
+  om('m-sell');
+  renderSellRequests();
+}
+
+async function delSellRequest(id) {
+  if (!confirm('Delete this sell request permanently?')) return;
+  const res = await api(`/sellrequests/${id}`, 'DELETE', null, true);
+  if (res.success) { renderSellRequests(); toast('Sell request deleted', '🗑️'); }
+}
+
+async function markAllSellRead() {
+  const res = await api('/sellrequests/read-all', 'PUT', null, true);
+  if (res.success) { renderSellRequests(); toast('All marked as read ✓'); }
 }
 
 /* ── SETTINGS ── */

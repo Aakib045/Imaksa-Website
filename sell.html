@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sell With Us — IMAKSA Dubai Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;scroll-behavior:smooth;overflow-x:hidden;}
+body{background:#FAFAF8;color:#0A0A0A;font-family:'Inter',sans-serif;font-weight:300;overflow-x:hidden;}
+img{max-width:100%;height:auto;display:block;}a{text-decoration:none;color:inherit;}
+::-webkit-scrollbar{width:2px;}::-webkit-scrollbar-thumb{background:#0D4F4A;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2.5vw,26px) clamp(16px,4vw,60px);transition:all .4s;width:100%;}
+nav.sc{background:rgba(250,250,248,.97);backdrop-filter:blur(20px);padding:clamp(10px,1.8vw,16px) clamp(16px,4vw,60px);border-bottom:1px solid rgba(13,79,74,.12);box-shadow:0 2px 24px rgba(0,0,0,.07);}
+.n-logo{font-family:'Fraunces',serif;font-size:clamp(16px,2.5vw,22px);font-weight:400;color:#0D4F4A;letter-spacing:clamp(2px,1vw,4px);}
+.n-links{display:flex;gap:clamp(20px,3vw,40px);list-style:none;}
+.n-links a{color:#6B6B60;font-size:clamp(9px,1.1vw,11px);letter-spacing:1.5px;text-transform:uppercase;transition:color .3s;}
+.n-links a:hover,.n-links a.active{color:#0D4F4A;}
+.n-cta{background:#0D4F4A;color:#F5EFE4;padding:clamp(9px,1.4vw,12px) clamp(18px,2.5vw,28px);font-size:clamp(9px,1.1vw,10px);letter-spacing:2px;text-transform:uppercase;transition:all .3s;font-family:'Inter',sans-serif;}
+.n-cta:hover{background:#1A6B65;}
+.n-hbtn{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:8px;cursor:pointer;}
+.n-hbtn span{display:block;width:22px;height:1.5px;background:#0D4F4A;transition:all .35s;}
+.n-hbtn.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px);}
+.n-hbtn.open span:nth-child(2){opacity:0;}
+.n-hbtn.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px);}
+@media(max-width:900px){.n-links,.n-cta{display:none!important;}.n-hbtn{display:flex!important;}}
+.mob-menu{display:none;position:fixed;inset:0;background:rgba(13,79,74,.99);z-index:998;flex-direction:column;align-items:center;justify-content:center;gap:clamp(24px,5vw,40px);}
+.mob-menu.open{display:flex;}
+.mob-menu a{font-family:'Fraunces',serif;font-size:clamp(28px,8vw,52px);font-weight:300;color:#F5EFE4;letter-spacing:3px;}
+.mob-cta-link{border:1px solid rgba(245,239,228,.4);padding:clamp(12px,3vw,18px) clamp(32px,6vw,56px)!important;font-size:clamp(14px,3.5vw,20px)!important;}
+.page-hero{background:#0D4F4A;padding:clamp(120px,15vw,180px) clamp(16px,5vw,72px) clamp(60px,8vw,100px);text-align:center;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1400&q=80') center/cover no-repeat;opacity:.1;}
+.page-hero-tag{font-size:clamp(8px,1.3vw,10px);letter-spacing:5px;text-transform:uppercase;color:rgba(245,239,228,.6);margin-bottom:16px;position:relative;}
+.page-hero-title{font-family:'Fraunces',serif;font-size:clamp(36px,7vw,88px);font-weight:300;color:#F5EFE4;position:relative;}
+.page-hero-title em{font-style:italic;}
+.page-hero-sub{font-size:clamp(12px,1.5vw,15px);color:rgba(245,239,228,.7);max-width:560px;margin:20px auto 0;position:relative;line-height:1.8;}
+
+/* WHY SELL STRIP */
+.why-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:#F5EFE4;}
+@media(max-width:768px){.why-strip{grid-template-columns:1fr;}}
+.why-item{padding:clamp(32px,5vw,52px) clamp(24px,4vw,40px);text-align:center;border-right:1px solid rgba(13,79,74,.1);}
+.why-item:last-child{border-right:none;}
+@media(max-width:768px){.why-item{border-right:none;border-bottom:1px solid rgba(13,79,74,.1);}.why-item:last-child{border-bottom:none;}}
+.why-icon{font-size:30px;margin-bottom:16px;}
+.why-title{font-family:'Fraunces',serif;font-size:clamp(16px,2vw,20px);color:#0D4F4A;margin-bottom:8px;}
+.why-desc{font-size:clamp(11px,1.3vw,13px);color:#6B6B60;line-height:1.7;}
+
+/* SELL LAYOUT (reuses contact-wrap pattern) */
+.contact-wrap{display:grid;grid-template-columns:1fr 1.4fr;min-height:70vh;}
+@media(max-width:768px){.contact-wrap{grid-template-columns:1fr;}}
+.contact-info{background:#0D4F4A;padding:clamp(48px,7vw,96px) clamp(24px,5vw,64px);}
+.ci-title{font-family:'Fraunces',serif;font-size:clamp(26px,4vw,44px);font-weight:300;color:#F5EFE4;line-height:1.15;margin-bottom:clamp(20px,3vw,28px);}
+.ci-title em{font-style:italic;}
+.ci-step{display:flex;gap:16px;align-items:flex-start;margin-bottom:clamp(24px,3.5vw,32px);}
+.ci-step-num{width:36px;height:36px;border:1px solid rgba(245,239,228,.3);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:15px;color:#F5EFE4;flex-shrink:0;}
+.ci-step-title{font-size:clamp(13px,1.5vw,15px);color:#F5EFE4;margin-bottom:4px;font-weight:500;}
+.ci-step-desc{font-size:clamp(11px,1.3vw,13px);color:rgba(245,239,228,.6);line-height:1.7;}
+.ci-divider{height:1px;background:rgba(245,239,228,.1);margin:clamp(24px,3.5vw,32px) 0;}
+.ci-direct{font-size:clamp(11px,1.3vw,13px);color:rgba(245,239,228,.6);line-height:1.8;}
+.ci-direct a{color:#F5EFE4;font-weight:500;}
+
+.contact-form{background:#F5EFE4;padding:clamp(48px,7vw,96px) clamp(24px,5vw,64px);}
+.cf-title{font-family:'Fraunces',serif;font-size:clamp(24px,3.5vw,40px);font-weight:300;color:#0D4F4A;margin-bottom:8px;}
+.cf-sub{font-size:clamp(11px,1.3vw,13px);color:#6B6B60;margin-bottom:clamp(28px,4vw,44px);line-height:1.8;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.5vw,16px);}
+@media(max-width:560px){.form-row{grid-template-columns:1fr;}}
+.fi{width:100%;background:#fff;border:1px solid #DDD3C0;color:#0A0A0A;padding:clamp(13px,1.8vw,16px) clamp(14px,2vw,18px);font-family:'Inter',sans-serif;font-size:clamp(11px,1.3vw,13px);margin-bottom:clamp(12px,1.6vw,16px);outline:none;transition:border-color .3s;appearance:none;}
+.fi::placeholder{color:#aaa;}
+.fi:focus{border-color:#0D4F4A;}
+textarea.fi{height:clamp(100px,12vw,130px);resize:none;}
+select.fi option{background:#fff;}
+.fi-btn{width:100%;background:#0D4F4A;color:#F5EFE4;border:none;padding:clamp(14px,2vw,18px);font-family:'Inter',sans-serif;font-size:clamp(10px,1.3vw,12px);letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background .35s;font-weight:500;margin-top:4px;}
+.fi-btn:hover{background:#1A6B65;}
+.form-success{display:none;background:#0D4F4A;color:#F5EFE4;padding:20px;text-align:center;font-size:clamp(12px,1.4vw,14px);margin-top:16px;}
+
+footer{background:#080808;padding:clamp(44px,6vw,80px) clamp(16px,5vw,72px) 0;border-top:1px solid rgba(13,79,74,.3);}
+.ft-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:clamp(20px,4vw,52px);padding-bottom:clamp(36px,5vw,52px);border-bottom:1px solid rgba(255,255,255,.06);}
+.ft-logo{font-family:'Fraunces',serif;font-size:clamp(20px,3vw,28px);font-weight:300;color:#F5EFE4;letter-spacing:3px;display:block;margin-bottom:14px;}
+.ft-about{font-size:clamp(10px,1.2vw,11px);color:rgba(255,255,255,.28);line-height:2;max-width:240px;}
+.ft-head{font-size:clamp(7px,1vw,9px);letter-spacing:4px;text-transform:uppercase;color:#2E8B84;margin-bottom:18px;}
+.ft-links{list-style:none;}
+.ft-links li{margin-bottom:10px;}
+.ft-links a{font-size:clamp(10px,1.2vw,12px);color:rgba(255,255,255,.32);transition:color .3s;}
+.ft-links a:hover{color:rgba(255,255,255,.8);}
+@media(max-width:720px){.ft-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:400px){.ft-top{grid-template-columns:1fr;}}
+.ft-bottom{display:flex;flex-direction:column;align-items:center;gap:14px;padding:clamp(18px,3vw,28px) 0 clamp(20px,3vw,28px);text-align:center;}
+.ft-socs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.ft-soc{width:clamp(34px,4.5vw,40px);height:clamp(34px,4.5vw,40px);border:1px solid rgba(13,79,74,.5);display:flex;align-items:center;justify-content:center;color:#2E8B84;font-size:11px;font-weight:600;transition:all .3s;}
+.ft-soc:hover{background:#0D4F4A;border-color:#0D4F4A;color:#F5EFE4;}
+.ft-copy{font-size:clamp(9px,1.2vw,10px);color:rgba(255,255,255,.2);}
+.wa{position:fixed;bottom:clamp(16px,3vw,28px);right:clamp(16px,3vw,28px);z-index:9000;width:clamp(48px,6.5vw,58px);height:clamp(48px,6.5vw,58px);background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .3s;}
+.wa:hover{transform:scale(1.12);}
+.wa svg{width:clamp(22px,3.5vw,28px);height:clamp(22px,3.5vw,28px);}
+.rv{opacity:0;transform:translateY(32px);}
+.rv.in{opacity:1;transform:translateY(0);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
+</style>
+</head>
+<body>
+<a href="https://wa.me/971XXXXXXXXX" target="_blank" class="wa" id="wa-btn"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+<div class="mob-menu" id="mm">
+  <a href="index.html" onclick="closeMM()">Home</a>
+  <a href="properties.html" onclick="closeMM()">Properties</a>
+  <a href="sell.html" onclick="closeMM()">Sell</a>
+  <a href="about.html" onclick="closeMM()">About</a>
+  <a href="contact.html" onclick="closeMM()">Contact</a>
+  <a href="contact.html" onclick="closeMM()" class="mob-cta-link">Enquire Now</a>
+</div>
+<nav id="nav">
+  <a href="index.html" class="n-logo">IMAKSA</a>
+  <ul class="n-links"><li><a href="index.html">Home</a></li><li><a href="properties.html">Properties</a></li><li><a href="sell.html" class="active">Sell</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <a href="contact.html" class="n-cta">Enquire</a>
+  <button class="n-hbtn" id="hbtn"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-tag">Thinking Of Selling?</div>
+  <h1 class="page-hero-title">Sell With <em>IMAKSA</em></h1>
+  <p class="page-hero-sub">Tell us about your property and one of our consultants will reach out with a clear, honest valuation — no pressure, no obligation.</p>
+</div>
+
+<!-- WHY SELL WITH US -->
+<div class="why-strip">
+  <div class="why-item rv">
+    <div class="why-icon">🤝</div>
+    <div class="why-title">Honest Valuation</div>
+    <div class="why-desc">We give you a realistic market price based on real Dubai data — not an inflated number to win your listing.</div>
+  </div>
+  <div class="why-item rv">
+    <div class="why-icon">⚡</div>
+    <div class="why-title">Fast Response</div>
+    <div class="why-desc">A consultant reviews your submission and contacts you within 24 hours, every time.</div>
+  </div>
+  <div class="why-item rv">
+    <div class="why-icon">🔒</div>
+    <div class="why-title">No Obligation</div>
+    <div class="why-desc">Submitting your details doesn't commit you to anything. Decide after you hear our offer.</div>
+  </div>
+</div>
+
+<!-- SELL FORM -->
+<div class="contact-wrap">
+  <div class="contact-info rv">
+    <h2 class="ci-title">How It <em>Works</em></h2>
+    <div class="ci-step">
+      <div class="ci-step-num">1</div>
+      <div><div class="ci-step-title">Tell us about your property</div><div class="ci-step-desc">Fill in the form with your property details and contact info.</div></div>
+    </div>
+    <div class="ci-step">
+      <div class="ci-step-num">2</div>
+      <div><div class="ci-step-title">We review &amp; reach out</div><div class="ci-step-desc">Our team reviews your submission and contacts you within 24 hours.</div></div>
+    </div>
+    <div class="ci-step">
+      <div class="ci-step-num">3</div>
+      <div><div class="ci-step-title">Get your valuation</div><div class="ci-step-desc">We discuss next steps, valuation, and how we'll market your property.</div></div>
+    </div>
+    <div class="ci-divider"></div>
+    <div class="ci-direct">Prefer to talk directly?<br><a href="tel:+971XXXXXXXX" id="ci-phone-direct">+971 4 XXX XXXX</a> &nbsp;or&nbsp; <a href="mailto:info@imaksa.ae" id="ci-email-direct">info@imaksa.ae</a></div>
+  </div>
+  <div class="contact-form rv">
+    <div class="cf-title">Property Details</div>
+    <p class="cf-sub">Share as much as you can — the more we know, the more accurate our valuation will be.</p>
+    <div class="form-row">
+      <input type="text" class="fi" id="sf-name" placeholder="Full Name" required>
+      <input type="tel" class="fi" id="sf-phone" placeholder="Phone Number" required>
+    </div>
+    <input type="email" class="fi" id="sf-email" placeholder="Email Address" required>
+    <input type="text" class="fi" id="sf-location" placeholder="Property Location / Address" required>
+    <div class="form-row">
+      <select class="fi" id="sf-type">
+        <option value="">Property Type</option>
+        <option value="Villa / Mansion">Villa / Mansion</option>
+        <option value="Penthouse">Penthouse</option>
+        <option value="Apartment">Apartment</option>
+        <option value="Townhouse">Townhouse</option>
+        <option value="Commercial">Commercial</option>
+        <option value="Other">Other</option>
+      </select>
+      <input type="text" class="fi" id="sf-size" placeholder="Approx. Size (sq.ft)">
+    </div>
+    <input type="text" class="fi" id="sf-price" placeholder="Asking Price (AED) — optional">
+    <textarea class="fi" id="sf-notes" placeholder="Anything else we should know about the property..."></textarea>
+    <button class="fi-btn" id="sf-submit" onclick="submitSellForm()">Submit Property →</button>
+    <div class="form-success" id="success">✅ Thank you! Our team will review your details and reach out within 24 hours.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-top">
+    <div><span class="ft-logo">IMAKSA</span><p class="ft-about">Dubai's trusted property partner. Connecting clients with extraordinary homes since 2012. RERA Licensed.</p></div>
+    <div><div class="ft-head">Properties</div><ul class="ft-links"><li><a href="properties.html">Villas & Mansions</a></li><li><a href="properties.html">Penthouses</a></li><li><a href="properties.html">Apartments</a></li><li><a href="properties.html">Off-Plan</a></li><li><a href="properties.html">Commercial</a></li></ul></div>
+    <div><div class="ft-head">Company</div><ul class="ft-links"><li><a href="about.html">About IMAKSA</a></li><li><a href="about.html#team">Our Team</a></li><li><a href="careers.html">Careers</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><div class="ft-head">Contact</div><ul class="ft-links"><li><a href="contact.html" id="ft-addr">Business Bay, Dubai</a></li><li><a href="tel:+971XXXXXXXX" id="ft-phone">+971 4 XXX XXXX</a></li><li><a href="mailto:info@imaksa.ae" id="ft-email">info@imaksa.ae</a></li><li id="ft-hrs">Mon–Sat 9am–7pm</li></ul></div>
+  </div>
+  <div class="ft-bottom"><div class="ft-socs"><a href="#" class="ft-soc" data-soc="li" target="_blank">in</a><a href="#" class="ft-soc" data-soc="ig" target="_blank">ig</a><a href="#" class="ft-soc" data-soc="wa" target="_blank">wa</a><a href="#" class="ft-soc" data-soc="fb" target="_blank">fb</a></div><p class="ft-copy">© 2025 IMAKSA Properties LLC. RERA Licensed. All Rights Reserved.</p></div>
+</footer>
+<script>
+const API = 'https://imaksa-backend-production.up.railway.app/api';
+
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('sc',scrollY>50));
+const hbtn=document.getElementById('hbtn'),mm=document.getElementById('mm');
+hbtn.addEventListener('click',()=>{hbtn.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':'';});
+function closeMM(){hbtn.classList.remove('open');mm.classList.remove('open');document.body.style.overflow='';}
+
+// Reveal
+const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.07});
+document.querySelectorAll('.rv').forEach(r=>obs.observe(r));
+
+// ── SELL FORM → BACKEND ──
+async function submitSellForm() {
+  const btn = document.getElementById('sf-submit');
+
+  const name        = document.getElementById('sf-name').value.trim();
+  const phone       = document.getElementById('sf-phone').value.trim();
+  const email       = document.getElementById('sf-email').value.trim();
+  const location    = document.getElementById('sf-location').value.trim();
+  const propertyType = document.getElementById('sf-type').value;
+  const size        = document.getElementById('sf-size').value.trim();
+  const askingPrice = document.getElementById('sf-price').value.trim();
+  const notes       = document.getElementById('sf-notes').value.trim();
+
+  // Validate
+  if (!name)     { showAlert('⚠️ Please enter your name', 'warning'); return; }
+  if (!email)    { showAlert('⚠️ Please enter your email address', 'warning'); return; }
+  if (!phone)    { showAlert('⚠️ Please enter your phone number', 'warning'); return; }
+  if (!location) { showAlert('⚠️ Please enter the property location', 'warning'); return; }
+
+  const data = { name, email, phone, location, propertyType, size, askingPrice, notes };
+
+  // Loading state
+  btn.textContent  = 'Submitting...';
+  btn.disabled     = true;
+  btn.style.opacity = '0.7';
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+
+    let res;
+    try {
+      res = await fetch(`${API}/sellrequests`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        mode:    'cors',
+        body:    JSON.stringify(data),
+        signal:  controller.signal,
+      });
+      clearTimeout(timeout);
+    } catch (fetchErr) {
+      clearTimeout(timeout);
+      if (fetchErr.name === 'AbortError') {
+        showSellSuccess(btn);
+        return;
+      }
+      throw fetchErr;
+    }
+
+    if (res.ok || res.status === 201 || res.status === 200) {
+      showSellSuccess(btn);
+    } else if (res.status === 429) {
+      btn.textContent  = 'Submit Property →';
+      btn.disabled     = false;
+      btn.style.opacity = '1';
+      showAlert('⏳ Too many submissions. Please wait a few minutes.', 'warning');
+    } else {
+      throw new Error('Server returned ' + res.status);
+    }
+
+  } catch (err) {
+    console.error('Form error:', err);
+    btn.textContent  = 'Try Again';
+    btn.disabled     = false;
+    btn.style.opacity = '1';
+    showAlert('❌ Something went wrong. Please call us directly.', 'error');
+  }
+}
+
+function showSellSuccess(btn) {
+  btn.textContent      = '✅ Submitted!';
+  btn.style.background = '#0D9B6E';
+  btn.style.opacity    = '1';
+
+  const successEl = document.getElementById('success');
+  successEl.style.display = 'block';
+  successEl.textContent   = '✅ Thank you! Our team will review your details and reach out within 24 hours.';
+
+  // Clear form
+  document.getElementById('sf-name').value = '';
+  document.getElementById('sf-phone').value = '';
+  document.getElementById('sf-email').value = '';
+  document.getElementById('sf-location').value = '';
+  document.getElementById('sf-type').value = '';
+  document.getElementById('sf-size').value = '';
+  document.getElementById('sf-price').value = '';
+  document.getElementById('sf-notes').value = '';
+
+  setTimeout(() => {
+    btn.textContent      = 'Submit Property →';
+    btn.style.background = '';
+    btn.disabled         = false;
+    btn.style.opacity    = '1';
+    successEl.style.display = 'none';
+  }, 5000);
+}
+
+// ── ALERT HELPER ──
+function showAlert(msg, type) {
+  const existing = document.getElementById('form-alert');
+  if (existing) existing.remove();
+
+  const alert = document.createElement('div');
+  alert.id = 'form-alert';
+  alert.style.cssText = `
+    position:fixed; top:80px; right:20px; z-index:9999;
+    background:${type === 'warning' ? '#F59E0B' : type === 'error' ? '#DC2626' : '#0D4F4A'};
+    color:#fff; padding:14px 20px; font-size:13px;
+    max-width:320px; box-shadow:0 4px 20px rgba(0,0,0,.2);
+  `;
+  alert.textContent = msg;
+  document.body.appendChild(alert);
+  setTimeout(() => alert.remove(), 4000);
+}
+
+/* ── LIVE SETTINGS (from admin panel) ── */
+(async function applyLiveSettings(){
+  try {
+    const res = await fetch(`${API}/settings`);
+    const data = await res.json();
+    if (!data.success || !data.data) return;
+    const s = data.data;
+    if (s.wa) s.wa = s.wa.replace(/[^0-9]/g, '');
+    const waMsg = encodeURIComponent('Hello IMAKSA 🏡\n\nI am interested in selling my property. Could you please help me?\n\nThank you!');
+
+    const waBtn = document.getElementById('wa-btn');
+    if (waBtn && s.wa) waBtn.href = `https://wa.me/${s.wa}?text=${waMsg}`;
+
+    const ftPhone = document.getElementById('ft-phone');
+    if (ftPhone && s.phone) { ftPhone.textContent = s.phone; ftPhone.href = `tel:${s.phone.replace(/[^0-9+]/g, '')}`; }
+    const ftEmail = document.getElementById('ft-email');
+    if (ftEmail && s.email) { ftEmail.textContent = s.email; ftEmail.href = `mailto:${s.email}`; }
+    const ftAddr = document.getElementById('ft-addr');
+    if (ftAddr && s.addr) ftAddr.textContent = s.addr;
+    const ftHrs = document.getElementById('ft-hrs');
+    if (ftHrs && s.hrs) ftHrs.textContent = s.hrs;
+
+    document.querySelectorAll('[data-soc]').forEach(el => {
+      const key = el.getAttribute('data-soc');
+      const map = { li: s.li, ig: s.ig, wa: s.wa ? `https://wa.me/${s.wa}` : '', fb: s.fb };
+      if (map[key]) el.href = map[key];
+    });
+
+    const ciPhoneDirect = document.getElementById('ci-phone-direct');
+    if (ciPhoneDirect && s.phone) { ciPhoneDirect.textContent = s.phone; ciPhoneDirect.href = `tel:${s.phone.replace(/[^0-9+]/g, '')}`; }
+    const ciEmailDirect = document.getElementById('ci-email-direct');
+    if (ciEmailDirect && s.email) { ciEmailDirect.textContent = s.email; ciEmailDirect.href = `mailto:${s.email}`; }
+
+  } catch (err) {
+    console.error('Could not load live settings:', err);
+  }
+})();
+</script>
+</body>
+</html>

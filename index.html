@@ -412,7 +412,7 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
 <div class="mob-menu" id="mm">
   <a href="properties.html?type=buy" onclick="closeMM()">Buy</a>
   <a href="properties.html?type=rent" onclick="closeMM()">Rent</a>
-  <a href="properties.html?type=sell" onclick="closeMM()">Sell</a>
+  <a href="sell.html" onclick="closeMM()">Sell</a>
   <a href="properties.html?type=offplan" onclick="closeMM()">Off-Plan</a>
   <a href="about.html" onclick="closeMM()">About</a>
   <a href="blog.html" onclick="closeMM()">Blog</a>
@@ -425,7 +425,7 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
   <ul class="n-links">
     <li><a href="index.html">Home</a></li><li><a href="properties.html?type=buy">Buy</a></li>
     <li><a href="properties.html?type=rent">Rent</a></li>
-    <li><a href="properties.html?type=sell">Sell</a></li>
+    <li><a href="sell.html">Sell</a></li>
     <li><a href="properties.html?type=offplan">Off-Plan</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="blog.html">Blog</a></li>
@@ -678,7 +678,7 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
       <ul class="foot-links">
         <li><a href="properties.html?type=buy">For Sale</a></li>
         <li><a href="properties.html?type=rent">For Rent</a></li>
-        <li><a href="properties.html?type=sell">Sell Property</a></li>
+        <li><a href="sell.html">Sell Property</a></li>
         <li><a href="properties.html?type=offplan">Off-Plan</a></li>
       </ul>
     </div>
@@ -736,7 +736,11 @@ function setHeroTab(btn, type) {
   document.querySelectorAll('.s-tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   heroTabActive = type;
-  window.location.href = `properties.html?type=${type}`;
+  if (type === 'sell') {
+    window.location.href = 'sell.html';
+  } else {
+    window.location.href = `properties.html?type=${type}`;
+  }
 }
 
 // COUNTERS

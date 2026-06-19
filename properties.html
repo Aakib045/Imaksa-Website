@@ -145,7 +145,7 @@ const API = 'https://imaksa-backend-production.up.railway.app/api';
   <button class="filter-btn active" data-listing="all" onclick="setListingFilter('all',this)">All</button>
   <button class="filter-btn" data-listing="buy" onclick="setListingFilter('buy',this)">Buy</button>
   <button class="filter-btn" data-listing="rent" onclick="setListingFilter('rent',this)">Rent</button>
-  <button class="filter-btn" data-listing="sell" onclick="setListingFilter('sell',this)">Sell</button>
+  <a href="sell.html" class="filter-btn" style="display:inline-block;text-decoration:none;">Sell</a>
   <button class="filter-btn" data-listing="offplan" onclick="setListingFilter('offplan',this)">Off-Plan</button>
 </div>
 
@@ -301,7 +301,7 @@ document.querySelectorAll('.rv').forEach(r => obs.observe(r));
 // ── INIT ──
 const urlParams = new URLSearchParams(window.location.search);
 const initialListingType = urlParams.get('type'); // buy / rent / sell / offplan from header & hero links
-if (initialListingType && ['buy','rent','sell','offplan'].includes(initialListingType.toLowerCase())) {
+if (initialListingType && ['buy','rent','offplan'].includes(initialListingType.toLowerCase())) {
   activeListingFilter = initialListingType.toLowerCase();
   document.querySelectorAll('#listing-filter-bar .filter-btn').forEach(b => {
     b.classList.toggle('active', b.dataset.listing === activeListingFilter);
