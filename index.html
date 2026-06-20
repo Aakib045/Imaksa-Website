@@ -630,7 +630,7 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
       <div class="cta-contacts rv-el d2">
         <div class="cta-contact">
           <div class="cta-contact-icon">📞</div>
-          <div><div class="cta-contact-text">Call Us</div><div class="cta-contact-val" id="cta-phone">+971 4 XXX XXXX</div></div>
+          <div><div class="cta-contact-text">Call Us</div><div class="cta-contact-val" id="cta-phone-display">+971 4 XXX XXXX</div></div>
         </div>
         <div class="cta-contact">
           <div class="cta-contact-icon">💬</div>
@@ -638,7 +638,7 @@ footer{background:#0A0A0A;color:rgba(245,239,228,.6);padding:clamp(40px,6vw,72px
         </div>
         <div class="cta-contact">
           <div class="cta-contact-icon">✉️</div>
-          <div><div class="cta-contact-text">Email</div><div class="cta-contact-val" id="cta-email">info@imaksa.ae</div></div>
+          <div><div class="cta-contact-text">Email</div><div class="cta-contact-val" id="cta-email-display">info@imaksa.ae</div></div>
         </div>
       </div>
     </div>
@@ -890,11 +890,11 @@ function showCTASuccess(btn) {
     if (s.wa) { const el = document.getElementById('ci-wa-soc'); if (el) el.href = `https://wa.me/${s.wa}`; }
 
     // Homepage CTA block (if present)
-    const ctaPhone = document.getElementById('cta-phone');
+    const ctaPhone = document.getElementById('cta-phone-display');
     if (ctaPhone && s.phone) ctaPhone.textContent = s.phone;
     const ctaWa = document.getElementById('cta-wa');
     if (ctaWa && s.wa) ctaWa.textContent = '+' + s.wa.replace(/(\d{3})(\d{2})(\d{3})(\d{4})/, '$1 $2 $3 $4');
-    const ctaEmail = document.getElementById('cta-email');
+    const ctaEmail = document.getElementById('cta-email-display');
     if (ctaEmail && s.email) ctaEmail.textContent = s.email;
 
   } catch (err) {
