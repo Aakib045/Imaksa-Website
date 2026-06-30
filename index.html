@@ -78,18 +78,13 @@ nav.sc{
 }
 nav.sc .n-logo{color:#0D4F4A;}
 
-.n-links{display:flex;gap:clamp(12px,2vw,28px);list-style:none;align-items:center;}
-.n-links>li{position:relative;}
-.n-links>li>a{
-  color:rgba(255,255,255,.9);
-  font-size:clamp(9px,1vw,11px);
-  letter-spacing:1.5px;text-transform:uppercase;
-  transition:color .3s;white-space:nowrap;
-  display:flex;align-items:center;gap:4px;
-}
-nav.sc .n-links>li>a{color:#6B6B60;}
-.n-links>li>a:hover{color:#fff;}
-nav.sc .n-links>li>a:hover{color:#0D4F4A;}
+.n-links{display:flex;gap:clamp(2px,0.5vw,4px);list-style:none;align-items:center;}
+.n-links>li>a,.n-links li a{color:rgba(255,255,255,.65);font-size:clamp(9px,1vw,11px);letter-spacing:1.5px;text-transform:uppercase;transition:all .3s ease;white-space:nowrap;display:flex;align-items:center;gap:4px;padding:8px 12px;border-bottom:2px solid transparent;}
+.n-links>li>a.active,.n-links li a.active{color:#C9A84C;border-bottom-color:#C9A84C;}
+.n-links>li>a:hover,.n-links li a:hover{color:#F5EFE4;}
+nav.sc .n-links>li>a,nav.sc .n-links li a{color:#6B6B60;}
+nav.sc .n-links>li>a.active,nav.sc .n-links li a.active{color:#C9A84C;border-bottom-color:#C9A84C;}
+nav.sc .n-links>li>a:hover,nav.sc .n-links li a:hover{color:#0D4F4A;}
 
 .n-cta{
   background:rgba(255,255,255,.15);
@@ -125,8 +120,10 @@ nav.sc .n-hbtn span{background:#0D4F4A;}
 #hero{position:relative;min-height:100vh;}
 .h-photo{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;z-index:1;}
 .h-photo img{width:100%;height:100%;object-fit:cover;}
-.h-photo video{width:100%;height:100%;object-fit:cover;}
+.h-photo video{position:absolute;top:-15%;left:0;width:100%;height:130%;object-fit:cover;will-change:transform;}
 .h-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,79,74,.68) 0%,rgba(13,79,74,.58) 45%,rgba(13,79,74,.72) 100%);}
+#hDark{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none;z-index:2;}
+.h-tag,.h-title,.h-desc{will-change:transform,opacity;}
 
 /* Floating badges on hero video */
 .h-float{position:absolute;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);padding:14px 18px;border-left:3px solid #0D4F4A;min-width:160px;z-index:3;}
@@ -461,6 +458,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;back
   <div class="h-photo">
     <video src="hero-video.mp4" autoplay loop muted playsinline preload="auto" aria-label="Dubai skyline video"></video>
     <div class="h-grad"></div>
+    <div id="hDark"></div>
   </div>
   <div class="h-content">
     <p class="h-tag">Dubai's Trusted Property Partner</p>
@@ -748,6 +746,64 @@ document.addEventListener('mousemove', e => {
 // NAV
 window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('sc', scrollY > 80));
 
+// HERO PARALLAX + CINEMATIC TEXT DEPARTURE
+(function(){
+  var vid = document.querySelector('.h-photo video');
+  var hDark = document.getElementById('hDark');
+  var tag = document.querySelector('.h-tag');
+  var title = document.querySelector('.h-title');
+  var desc = document.querySelector('.h-desc');
+  var scrollInd = document.querySelector('.h-scroll-ind');
+  var ready = false;
+  var raf;
+
+  function clamp(v,lo,hi){ return v<lo?lo:v>hi?hi:v; }
+  function prog(s,start,dist){ return clamp((s-start)/dist,0,1); }
+  function eio(t){ return t<.5?2*t*t:-1+(4-2*t)*t; }
+
+  function tick(){
+    var s = window.scrollY;
+    var h = window.innerHeight;
+
+    // Video parallax — always active
+    if(vid) vid.style.transform = 'translateY('+(s*0.14)+'px)';
+
+    // Dark veil intensifies as user scrolls — smooths exit into next section
+    if(hDark) hDark.style.opacity = (eio(prog(s,0,h*0.55))*0.28).toFixed(3);
+
+    // Guard: don't touch text elements until all entry animations have resolved
+    if(!ready) return;
+
+    // Scroll indicator — vanishes immediately, first to leave
+    if(scrollInd) scrollInd.style.opacity = (1-prog(s,0,h*0.18)).toFixed(3);
+
+    // Tagline — drifts to the right and fades, departs earliest
+    if(tag){
+      var p1 = eio(prog(s,h*0.05,h*0.36));
+      tag.style.opacity = (1-p1).toFixed(3);
+      tag.style.transform = 'translateX('+(p1*34).toFixed(1)+'px)';
+    }
+
+    // Title — rises upward and subtly retreats into depth (scale)
+    if(title){
+      var p2 = eio(prog(s,h*0.12,h*0.42));
+      title.style.opacity = (1-p2).toFixed(3);
+      title.style.transform = 'translateY('+(-p2*56).toFixed(1)+'px) scale('+(1-p2*0.07).toFixed(4)+')';
+    }
+
+    // Description — counter-drops downward and fades, departs last
+    if(desc){
+      var p3 = eio(prog(s,h*0.18,h*0.44));
+      desc.style.opacity = (1-p3).toFixed(3);
+      desc.style.transform = 'translateY('+(p3*22).toFixed(1)+'px)';
+    }
+  }
+
+  // Activate text parallax after all entry animations complete (last ends at ~2.8s)
+  setTimeout(function(){ ready = true; tick(); }, 3000);
+  window.addEventListener('scroll', function(){ cancelAnimationFrame(raf); raf = requestAnimationFrame(tick); }, {passive:true});
+})();
+
 // MOBILE MENU
 const hbtn = document.getElementById('hbtn'), mm = document.getElementById('mm');
 hbtn.addEventListener('click', () => {
@@ -997,6 +1053,7 @@ async function handleSubscribe(){
     err.textContent='Something went wrong. Please try again.';err.style.display='block';
   }
 }
+(function(){var list=document.querySelector('.n-links');if(!list)return;var pg=location.pathname.split('/').pop()||'index.html',qs=location.search;list.querySelectorAll('li a').forEach(function(a){a.classList.remove('active');var p=(a.getAttribute('href')||'').split('?'),hp=p[0]||'index.html',hq=p[1]||'';if(hp===pg||(pg===''&&hp==='index.html')){if(hq){if(new URLSearchParams(hq).get('type')===new URLSearchParams(qs).get('type'))a.classList.add('active');}else{a.classList.add('active');}}});})();
 </script>
 </body>
 </html>
