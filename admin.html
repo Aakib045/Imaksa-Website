@@ -212,6 +212,25 @@ select.fi option{background:#fff;}
 .pwd-bar-wrap{height:3px;background:var(--cream2);margin-top:6px;}
 .pwd-bar{height:100%;width:0;transition:all .3s;}
 
+/* ── MULTI-IMAGE UPLOAD ── */
+.img-upload-box{border:1px solid var(--border);background:var(--cream);padding:14px;}
+.img-upload-actions{display:flex;gap:8px;margin-bottom:12px;}
+.img-upload-actions button{flex:1;padding:10px;border:none;font-size:11px;letter-spacing:1px;cursor:pointer;font-family:'Inter',sans-serif;transition:background .25s;}
+.img-upload-btn{background:var(--teal);color:var(--cream);}
+.img-upload-btn:hover{background:var(--teal2);}
+.img-url-row{display:flex;gap:6px;margin-bottom:10px;}
+.img-url-row input{flex:1;}
+.img-url-row button{flex-shrink:0;padding:10px 14px;background:var(--teal);color:var(--cream);border:none;font-size:11px;cursor:pointer;font-family:'Inter',sans-serif;}
+.img-url-row button:hover{background:var(--teal2);}
+.img-url-row{display:none;}
+.img-url-row.show{display:flex;}
+.img-grid{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+.img-thumb-wrap{position:relative;width:80px;height:64px;flex-shrink:0;}
+.img-thumb-wrap img{width:100%;height:100%;object-fit:cover;border:1px solid var(--border);display:block;}
+.img-thumb-first::after{content:'MAIN';position:absolute;bottom:0;left:0;right:0;background:rgba(13,79,74,.85);color:#fff;font-size:7px;letter-spacing:1.5px;text-align:center;padding:2px 0;}
+.img-remove{position:absolute;top:-6px;right:-6px;width:18px;height:18px;background:var(--danger);color:#fff;border:none;border-radius:50%;font-size:11px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;}
+.img-count{font-size:11px;color:var(--text3);margin-top:8px;}
+
 /* ── RESPONSIVE ── */
 .sb-overlay{display:none;position:fixed;inset:0;background:rgba(13,79,74,.4);z-index:99;}
 .sb-overlay.show{display:block;}
@@ -483,16 +502,19 @@ select.fi option{background:#fff;}
       <div class="fr"><div class="fg"><label class="fl">Bedrooms</label><input type="number" class="fi" id="mp-beds" placeholder="4"></div><div class="fg"><label class="fl">Bathrooms</label><input type="number" class="fi" id="mp-baths" placeholder="5"></div></div>
       <div class="fr"><div class="fg"><label class="fl">Area (Sq.Ft)</label><input type="text" class="fi" id="mp-area" placeholder="6,800"></div><div class="fg"><label class="fl">Badge</label><input type="text" class="fi" id="mp-badge" placeholder="e.g. New Launch"></div></div>
       <div class="fg"><label class="fl">Description</label><textarea class="fi" id="mp-desc" placeholder="Describe the property..."></textarea></div>
-      <div class="fg"><label class="fl">Property Image</label>
-        <div style="border:1px solid var(--border);background:var(--cream);padding:12px;margin-bottom:8px;">
-          <div style="display:flex;gap:8px;margin-bottom:10px;">
-            <button type="button" onclick="document.getElementById('img-file').click()" style="flex:1;padding:9px;background:var(--teal);color:var(--cream);border:none;font-size:11px;letter-spacing:1px;cursor:pointer;">📁 Upload Image</button>
-            <button type="button" onclick="toggleImgMode()" style="flex:1;padding:9px;background:var(--cream2);color:var(--text2);border:1px solid var(--border);font-size:11px;letter-spacing:1px;cursor:pointer;">🔗 Use URL</button>
+      <div class="fg"><label class="fl">Property Images</label>
+        <div class="img-upload-box">
+          <div class="img-upload-actions">
+            <button type="button" class="img-upload-btn" onclick="document.getElementById('img-files').click()">📁 Upload Images</button>
+            <button type="button" onclick="toggleUrlRow()" style="flex:1;padding:10px;background:var(--cream2);color:var(--text2);border:1px solid var(--border);font-size:11px;letter-spacing:1px;cursor:pointer;font-family:'Inter',sans-serif;">🔗 Add URL</button>
           </div>
-          <input type="file" id="img-file" accept="image/*" style="display:none;" onchange="handleImgUpload(this)">
-          <input type="url" class="fi" id="mp-img" placeholder="https://... or upload above" style="margin-bottom:4px;">
-          <div id="img-preview" style="display:none;margin-top:8px;"><img id="img-preview-el" style="width:100%;max-height:160px;object-fit:cover;border:1px solid var(--border);" src="" alt="Preview"></div>
-          <div class="fhint">Upload from your device OR paste an image URL</div>
+          <input type="file" id="img-files" accept="image/*" multiple style="display:none;" onchange="addImgFiles(this)">
+          <div class="img-url-row" id="img-url-row">
+            <input type="url" class="fi" id="img-url-inp" placeholder="https://... paste image URL" style="margin-bottom:0;">
+            <button type="button" onclick="addImgUrl()">Add</button>
+          </div>
+          <div class="img-grid" id="img-grid"></div>
+          <div class="img-count" id="img-count">No images added yet</div>
         </div>
       </div>
     </div>
@@ -795,7 +817,7 @@ function applyPropFilters() {
     const listingKey = (p.listingType || 'buy').toLowerCase();
     const listingLabel = LISTING_LABELS[listingKey] || listingKey;
     return `<tr>
-    <td>${p.img ? `<img class="tbl-img" src="${p.img}" alt="${p.name}" onerror="this.style.display='none'">` : '<div style="width:52px;height:40px;background:var(--cream2);display:flex;align-items:center;justify-content:center;">🏡</div>'}</td>
+    <td>${(p.images && p.images.length ? p.images[0] : p.img) ? `<img class="tbl-img" src="${p.images && p.images.length ? p.images[0] : p.img}" alt="${p.name}" onerror="this.style.display='none'">` : '<div style="width:52px;height:40px;background:var(--cream2);display:flex;align-items:center;justify-content:center;">🏡</div>'}</td>
     <td><div class="tbl-name">${p.name}</div><div style="font-size:11px;color:var(--text3);margin-top:2px;">${p.location || ''}</div></td>
     <td style="text-transform:capitalize;">${p.type || '—'}</td>
     <td><span class="bdg bdg-listing-${listingKey}">${listingLabel}</span></td>
@@ -835,15 +857,25 @@ function openPropModal(id = null) {
       document.getElementById('mp-area').value      = p.area       || '';
       document.getElementById('mp-badge').value     = p.badge      || '';
       document.getElementById('mp-desc').value      = p.desc       || '';
-      document.getElementById('mp-img').value       = p.img        || '';
+      // Populate multi-image state
+      if (p.images && p.images.length) {
+        propertyImages = p.images.map(src => ({ src, type: src.startsWith('data:') ? 'base64' : 'url' }));
+      } else if (p.img) {
+        propertyImages = [{ src: p.img, type: p.img.startsWith('data:') ? 'base64' : 'url' }];
+      } else {
+        propertyImages = [];
+      }
+      renderImgGrid();
       om('m-prop');
     });
   } else {
-    ['mp-name','mp-price','mp-loc','mp-beds','mp-baths','mp-area','mp-badge','mp-desc','mp-img'].forEach(id => document.getElementById(id).value = '');
+    ['mp-name','mp-price','mp-loc','mp-beds','mp-baths','mp-area','mp-badge','mp-desc'].forEach(id => document.getElementById(id).value = '');
     document.getElementById('mp-id').value        = '';
     document.getElementById('mp-type').selectedIndex    = 0;
     document.getElementById('mp-listing').selectedIndex = 0;
     document.getElementById('mp-status').selectedIndex  = 0;
+    propertyImages = [];
+    renderImgGrid();
     om('m-prop');
   }
 }
@@ -853,6 +885,7 @@ async function saveProp() {
   const price = document.getElementById('mp-price').value.trim();
   if (!name || !price) { toast('Please fill required fields', '⚠️'); return; }
 
+  const imgSrcs = propertyImages.map(i => i.src);
   const data = {
     price: String(price).replace(/,/g, '').replace(/AED/gi, '').trim(),
     type:        document.getElementById('mp-type').value,
@@ -864,7 +897,8 @@ async function saveProp() {
     area:        document.getElementById('mp-area').value,
     badge:       document.getElementById('mp-badge').value,
     desc:        document.getElementById('mp-desc').value,
-    img:         document.getElementById('mp-img').dataset.base64 || document.getElementById('mp-img').value,
+    images:      imgSrcs,
+    img:         imgSrcs[0] || '',
   };
 
   const res = editId
@@ -1353,28 +1387,64 @@ async function updateEnqStatus(id, status) {
   document.getElementById('ec-' + id)?.classList.remove('enq-new');
 }
 
-// ── IMAGE UPLOAD ──
-function toggleImgMode() { document.getElementById('mp-img').focus(); }
+// ── MULTI-IMAGE UPLOAD ──
+let propertyImages = []; // array of { src: string (base64 or URL), type: 'base64'|'url' }
 
-function handleImgUpload(input) {
-  const file = input.files[0];
-  if (!file) return;
-  const localUrl = URL.createObjectURL(file);
-  document.getElementById('img-preview').style.display = 'block';
-  document.getElementById('img-preview-el').src = localUrl;
-  const inp = document.getElementById('mp-img');
-  inp.placeholder = 'Uploading...';
-  inp.disabled = true;
-  // Convert to base64 for storage
-  const reader = new FileReader();
-  reader.onload = e => {
-    inp.value = localUrl; // use object URL for preview
-    inp.dataset.base64 = e.target.result;
-    inp.placeholder = 'Image ready!';
-    inp.disabled = false;
-    toast('✅ Image ready!');
-  };
-  reader.readAsDataURL(file);
+function renderImgGrid() {
+  const grid = document.getElementById('img-grid');
+  const countEl = document.getElementById('img-count');
+  if (!propertyImages.length) {
+    grid.innerHTML = '';
+    countEl.textContent = 'No images added yet';
+    return;
+  }
+  countEl.textContent = `${propertyImages.length} image${propertyImages.length > 1 ? 's' : ''} — first is the main card image`;
+  grid.innerHTML = propertyImages.map((img, i) => `
+    <div class="img-thumb-wrap ${i === 0 ? 'img-thumb-first' : ''}">
+      <img src="${img.src}" alt="Property image ${i + 1}">
+      <button type="button" class="img-remove" onclick="removeImg(${i})" title="Remove">✕</button>
+    </div>
+  `).join('');
+}
+
+function removeImg(idx) {
+  propertyImages.splice(idx, 1);
+  renderImgGrid();
+}
+
+function toggleUrlRow() {
+  const row = document.getElementById('img-url-row');
+  row.classList.toggle('show');
+  if (row.classList.contains('show')) document.getElementById('img-url-inp').focus();
+}
+
+function addImgUrl() {
+  const inp = document.getElementById('img-url-inp');
+  const url = inp.value.trim();
+  if (!url) return;
+  propertyImages.push({ src: url, type: 'url' });
+  inp.value = '';
+  document.getElementById('img-url-row').classList.remove('show');
+  renderImgGrid();
+}
+
+function addImgFiles(input) {
+  const files = Array.from(input.files);
+  if (!files.length) return;
+  let loaded = 0;
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      propertyImages.push({ src: e.target.result, type: 'base64' });
+      loaded++;
+      if (loaded === files.length) {
+        renderImgGrid();
+        toast(`${files.length} image${files.length > 1 ? 's' : ''} added`);
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+  input.value = '';
 }
 
 

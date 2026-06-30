@@ -847,7 +847,7 @@ function renderHomeProps(props) {
   if (!show.length) { grid.innerHTML = '<p style="color:rgba(245,239,228,.5);padding:20px 0;">No properties found.</p>'; return; }
   grid.innerHTML = show.map((p, i) => `
     <div class="pc rv-el${i > 0 ? ' d' + Math.min(i, 3) : ''}">
-      <img src="${p.img || 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=80'}"
+      <img src="${(p.images && p.images.length ? p.images[0] : p.img) || 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=80'}"
            alt="${p.name}" loading="lazy"
            onerror="this.src='https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=700&q=80'">
       <div class="pc-grad"></div>
