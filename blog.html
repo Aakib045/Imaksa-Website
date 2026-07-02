@@ -135,6 +135,16 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;back
 .rv{opacity:0;transform:translateY(32px);}
 .rv.in{opacity:1;transform:translateY(0);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
 .rv.d1.in{transition-delay:.1s;}.rv.d2.in{transition-delay:.2s;}
+
+/* article expand/collapse */
+.article-expand{display:none;padding:clamp(24px,3vw,40px) clamp(20px,2.5vw,32px);background:#F4F0E8;border-top:1px solid rgba(13,79,74,.1);}
+.article-expand.open{display:block;}
+.article-expand p{font-size:clamp(13px,1.4vw,15px);color:#3a3a35;line-height:1.95;margin-bottom:1.3em;}
+.article-expand h3{font-family:'Fraunces',serif;font-size:clamp(16px,1.8vw,20px);font-weight:300;color:#0D4F4A;margin-bottom:.7em;margin-top:1.5em;}
+.article-expand-featured{display:none;padding:clamp(32px,4vw,56px) clamp(16px,5vw,72px);background:#F4F0E8;border-top:2px solid rgba(13,79,74,.08);}
+.article-expand-featured.open{display:block;}
+.article-expand-featured p{font-size:clamp(13px,1.4vw,15px);color:#3a3a35;line-height:1.95;margin-bottom:1.3em;max-width:720px;}
+.article-expand-featured h3{font-family:'Fraunces',serif;font-size:clamp(17px,2vw,22px);font-weight:300;color:#0D4F4A;margin-bottom:.7em;margin-top:1.5em;}
 </style>
 </head>
 <body>
@@ -241,7 +251,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;back
     </div>
   </div>
   <div class="ft-bottom">
-    <p class="ft-copy">© 2025 IMAKSA Real Estate LLC. All rights reserved.</p>
+    <p class="ft-copy">© 2026 IMAKSA Real Estate LLC. All rights reserved.</p>
     <p class="ft-rera">RERA Licensed · Dubai, UAE</p>
   </div>
 </footer>
@@ -254,63 +264,140 @@ function closeMM(){hbtn.classList.remove('open');mm.classList.remove('open');doc
 const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.07});
 document.querySelectorAll('.rv').forEach(r=>obs.observe(r));
 
-// ── LOAD BLOGS FROM BACKEND ──
-async function loadBlogs() {
-  try {
-    const res  = await fetch(`${API}/blogs`, { mode: 'cors' });
-    const data = await res.json();
-    if (!data.success || !data.data.length) return;
-
-    const blogs     = data.data.filter(b => b.status === 'Published');
-    const featured  = blogs[0];
-    const rest      = blogs.slice(1);
-    const delays    = ['', 'd1', 'd2', '', 'd1', 'd2'];
-
-    document.getElementById('blog-container').innerHTML = `
-      ${featured ? `
-      <div class="blog-featured rv">
-        <div class="bf-img">
-          <img src="${featured.img || 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&q=80'}"
-               alt="${featured.title}" loading="lazy"
-               onerror="this.src='https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=900&q=80'">
-        </div>
-        <div class="bf-body">
-          <div class="bf-tag">${featured.cat || 'Article'}</div>
-          <h2 class="bf-title">${featured.title}</h2>
-          <div class="bf-meta">${new Date(featured.createdAt).toLocaleDateString('en-AE',{day:'numeric',month:'long',year:'numeric'})} &nbsp;·&nbsp; ${featured.readTime || '5 min read'}</div>
-          <p class="bf-desc">${featured.desc}</p>
-          <a href="contact.html" class="bf-link">Read Full Article →</a>
-        </div>
-      </div>` : ''}
-
-      <div class="blog-grid">
-        ${rest.map((b, i) => `
-          <div class="bc rv ${delays[i] || ''}">
-            <div class="bc-img">
-              <img src="${b.img || 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80'}"
-                   alt="${b.title}" loading="lazy"
-                   onerror="this.src='https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80'">
-            </div>
-            <div class="bc-body">
-              <div class="bc-tag">${b.cat || 'Article'}</div>
-              <div class="bc-title">${b.title}</div>
-              <div class="bc-meta">${new Date(b.createdAt).toLocaleDateString('en-AE',{day:'numeric',month:'long',year:'numeric'})} · ${b.readTime || '5 min read'}</div>
-              <p class="bc-desc">${b.desc}</p>
-              <a href="contact.html" class="bc-link">Read More →</a>
-            </div>
-          </div>
-        `).join('')}
-      </div>
-    `;
-
-    // Re-run scroll reveal on new elements
-    document.querySelectorAll('.rv').forEach(r => obs.observe(r));
-
-  } catch (err) {
-    console.error('Blog load error:', err);
-  }
+// ── TOGGLE ARTICLE EXPAND/COLLAPSE ──
+function toggleArticle(id, el) {
+  const panel = document.getElementById(id);
+  const open = panel.classList.toggle('open');
+  el.textContent = open ? 'Read Less ←' : 'Read More →';
 }
-loadBlogs();
+
+// ── STATIC BLOG ARTICLES ──
+const BLOGS = [
+  {
+    id: 'article-0',
+    featured: true,
+    title: 'UAE Golden Visa: The Complete 2026 Guide',
+    cat: 'Visa & Residency',
+    date: '10 January 2026',
+    readTime: '7 min read',
+    img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1200&q=80',
+    desc: 'The UAE Golden Visa offers a path to 10-year renewable residency for investors, entrepreneurs, and skilled professionals — with no employer sponsorship required.',
+    content: `
+      <p>The UAE Golden Visa is a long-term residency program offering 5 and 10-year renewable visas to eligible investors, entrepreneurs, skilled professionals, scientists, and outstanding students. Unlike standard UAE residency, the Golden Visa does not require employer sponsorship, giving holders complete freedom to live, work, and study in the UAE independently — a game-changer for internationally mobile high-net-worth individuals.</p>
+      <p>To qualify as a real estate investor, you must own property worth a minimum of AED 2 million, either outright or through a mortgage with at least AED 2 million already paid. The property can be under construction or completed, and multiple properties can be combined to reach the threshold. Investors holding property jointly may also qualify if their individual share exceeds AED 2 million. Properties in free zones and non-free zones are both eligible, giving buyers a wide range of options across Dubai.</p>
+      <p>The application process begins with obtaining an official property valuation certificate from a RERA-registered valuator. You then apply through the General Directorate of Residency and Foreigners Affairs (GDRFA) or the ICP (Federal Authority for Identity, Citizenship, Customs and Port Security) online portal. Processing typically takes 2–4 weeks, after which you receive a 6-month multi-entry visa to complete biometrics in the UAE and collect your Emirates ID. The entire process can be initiated remotely through a registered typing centre or legal representative.</p>
+      <p>Golden Visa holders can sponsor their spouse, children of all ages, parents, and unlimited domestic workers. The visa remains valid for up to 6 months even if you are outside the UAE, making it ideal for investors who travel frequently. With Dubai's zero personal income tax environment, world-class healthcare, and one of the world's safest cities by crime index, the Golden Visa has positioned the UAE as the leading destination for globally mobile investors and entrepreneurs seeking a stable, tax-efficient base for 2026 and beyond.</p>
+    `
+  },
+  {
+    id: 'article-1',
+    featured: false,
+    title: 'Off-Plan vs Ready Property: Which is Better?',
+    cat: 'Buying Guide',
+    date: '18 February 2026',
+    readTime: '6 min read',
+    img: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80',
+    desc: 'Both off-plan and ready properties offer compelling advantages in Dubai. Here\'s how to decide which suits your investment goals, cash flow needs, and risk profile.',
+    content: `
+      <p>One of the most common dilemmas facing Dubai property investors is whether to buy off-plan or purchase a ready, completed unit. Both options have distinct advantages, and the right choice depends on your investment horizon, cash flow requirements, risk appetite, and whether you need to occupy or rent the property immediately.</p>
+      <p>Off-plan properties — purchased directly from a developer before or during construction — typically offer lower entry prices, flexible payment plans spread over several years, and the potential for significant capital appreciation by the time of handover. Dubai's leading developers frequently offer post-handover payment plans, allowing buyers to pay 30–50% of the purchase price even after receiving the keys. Many also waive the standard 4% Dubai Land Department (DLD) registration fee, representing a saving of tens of thousands of dirhams. The main risk is construction timeline delays, which are not uncommon — always verify the developer's track record and ensure funds are held in a RERA-regulated escrow account.</p>
+      <p>Ready properties offer immediate rental income, complete visibility of what you are buying, and access to UAE bank mortgage financing. Expats can finance up to 75% of a property valued under AED 5 million through UAE banks, and established communities with proven infrastructure provide predictable rental demand and occupancy rates. Buyers can conduct thorough inspections before committing, and transactions can complete in as little as 30 days with no construction risk or waiting period.</p>
+      <p>Many experienced investors hold a combination of both. Off-plan purchases in emerging corridors like Dubai South, Ras Al Khor, and Arjan can yield 20–40% capital gains between purchase and handover. Ready units in established communities such as Dubai Marina, JBR, and Business Bay deliver stable annual yields of 6–8%. The strategic approach for 2026 is to use off-plan for medium-term growth and ready properties for immediate cash flow — building a balanced portfolio that generates income today while capturing appreciation over the next 3–5 years.</p>
+    `
+  },
+  {
+    id: 'article-2',
+    featured: false,
+    title: 'Top 5 Dubai Areas for Highest Rental Yields in 2026',
+    cat: 'Investment',
+    date: '5 March 2026',
+    readTime: '5 min read',
+    img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80',
+    desc: 'Dubai\'s rental market delivers some of the highest yields of any global city. These five areas offer the best return on investment for buy-to-let investors in 2026.',
+    content: `
+      <p>Dubai's rental market has consistently outperformed comparable global cities, delivering gross yields between 5% and 10% depending on location, unit type, and community amenities. For context, London averages 3–4%, Singapore 2–3%, and New York 3–5%. Knowing which areas are delivering the strongest returns in 2026 is critical for investors focused on income generation.</p>
+      <p>Jumeirah Village Circle (JVC) leads the affordability-to-yield ratio, with studio and 1-bedroom apartments generating gross yields of 8–9%. The community's central location — with quick highway access to both Downtown and Dubai Marina — combined with its growing retail and F&B scene, has made it a top choice for young professionals and families priced out of premium areas. International City follows closely, with select clusters delivering yields above 10% on studio units, though resale liquidity is lower than prime areas and should be factored into exit planning.</p>
+      <p>For investors seeking a balance of yield and capital appreciation, Dubai Marina and Business Bay are the standout choices in 2026. Marina generates 6–8% gross yields with strong demand from hospitality workers, young professionals, and short-term rental platforms. Business Bay's proximity to DIFC and Downtown drives consistent corporate and executive tenant demand, yielding 6–7% with low vacancy. Both communities benefit from active resale markets, making it straightforward to exit the investment when needed.</p>
+      <p>Jumeirah Lake Towers (JLT) and Dubai Silicon Oasis round out the top five, with yields of 7–8% and 8–10% respectively. JLT has matured significantly as a live-work-play destination, while Silicon Oasis appeals to the tech and education sector with its growing infrastructure. Looking ahead, the planned metro expansions across several of these corridors are expected to further boost rental demand and values throughout 2026 and into 2027.</p>
+    `
+  },
+  {
+    id: 'article-3',
+    featured: false,
+    title: 'Dubai Real Estate Market 2026: What Investors Need to Know',
+    cat: 'Market Update',
+    date: '22 March 2026',
+    readTime: '8 min read',
+    img: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800&q=80',
+    desc: 'From record transaction volumes to shifting investor demographics and new RERA regulations, here is everything you need to know about Dubai\'s property market in 2026.',
+    content: `
+      <p>Dubai's real estate market entered 2026 on the back of a historic multi-year growth cycle, with Dubai Land Department recording transaction volumes that surpassed every previous benchmark. Prime residential prices in areas like Palm Jumeirah, Downtown, and Dubai Hills Estate rose 15–30% over the 2023–2025 period, and the market shows no signs of a correction. DLD data confirms that foreign investors now account for over 60% of all transactions — a structural shift that has fundamentally changed the demand dynamics of the market.</p>
+      <p>The luxury and ultra-luxury segment has been the standout performer. Palm Jumeirah villas, branded residences on Sheikh Zayed Road, and penthouses in Downtown are attracting ultra-high-net-worth buyers from Europe, India, Russia, and Southeast Asia at record price-per-square-foot levels. Branded residences — properties affiliated with Four Seasons, Ritz-Carlton, Bulgari, and similar brands — have commanded 20–35% premiums over comparable non-branded stock, driven by demand from buyers seeking investment certainty and lifestyle credentials in a single asset.</p>
+      <p>On the regulatory front, RERA introduced updated escrow account requirements in late 2025 that took full effect in 2026, mandating more frequent progress-linked releases to developers and stronger consumer protections for off-plan buyers. New rules on sub-developer resales during the construction phase have reduced speculative flipping activity, contributing to a more stable and transparent market. These changes broadly benefit end-buyers and long-term investors, even if they reduce short-term speculative returns.</p>
+      <p>Looking ahead, analysts broadly project continued price appreciation in the 8–12% range for 2026, driven by constrained supply of completed prime inventory versus sustained inflows of high-net-worth investors. Key catalysts include the expansion of Al Maktoum International Airport into a global mega-hub, the maturation of Expo City Dubai into a mixed-use business and residential destination, and several new metro extensions that will unlock undervalued residential corridors. For investors, mid-market communities with strong fundamentals — JVC, Business Bay, Dubai Hills — remain the most compelling entry points for both rental income and 5-year capital appreciation.</p>
+    `
+  },
+  {
+    id: 'article-4',
+    featured: false,
+    title: 'How to Buy Property in Dubai as a Foreigner in 2026',
+    cat: 'Buying Guide',
+    date: '8 April 2026',
+    readTime: '6 min read',
+    img: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80',
+    desc: 'Dubai welcomes foreign buyers with full freehold ownership rights, no income tax, and a streamlined purchase process. Here\'s a step-by-step guide for 2026.',
+    content: `
+      <p>Dubai is one of the few cities in the world where foreign nationals can own property outright with the same legal protections as citizens. As of 2026, non-UAE nationals can purchase freehold property in more than 40 designated zones including Dubai Marina, Downtown Dubai, Palm Jumeirah, Jumeirah Beach Residence, Business Bay, Arabian Ranches, Dubai Hills Estate, and Emaar Beachfront. There are no nationality restrictions — buyers from any country are welcome — and ownership is registered with the government Dubai Land Department, providing absolute title security.</p>
+      <p>The buying process begins with identifying a property and signing a Memorandum of Understanding (MOU), also known as Form F, with the seller or developer. A 10% security deposit is required at this stage, held in trust until transfer. If purchasing off-plan directly from a developer, you sign a Sales Purchase Agreement (SPA) instead and follow the developer's milestone payment schedule. Importantly, you do not need to be a UAE resident to complete a purchase — the entire transaction can be managed remotely, including through a notarised Power of Attorney, making Dubai accessible to international investors worldwide.</p>
+      <p>The core transaction costs to budget for are: a 4% Dubai Land Department registration fee (calculated on the purchase price), a 2% real estate agent commission (the industry-standard split is 2% buyer, 2% seller), a trustee office fee of AED 4,000–5,000 for the actual transfer appointment, and — if taking a mortgage — a 0.25% mortgage registration fee. Some developers cover the DLD fee entirely for off-plan purchases. UAE banks offer mortgage financing to foreign nationals with LTVs of up to 75% on primary home purchases (up to AED 5M) and 65% for investment properties, with 2026 fixed rates ranging from approximately 4.5%–5.5% for 3–5 year terms.</p>
+      <p>After the MOU, a No Objection Certificate (NOC) is obtained from the developer or master developer (required in secondary market transactions), and the transfer appointment is booked at the DLD or a RERA-registered trustee office. Title deeds are issued on the day of transfer or within 24 hours. The entire secondary market transaction typically takes 30–45 days from signed MOU to title deed. Property ownership also unlocks UAE residency: buyers of property worth AED 750,000+ qualify for a renewable 2-year investor visa, while those owning AED 2M+ in real estate are eligible for the 10-year UAE Golden Visa — making a Dubai property purchase one of the most efficient routes to long-term residency in the region.</p>
+    `
+  }
+];
+
+(function renderBlogs() {
+  const featured = BLOGS.find(b => b.featured);
+  const cards = BLOGS.filter(b => !b.featured);
+  const delays = ['', 'd1', 'd2', '', 'd1'];
+
+  document.getElementById('blog-container').innerHTML = `
+    ${featured ? `
+    <div class="blog-featured rv">
+      <div class="bf-img">
+        <img src="${featured.img}" alt="${featured.title}" loading="lazy">
+      </div>
+      <div class="bf-body">
+        <div class="bf-tag">${featured.cat}</div>
+        <h2 class="bf-title">${featured.title}</h2>
+        <div class="bf-meta">${featured.date} &nbsp;·&nbsp; ${featured.readTime}</div>
+        <p class="bf-desc">${featured.desc}</p>
+        <a href="#" class="bf-link" onclick="toggleArticle('${featured.id}', this); return false;">Read More →</a>
+      </div>
+    </div>
+    <div class="article-expand-featured" id="${featured.id}">${featured.content}</div>
+    ` : ''}
+
+    <div class="blog-grid">
+      ${cards.map((b, i) => `
+        <div class="bc rv ${delays[i] || ''}">
+          <div class="bc-img">
+            <img src="${b.img}" alt="${b.title}" loading="lazy">
+          </div>
+          <div class="bc-body">
+            <div class="bc-tag">${b.cat}</div>
+            <div class="bc-title">${b.title}</div>
+            <div class="bc-meta">${b.date} · ${b.readTime}</div>
+            <p class="bc-desc">${b.desc}</p>
+            <a href="#" class="bc-link" onclick="toggleArticle('${b.id}', this); return false;">Read More →</a>
+          </div>
+          <div class="article-expand" id="${b.id}">${b.content}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+
+  document.querySelectorAll('.rv').forEach(r => obs.observe(r));
+})();
 
 /* ── LIVE SETTINGS (from admin panel) ── */
 (async function applyLiveSettings(){
